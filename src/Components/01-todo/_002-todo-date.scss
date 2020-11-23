@@ -1,0 +1,20 @@
+.todo-date {
+    color: #fff;
+    margin-top: 10%;
+    position: relative;
+     & > p {
+         font-size: 25px;
+         font-weight: 500;
+     }
+     & > svg {
+         position: absolute;
+         top: 0;
+         cursor: pointer;
+     }
+    }
+    .todo-date-left {
+        left: -50px;
+    }
+    .todo-date-right {
+        right: -50px;
+    }
