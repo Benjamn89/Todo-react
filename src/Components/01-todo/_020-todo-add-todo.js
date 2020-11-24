@@ -40,10 +40,11 @@ const submitTodo = () => {
     userName: JSON.parse(localStorage.getItem('todo')).userName,
     text: props.textArea
   }
+  props.setHoldOnSubmit()
   props.submitTodo(data)
 }
 
-  return <div className={props.addTodoState ? 'todo-add-todo todo-add-todo-on' : 'todo-add-todo'}>
+  return <div className={props.addTodoState ? `todo-add-todo todo-add-todo-on ${props.holdAfterSubmit}` : 'todo-add-todo'}>
   <div className='todo-add-wrapper'>
   <textarea onChange={typingTodo} value={props.textArea}
   placeholder='Type Here...' maxLength='40' rows='3' wrap='hard' type='text' className='add-todo-input'/>
@@ -63,14 +64,16 @@ const mapDispatchToProps = dispatch => {
     return {
       updateTextArea: (data) => dispatch(todoActionTypes.updateTextArea(data)),
       closeTodo: (val) => dispatch(todoActionTypes.closeTodo(val)),
-      submitTodo: (data) => dispatch(todoActionTypes.submitTodo(data))
+      submitTodo: (data) => dispatch(todoActionTypes.submitTodo(data)),
+      setHoldOnSubmit: () =>  dispatch(todoActionTypes.setHold())
      }
     }
 const mapStateToProps = state => {
   return {
     addTodoState: state.todoReducer.addTodo,
     textArea: state.todoReducer.textArea,
-    submitOn: state.todoReducer.submitOn
+    submitOn: state.todoReducer.submitOn,
+    holdAfterSubmit: state.todoReducer.holdAfterSubmit
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)

@@ -55,6 +55,11 @@ const client = new faunadb.Client({
         return {
             type: 'submit-todo'
         }
+    },
+    setHold: () => {
+        return {
+            type: 'set-hold'
+        }
     }
   }
 
