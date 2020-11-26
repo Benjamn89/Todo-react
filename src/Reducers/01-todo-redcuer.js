@@ -3,12 +3,8 @@ const initialState = {
     addTodo: false,
     submitOn: false,
     textArea: '',
-<<<<<<< HEAD
     holdAfterSubmit: '',
     todoWasAdded: 1
-=======
-    holdAfterSubmit: ''
->>>>>>> db131f236c54c5e597f08a5da8be01d5391b76f1
 }
 
 const redurcer = (state = initialState, action) => {
@@ -44,14 +40,10 @@ const redurcer = (state = initialState, action) => {
         return {
             ...state,
             textArea: '',
-<<<<<<< HEAD
             holdAfterSubmit: '',
             submitOn: false,
             addTodo: false,
             todoWasAdded: state.todoWasAdded + 1
-=======
-            holdAfterSubmit: ''
->>>>>>> db131f236c54c5e597f08a5da8be01d5391b76f1
         }
     } else if (action.type === 'set-hold') {
       return {
