@@ -2,7 +2,9 @@ const initialState = {
     loadState: 'spinner',
     addTodo: false,
     submitOn: false,
-    textArea: ''
+    textArea: '',
+    holdAfterSubmit: '',
+    todoWasAdded: 1
 }
 
 const redurcer = (state = initialState, action) => {
@@ -37,7 +39,17 @@ const redurcer = (state = initialState, action) => {
     } else if (action.type === 'submit-todo') {
         return {
             ...state,
+            textArea: '',
+            holdAfterSubmit: '',
+            submitOn: false,
+            addTodo: false,
+            todoWasAdded: state.todoWasAdded + 1
         }
+    } else if (action.type === 'set-hold') {
+      return {
+          ...state,
+          holdAfterSubmit: 'todo-hold-submit'
+      }
     }
     return state
 }

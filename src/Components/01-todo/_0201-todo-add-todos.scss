@@ -6,7 +6,7 @@
   width: 110%;
   background: black;
   border-radius: 8px;
-  transition: transform 0.3s ease;
+  transition: 0.3s ease;
   transform: scaleY(0);
   transform-origin: 0 100%;
 }
@@ -37,13 +37,11 @@
   height: 18px;
   width: 18px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.849);
   bottom: 15px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.3s;
   &:hover {
     background: #fff;
-    transform: scale(1.3);
   }
 }
 .add-todo-cancel {
@@ -68,6 +66,7 @@
 .add-todo-confirm {
   right: 40px;
   pointer-events: none;
+  opacity: 0;
   & > svg {
     position: absolute;
     left: 23%;
@@ -76,16 +75,10 @@
   }
 }
 .add-todo-confirm-on {
-  animation: submitOn 0.7s;
   pointer-events: unset !important;
+  opacity: 1;
 }
-@keyframes submitOn {
-  50% {
-    transform: scale(1.3);
-    background: #fff;
-  }
-  100% {
-    transform: scale(1);
-    background: rgba(255, 255, 255, 0.849);
-  }
+.todo-hold-submit {
+  opacity: 0.5;
+  pointer-events: none;
 }
