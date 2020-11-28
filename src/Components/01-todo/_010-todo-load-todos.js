@@ -5,6 +5,8 @@ import actionTypes from '../../Reducers/01-todo-actions'
 
 const LoadTodos = (props) => {
 
+  console.log('Inside todo box')
+
   useEffect(() => {
     props.fetchTodos()
   })
@@ -35,7 +37,8 @@ const mapDispatchToProps = dispatch => {
   }
 const mapStateToProps = state => {
   return {
-    loadState: state.todoReducer.loadState
+    loadState: state.todoReducer.loadState,
+    todoWasAdded: state.todoReducer.todoWasAdded
   }
 }
 

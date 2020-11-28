@@ -8,7 +8,6 @@ const AddTodo = (props) => {
     console.log('Child Add Todo')
     let counter =  useRef(true)
     let submitOn = useRef(false)
-    let firstRender = useRef(true)
 
 useEffect(() => {
   const arrow =  document.querySelector('.add-todo-arrow')
@@ -20,14 +19,6 @@ useEffect(() => {
     counter.current = true
   }
 }, [props.addTodoState])
-
-useEffect(() => {
-  if (firstRender.current) {
-    firstRender.current = false
-    return
-  }
-console.log('Useeffect ,', props.todoWasAdded)
-}, [props.todoWasAdded])
 
 const typingTodo = (e) => {
   let data = {
@@ -84,7 +75,6 @@ const mapStateToProps = state => {
     textArea: state.todoReducer.textArea,
     submitOn: state.todoReducer.submitOn,
     holdAfterSubmit: state.todoReducer.holdAfterSubmit,
-    todoWasAdded: state.todoReducer.todoWasAdded
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)

@@ -51,9 +51,16 @@ const actionTypes = {
                       .then(() => {
                         dispatch(actionTypes.regSuccess())
                         client.query(q.CreateCollection({ name: userData.displayName }))
-                        .then((ret) => {
-                         // Save the ref
-                         console.log(ret)
+                        .then(() => {
+                         client.query(
+                          q.CreateIndex({
+                            name: userData.email,
+                            source: q.Collection(userData.email),
+                            terms: [{ field: ['data', 'date'] }],
+                          })
+                         ).then(() => {
+                           console.log('Index was created')
+                         })
                         })
                       })
                   }
