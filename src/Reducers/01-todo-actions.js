@@ -42,11 +42,10 @@ const client = new faunadb.Client({
             client.query(
                 q.Create(
                   q.Collection(data.userName),
-                  { data: { todo: data.text } },
+                  { data: { date: data.date } },
                 )
               )
               .then((ret) => {
-                  console.log(ret)
                   dispatch(actionTypes.submitDone())
               })
         }

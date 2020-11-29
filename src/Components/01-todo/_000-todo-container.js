@@ -13,7 +13,6 @@ import {todoMethods} from './10-functions';
 
 const TodoPage = (props) => {
     console.log('Todo-Container')
-
     const logOutBtn = () => {
         localStorage.clear()
         props.logOut()
@@ -25,7 +24,9 @@ const TodoPage = (props) => {
       let day = today.getDate().toString()
       month = todoMethods.dayMonth(month)
       day = todoMethods.dayMonth(day)
-      return `${day}.${month}.${year}`
+      const displayDate = `${day}.${month}.${year}`
+      localStorage.setItem('date', displayDate)
+      return displayDate
     }
     const toggleTodo = () => {
       props.toggleTodo()
@@ -82,7 +83,7 @@ const TodoPage = (props) => {
 const mapDispatchToProps = dispatch => {
     return {
         logOut: () => dispatch(actionTypes.logOut()),
-        toggleTodo: () => dispatch(actionTypesTodos.toggleTodo())   
+        toggleTodo: () => dispatch(actionTypesTodos.toggleTodo()),
      } 
     }
 

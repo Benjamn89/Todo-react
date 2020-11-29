@@ -36,9 +36,11 @@ const closeTodo = () => {
 }
 
 const submitTodo = () => {
+  const date = localStorage.getItem('date')
   const data = {
+    date,
     userName: JSON.parse(localStorage.getItem('todo')).userName,
-    text: props.textArea
+    text: props.textArea,
   }
   props.setHoldOnSubmit()
   props.submitTodo(data)
@@ -62,11 +64,10 @@ const submitTodo = () => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-      fetchingTodos: () => dispatch(todoActionTypes.fetchTodos()),
       updateTextArea: (data) => dispatch(todoActionTypes.updateTextArea(data)),
       closeTodo: (val) => dispatch(todoActionTypes.closeTodo(val)),
       submitTodo: (data) => dispatch(todoActionTypes.submitTodo(data)),
-      setHoldOnSubmit: () =>  dispatch(todoActionTypes.setHold())
+      setHoldOnSubmit: () =>  dispatch(todoActionTypes.setHold()),
      }
     }
 const mapStateToProps = state => {

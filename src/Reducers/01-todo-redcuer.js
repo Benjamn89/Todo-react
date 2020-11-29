@@ -4,7 +4,8 @@ const initialState = {
     submitOn: false,
     textArea: '',
     holdAfterSubmit: '',
-    todoWasAdded: 1
+    todoWasAdded: 1,
+    ref: false
 }
 
 const redurcer = (state = initialState, action) => {
