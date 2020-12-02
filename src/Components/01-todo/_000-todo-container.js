@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {  } from 'react'
 // Import react components
 import LoadTodos from './_010-todo-load-todos';
 import AddTodo from './_020-todo-add-todo';
@@ -7,8 +7,6 @@ import actionTypes from '../../Reducers/00-login-action'
 import actionTypesTodos from '../../Reducers/01-todo-actions';
 // Import Redux
 import { connect } from "react-redux";
-// Import Functions
-import {todoMethods} from './10-functions';
 
 
 const TodoPage = (props) => {
@@ -16,17 +14,6 @@ const TodoPage = (props) => {
     const logOutBtn = () => {
         localStorage.clear()
         props.logOut()
-    }
-    const date = () => {
-      let today = new Date()
-      let year = today.getFullYear().toString()
-      let month = (today.getMonth() + 1).toString()
-      let day = today.getDate().toString()
-      month = todoMethods.dayMonth(month)
-      day = todoMethods.dayMonth(day)
-      const displayDate = `${day}.${month}.${year}`
-      localStorage.setItem('date', displayDate)
-      return displayDate
     }
     const toggleTodo = () => {
       props.toggleTodo()
@@ -54,7 +41,7 @@ const TodoPage = (props) => {
                 </div>
             </div>
             <div className='todo-date'>
-                <p>{date()}</p>
+                <p>{props.date}</p>
               <svg className='todo-date-left' width="31" height="33" viewBox="0 0 31 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 16.5L30.75 0.478531V32.5215L0 16.5Z" fill="white" fillOpacity="0.2"/>
                 </svg>
@@ -90,6 +77,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
       userAuth: state.loginReducer.userAuth,
+      date: state.todoReducer.date
     }
   }
 

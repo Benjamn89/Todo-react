@@ -36,7 +36,7 @@ const closeTodo = () => {
 }
 
 const submitTodo = () => {
-  const date = localStorage.getItem('date')
+  const date = props.date
   const data = {
     date,
     userName: JSON.parse(localStorage.getItem('todo')).userName,
@@ -76,6 +76,7 @@ const mapStateToProps = state => {
     textArea: state.todoReducer.textArea,
     submitOn: state.todoReducer.submitOn,
     holdAfterSubmit: state.todoReducer.holdAfterSubmit,
+    date: state.todoReducer.date
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)

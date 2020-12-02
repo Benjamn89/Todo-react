@@ -19,6 +19,26 @@ const client = new faunadb.Client({
             type: res
         }
     },
+    checkDate: (user) => {
+      return dispatch => {
+          client.query(
+              q.Get(
+                  q.Match(
+                      q.Index(user.user),
+                      user.date
+                  )
+              )
+          ).then((ret) => {
+              console.log(ret)
+            // client.query(
+            //     q.Get(q.Ref(q.Collection(user.user), ret.ref.value.id))
+            //   )
+            //   .then((ret) => console.log(ret))
+          }).catch(() => {
+              dispatch(actionTypes.fetchingResult('nothing'))
+          })
+      }
+    },
     toggleTodo: () => {
         return {
             type: 'toggle-todo'

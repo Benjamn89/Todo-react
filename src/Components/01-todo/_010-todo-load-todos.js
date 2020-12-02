@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 import actionTypes from '../../Reducers/01-todo-actions'
 
 const LoadTodos = (props) => {
-
   console.log('Inside todo box')
+  const userName = useRef(JSON.parse(localStorage.getItem('todo')).userName)
 
   useEffect(() => {
     props.fetchTodos()
+  })
+
+  useEffect(() => {
+    const data = {
+      user: userName.current,
+      date: props.date
+    }
+    props.checkDate(data)
   })
 
    const spinner = <div className='todo-spinner'>
@@ -33,12 +41,14 @@ const LoadTodos = (props) => {
 const mapDispatchToProps = dispatch => {
   return {
       fetchTodos: () => dispatch(actionTypes.fetchTodos()),
+      checkDate: (user) => dispatch(actionTypes.checkDate(user))
    } 
   }
 const mapStateToProps = state => {
   return {
     loadState: state.todoReducer.loadState,
-    todoWasAdded: state.todoReducer.todoWasAdded
+    todoWasAdded: state.todoReducer.todoWasAdded,
+    date: state.todoReducer.date
   }
 }
 
