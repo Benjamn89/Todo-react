@@ -29,7 +29,8 @@ const client = new faunadb.Client({
                   )
               )
           ).then((ret) => {
-              console.log(ret)
+              console.log(ret.ref.value.id)
+              dispatch(actionTypes.setRef(ret.ref.value.id))
             // client.query(
             //     q.Get(q.Ref(q.Collection(user.user), ret.ref.value.id))
             //   )
@@ -38,6 +39,12 @@ const client = new faunadb.Client({
               dispatch(actionTypes.fetchingResult('nothing'))
           })
       }
+    },
+    setRef: (ref) => {
+        return {
+            type: 'set-ref',
+            ref
+        }
     },
     toggleTodo: () => {
         return {

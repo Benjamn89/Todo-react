@@ -66,6 +66,11 @@ const redurcer = (state = initialState, action) => {
           ...state,
           holdAfterSubmit: 'todo-hold-submit'
       }
+    } else if (action.type === 'set-ref') {
+        return {
+            ...state,
+            ref: action.ref
+        }
     }
     return state
 }

@@ -12,6 +12,10 @@ const LoadTodos = (props) => {
   })
 
   useEffect(() => {
+   if (props.dateRef !== false) {
+     return
+   }
+    console.log('HAHAHAHAH')
     const data = {
       user: userName.current,
       date: props.date
@@ -48,7 +52,8 @@ const mapStateToProps = state => {
   return {
     loadState: state.todoReducer.loadState,
     todoWasAdded: state.todoReducer.todoWasAdded,
-    date: state.todoReducer.date
+    date: state.todoReducer.date,
+    dateRef: state.todoReducer.ref
   }
 }
 
