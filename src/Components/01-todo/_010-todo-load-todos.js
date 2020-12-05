@@ -15,7 +15,7 @@ const LoadTodos = (props) => {
    if (props.dateRef !== false) {
      return
    }
-    console.log('HAHAHAHAH')
+    console.log('use effect 2 is running')
     const data = {
       user: userName.current,
       date: props.date
@@ -51,10 +51,17 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     loadState: state.todoReducer.loadState,
-    todoWasAdded: state.todoReducer.todoWasAdded,
     date: state.todoReducer.date,
     dateRef: state.todoReducer.ref
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoadTodos)
+
+const myMemo = (prevProps, nextProps) => {
+  if (prevProps.loadState === nextProps.loadState) {
+    return true
+  }
+  return false
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(LoadTodos, myMemo))

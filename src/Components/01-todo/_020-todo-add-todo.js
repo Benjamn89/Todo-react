@@ -62,6 +62,7 @@ const submitTodo = () => {
   </div>
 </div>
 }
+
 const mapDispatchToProps = dispatch => {
     return {
       updateTextArea: (data) => dispatch(todoActionTypes.updateTextArea(data)),

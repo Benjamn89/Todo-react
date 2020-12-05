@@ -119,7 +119,8 @@ const register = (e) => {
 
 const mapStateToProps = state => {
   return {
-      loginReducer: state.loginReducer
+      loginReducer: state.loginReducer,
+      loginState: state.loginReducer.loginBox
   }
 }
 
@@ -133,5 +134,7 @@ const mapDispatchToProps = dispatch => {
       typePass: (val) => dispatch(actionTypes.typePass(val))
    } 
   }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
