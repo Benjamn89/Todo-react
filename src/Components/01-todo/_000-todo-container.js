@@ -13,7 +13,8 @@ const TodoPage = (props) => {
     console.log('Todo-Container')
     const logOutBtn = () => {
         localStorage.clear()
-        props.logOut()
+        props.logOutFromLogin()
+        props.logOutFromTodo()
     }
     const toggleTodo = () => {
       props.toggleTodo()
@@ -69,8 +70,9 @@ const TodoPage = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logOut: () => dispatch(actionTypes.logOut()),
-        toggleTodo: () => dispatch(actionTypesTodos.toggleTodo()),
+        logOutFromLogin: () => dispatch(actionTypes.logOut()),
+        logOutFromTodo: () => dispatch(actionTypesTodos.logOut()),
+        toggleTodo: () => dispatch(actionTypesTodos.toggleTodo())
      } 
     }
 

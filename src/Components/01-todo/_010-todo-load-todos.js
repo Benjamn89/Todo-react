@@ -8,14 +8,17 @@ const LoadTodos = (props) => {
   const userName = useRef(JSON.parse(localStorage.getItem('todo')).userName)
 
   useEffect(() => {
-    props.fetchTodos()
+
+      console.log('Use effect for updating the inside box is running')
+      props.fetchTodos()
+    
   })
 
   useEffect(() => {
    if (props.dateRef !== false) {
      return
    }
-    console.log('use effect 2 is running')
+    console.log('Use effect to update the ref is running')
     const data = {
       user: userName.current,
       date: props.date
@@ -52,7 +55,7 @@ const mapStateToProps = state => {
   return {
     loadState: state.todoReducer.loadState,
     date: state.todoReducer.date,
-    dateRef: state.todoReducer.ref
+    dateRef: state.todoReducer.ref,
   }
 }
 

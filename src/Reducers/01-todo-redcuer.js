@@ -70,6 +70,11 @@ const redurcer = (state = initialState, action) => {
             ...state,
             ref: action.ref
         }
+    } else if (action.type === 'log-out') {
+        return {
+            ...state,
+            loadState: 'spinner'
+        }
     }
     return state
 }

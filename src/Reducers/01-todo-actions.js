@@ -29,8 +29,15 @@ const client = new faunadb.Client({
                   )
               )
           ).then((ret) => {
-              console.log('Date was founded, updating the ref state')
-              dispatch(actionTypes.setRef(ret.ref.value.id))
+              console.log('Date was founded, Retriving the data')
+              client.query(
+                q.Get(q.Ref(q.Collection(user.user), ret.ref.value.id))
+              )
+              .then((ret) => {
+                console.log(ret)
+                dispatch(actionTypes.setRef(ret.ref.value.id))
+              })
+              
           }).catch(() => {
               console.log('New date has been created')
               client.query(
@@ -91,6 +98,11 @@ const client = new faunadb.Client({
     setHold: () => {
         return {
             type: 'set-hold'
+        }
+    },
+    logOut: () => {
+        return {
+            type: 'log-out'
         }
     }
   }
