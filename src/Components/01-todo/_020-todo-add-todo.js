@@ -23,7 +23,7 @@ useEffect(() => {
 const typingTodo = (e) => {
   let data = {
     textValue: e.target.value,
-    submitOn: submitOn.current
+    submitOn: submitOn.current,
   }
   if (e.target.value.length > 2) {
     data.submitOn = true
@@ -36,11 +36,10 @@ const closeTodo = () => {
 }
 
 const submitTodo = () => {
-  const date = props.date
   const data = {
-    date,
     userName: JSON.parse(localStorage.getItem('todo')).userName,
     text: props.textArea,
+    ref: props.myRef
   }
   props.setHoldOnSubmit()
   props.submitTodo(data)
@@ -77,7 +76,16 @@ const mapStateToProps = state => {
     textArea: state.todoReducer.textArea,
     submitOn: state.todoReducer.submitOn,
     holdAfterSubmit: state.todoReducer.holdAfterSubmit,
-    date: state.todoReducer.date
+    date: state.todoReducer.date,
+    myRef: state.todoReducer.ref
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)
+
+const myMemo = (prevProps, nextProps) => {
+  if (prevProps.myRef !== nextProps.myRef) {
+    return true
+  }
+  return false
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(AddTodo, myMemo))

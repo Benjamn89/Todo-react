@@ -12,7 +12,7 @@ import todoReducer from './Reducers/01-todo-redcuer'
 // combined reducers
 const rootReducer = combineReducers({
   loginReducer,
-  todoReducer
+  todoReducer,
   });
 
 

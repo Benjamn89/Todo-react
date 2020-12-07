@@ -19,7 +19,8 @@ const initialState = {
     textArea: '',
     holdAfterSubmit: '',
     ref: false,
-    date: date()
+    date: date(),
+    actualTodos: []
 }
 
 const redurcer = (state = initialState, action) => {
@@ -69,6 +70,11 @@ const redurcer = (state = initialState, action) => {
         return {
             ...state,
             ref: action.ref
+        }
+    } else if (action.type === 'log-out') {
+        return {
+            ...state,
+            loadState: 'spinner'
         }
     }
     return state
