@@ -19,7 +19,8 @@ const initialState = {
     textArea: '',
     holdAfterSubmit: '',
     ref: false,
-    date: date()
+    date: date(),
+    actualTodos: []
 }
 
 const redurcer = (state = initialState, action) => {
