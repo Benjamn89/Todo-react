@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 // Import Reducers
 import loginReducer from './Reducers/00-login-reducer'
 import todoReducer from './Reducers/01-todo-redcuer'
+import addTodoReducer from './Reducers/01.1-add-todo-reducer'
 
 // combined reducers
 const rootReducer = combineReducers({
   loginReducer,
   todoReducer,
+  addTodoReducer
   });
 
 

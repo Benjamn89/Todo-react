@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
-import todoActionTypes from '../../Reducers/01-todo-actions';
+import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 
 
 const AddTodo = (props) => {
@@ -64,25 +64,26 @@ const submitTodo = () => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      updateTextArea: (data) => dispatch(todoActionTypes.updateTextArea(data)),
-      closeTodo: (val) => dispatch(todoActionTypes.closeTodo(val)),
-      submitTodo: (data) => dispatch(todoActionTypes.submitTodo(data)),
-      setHoldOnSubmit: () =>  dispatch(todoActionTypes.setHold()),
+      updateTextArea: (data) => dispatch(addTodoActiontypes.updateTextArea(data)),
+      closeTodo: (val) => dispatch(addTodoActiontypes.closeTodo(val)),
+      submitTodo: (data) => dispatch(addTodoActiontypes.submitTodo(data)),
+      setHoldOnSubmit: () =>  dispatch(addTodoActiontypes.setHold()),
      }
     }
 const mapStateToProps = state => {
   return {
-    addTodoState: state.todoReducer.addTodo,
-    textArea: state.todoReducer.textArea,
-    submitOn: state.todoReducer.submitOn,
-    holdAfterSubmit: state.todoReducer.holdAfterSubmit,
+    textArea: state.addTodoReducer.textArea,
+    submitOn: state.addTodoReducer.submitOn,
+    holdAfterSubmit: state.addTodoReducer.holdAfterSubmit,
+    addTodoRender: state.addTodoReducer.addTodoRender,
     date: state.todoReducer.date,
-    myRef: state.todoReducer.ref
+    myRef: state.todoReducer.ref,
+    addTodoState: state.todoReducer.addTodo,
   }
 }
 
 const myMemo = (prevProps, nextProps) => {
-  if (prevProps.addTodoState === nextProps.addTodoState) {
+  if (prevProps.addTodoRender === nextProps.addTodoRender) {
     return true
   }
   return false

@@ -64,40 +64,9 @@ const client = new faunadb.Client({
             type: 'toggle-todo'
         }
     },
-    updateTextArea: (data) => {
-        return {
-            type: 'updateTextArea',
-            textValue: data.textValue,
-            submitOn: data.submitOn
-        }
-    },
-    closeTodo: (val) => {
-        return {
-            type: 'close-todo',
-            val
-        }
-    },
-    submitTodo: (data) => {
-        return dispatch => {
-            client.query(
-                q.Update(
-                  q.Ref(q.Collection(data.userName), data.ref),
-                  { data: data.text },
-                )
-              )
-              .then(() => {
-                  dispatch(actionTypes.submitDone())
-              })
-        }
-    },
     submitDone: () => {
         return {
             type: 'submit-todo'
-        }
-    },
-    setHold: () => {
-        return {
-            type: 'set-hold'
         }
     },
     logOut: () => {

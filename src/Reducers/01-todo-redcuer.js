@@ -15,12 +15,10 @@ const date = () => {
 const initialState = {
     loadState: 'spinner',
     addTodo: false,
-    submitOn: false,
-    textArea: '',
-    holdAfterSubmit: '',
     ref: false,
     date: date(),
-    actualTodos: []
+    actualTodos: [],
+    addTodoRender: false
 }
 
 const redurcer = (state = initialState, action) => {
@@ -39,34 +37,10 @@ const redurcer = (state = initialState, action) => {
     } else if (action.type === 'toggle-todo') {
         return {
             ...state,
-            addTodo: !state.addTodo
+            addTodo: !state.addTodo,
+            addTodoRender: !state.addTodoRender
         }
-    } else if (action.type === 'updateTextArea') {
-        return {
-            ...state,
-            textArea: action.textValue,
-            submitOn: action.submitOn
-        }
-    } else if (action.type === 'close-todo') {
-        return {
-            ...state,
-            addTodo: action.val
-        }
-    } else if (action.type === 'submit-todo') {
-        return {
-            ...state,
-            textArea: '',
-            holdAfterSubmit: '',
-            submitOn: false,
-            addTodo: false,
-            loadState: 'spinner'
-        }
-    } else if (action.type === 'set-hold') {
-      return {
-          ...state,
-          holdAfterSubmit: 'todo-hold-submit'
-      }
-    } else if (action.type === 'set-ref') {
+    }  else if (action.type === 'set-ref') {
         return {
             ...state,
             ref: action.ref
