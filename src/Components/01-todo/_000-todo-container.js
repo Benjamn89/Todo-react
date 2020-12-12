@@ -5,6 +5,7 @@ import AddTodo from './_020-todo-add-todo';
 // Import actionTypes
 import actionTypes from '../../Reducers/00-login-action'
 import actionTypesTodos from '../../Reducers/01-todo-actions';
+import addTodoActiontypes2 from '../../Reducers/01.1-add-todo-action';
 // Import Redux
 import { connect } from "react-redux";
 
@@ -72,7 +73,7 @@ const mapDispatchToProps = dispatch => {
     return {
         logOutFromLogin: () => dispatch(actionTypes.logOut()),
         logOutFromTodo: () => dispatch(actionTypesTodos.logOut()),
-        toggleTodo: () => dispatch(actionTypesTodos.toggleTodo())
+        toggleTodo: () => dispatch(addTodoActiontypes2.toggleTodo())
      } 
     }
 

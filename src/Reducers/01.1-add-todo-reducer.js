@@ -2,7 +2,8 @@ const initialState = {
     textArea: '',
     submitOn: false,
     holdAfterSubmit: '',
-    addTodoRender: false
+    addTodoRender: false,
+    addTodo: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,7 +36,13 @@ const reducer = (state = initialState, action) => {
             holdAfterSubmit: 'todo-hold-submit',
             addTodoRender: !state.addTodoRender
         }
-      }
+      } else if (action.type === 'toggle-todo') {
+        return {
+            ...state,
+            addTodo: !state.addTodo,
+            addTodoRender: !state.addTodoRender
+        }
+    } 
       return state
 }
 

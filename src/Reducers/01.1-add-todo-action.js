@@ -38,6 +38,11 @@ const actionTypes = {
             type: 'set-hold'
         }
     },
+    toggleTodo: () => {
+        return {
+            type: 'toggle-todo'
+        }
+    },
 }
 
 

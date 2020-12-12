@@ -59,11 +59,6 @@ const client = new faunadb.Client({
             ref
         }
     },
-    toggleTodo: () => {
-        return {
-            type: 'toggle-todo'
-        }
-    },
     submitDone: () => {
         return {
             type: 'submit-todo'

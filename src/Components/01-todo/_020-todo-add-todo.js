@@ -76,9 +76,9 @@ const mapStateToProps = state => {
     submitOn: state.addTodoReducer.submitOn,
     holdAfterSubmit: state.addTodoReducer.holdAfterSubmit,
     addTodoRender: state.addTodoReducer.addTodoRender,
+    addTodoState: state.addTodoReducer.addTodo,
     date: state.todoReducer.date,
     myRef: state.todoReducer.ref,
-    addTodoState: state.todoReducer.addTodo,
   }
 }
 

@@ -14,11 +14,9 @@ const date = () => {
 
 const initialState = {
     loadState: 'spinner',
-    addTodo: false,
     ref: false,
     date: date(),
     actualTodos: [],
-    addTodoRender: false
 }
 
 const redurcer = (state = initialState, action) => {
@@ -33,12 +31,6 @@ const redurcer = (state = initialState, action) => {
         return {
             ...state,
             loadState: 'loading'
-        }
-    } else if (action.type === 'toggle-todo') {
-        return {
-            ...state,
-            addTodo: !state.addTodo,
-            addTodoRender: !state.addTodoRender
         }
     }  else if (action.type === 'set-ref') {
         return {
