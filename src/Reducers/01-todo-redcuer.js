@@ -35,8 +35,20 @@ const redurcer = (state = initialState, action) => {
     }  else if (action.type === 'set-ref') {
         return {
             ...state,
-            ref: action.ref
+            ref: action.ref,
+            actualTodos: action.todo,
+            loadState: 'nothing'
         }
+    } else if (action.type === 'set-only-ref') {
+        return {
+            ...state,
+            ref: action.ref
+        }      
+    } else if (action.type === 'no-results') {
+       return {
+           ...state,
+           loadState: 'nothing'
+       }
     } else if (action.type === 'log-out') {
         return {
             ...state,

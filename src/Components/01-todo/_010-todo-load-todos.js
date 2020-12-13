@@ -6,14 +6,6 @@ import actionTypes from '../../Reducers/01-todo-actions'
 const LoadTodos = (props) => {
   console.log('Inside todo box')
   const userName = useRef(JSON.parse(localStorage.getItem('todo')).userName)
-
-  useEffect(() => {
-
-      console.log('Use effect for updating the inside box is running')
-      props.fetchTodos()
-    
-  })
-
   useEffect(() => {
    if (props.dateRef !== false) {
      return
@@ -56,12 +48,14 @@ const mapStateToProps = state => {
     loadState: state.todoReducer.loadState,
     date: state.todoReducer.date,
     dateRef: state.todoReducer.ref,
+    loadTodoFromAddTodo: state.addTodoReducer.renderLoadTodo
   }
 }
 
 
 const myMemo = (prevProps, nextProps) => {
-  if (prevProps.loadState === nextProps.loadState) {
+  if (prevProps.loadState === nextProps.loadState &&
+      prevProps.loadTodoFromAddTodo === nextProps.loadTodoFromAddTodo) {
     return true
   }
   return false

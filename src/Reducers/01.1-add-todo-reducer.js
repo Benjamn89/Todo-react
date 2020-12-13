@@ -4,6 +4,7 @@ const initialState = {
     holdAfterSubmit: '',
     addTodoRender: false,
     addTodo: false,
+    renderLoadTodo: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,8 +28,8 @@ const reducer = (state = initialState, action) => {
             holdAfterSubmit: '',
             submitOn: false,
             addTodo: false,
-            loadState: 'spinner',
-            addTodoRender: !state.addTodoRender
+            addTodoRender: !state.addTodoRender,
+            renderLoadTodo: !state.renderLoadTodo
         }
     } else if (action.type === 'set-hold') {
         return {

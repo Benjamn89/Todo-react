@@ -30,12 +30,14 @@ const client = new faunadb.Client({
               )
           ).then((ret) => {
               console.log('Date was founded, Save the ref and retriving the data')
-              dispatch(actionTypes.setRef(ret.ref.value.id))
+              dispatch(actionTypes.setOnlyRef(ret.ref.value.id))
               client.query(
                 q.Get(q.Ref(q.Collection(user.user), ret.ref.value.id))
               )
               .then((ret) => {
-                console.log(ret.data)
+                if (ret.data.todo.length < 1) {
+                    dispatch(actionTypes.noResults())
+                }
               })
               
           }).catch(() => {
@@ -43,30 +45,41 @@ const client = new faunadb.Client({
               client.query(
                 q.Create(
                   q.Collection(user.user),
-                  { data: { date: user.date } },
+                  { data: { date: user.date, todo: [] } },
                 )
               ).then((ret) => {
-                  dispatch(actionTypes.setRef(ret.ref.value.id))
+                  const data = {
+                      ref: ret.ref.value.id,
+                      todo: ret.data.todo
+                  }
+                  dispatch(actionTypes.setRef(data))
               }).catch((err) => {
                   console.log(err)
               })
           })
       }
     },
-    setRef: (ref) => {
+    setRef: (data) => {
         return {
             type: 'set-ref',
-            ref
+            ref: data.ref,
+            todo: data.todo 
         }
     },
-    submitDone: () => {
-        return {
-            type: 'submit-todo'
-        }
+    setOnlyRef: (ref) => {
+      return {
+          type:'set-only-ref',
+          ref
+      }  
     },
     logOut: () => {
         return {
             type: 'log-out'
+        }
+    },
+    noResults: () => {
+        return {
+            type: 'no-results'
         }
     }
   }
