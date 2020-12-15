@@ -20,9 +20,7 @@ const initialState = {
 }
 
 const redurcer = (state = initialState, action) => {
-    if (action.type === 'spinner') {
-        return initialState
-    } else if (action.type === 'nothing') {
+    if (action.type === 'nothing') {
         return {
             ...state,
             loadState: 'nothing'

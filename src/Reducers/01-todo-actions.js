@@ -7,13 +7,6 @@ const client = new faunadb.Client({
   })
 
   const actionTypes = {
-    fetchTodos: () => {
-        return dispatch => {
-            setTimeout(() => {
-                dispatch(actionTypes.fetchingResult('nothing'))
-            }, 500)
-        }
-    },
     fetchingResult: (res) => {
         return {
             type: res
