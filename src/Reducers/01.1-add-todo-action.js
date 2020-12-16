@@ -25,17 +25,18 @@ const actionTypes = {
             client.query(
                 q.Update(
                   q.Ref(q.Collection(data.userName), data.ref),
-                  { data: {todo : data.text} },
+                  { data: {todo : data.todoArray} },
                 )
               )
               .then(() => {
-                  dispatch(actionTypes.submitDone())
+                  dispatch(actionTypes.submitDone(data.todoArray))
               }).catch(err => console.log(err))
         }
     },
-    submitDone: () => {
+    submitDone: (todoArray) => {
         return {
-            type: 'submit-todo'
+            type: 'submit-todo',
+            todoArray
         }
     },
     setHold: () => {

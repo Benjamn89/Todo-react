@@ -29,8 +29,12 @@ const client = new faunadb.Client({
               )
               .then((ret) => {
                 if (ret.data.todo.length < 1) {
+                    console.log('No results has founded')
                     dispatch(actionTypes.noResults())
-                }
+                } else {
+                    // Results has been founded
+                    console.log(ret.data.todo)
+                    dispatch(actionTypes.foundTodos(ret.data.todo))}
               })
               
           }).catch(() => {
@@ -73,6 +77,12 @@ const client = new faunadb.Client({
     noResults: () => {
         return {
             type: 'no-results'
+        }
+    },
+    foundTodos: (todo) => {
+        return {
+            type: 'find-todos',
+            todo
         }
     }
   }

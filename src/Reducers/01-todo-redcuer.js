@@ -16,7 +16,7 @@ const initialState = {
     loadState: 'spinner',
     ref: false,
     date: date(),
-    actualTodos: [],
+    todosArray: []
 }
 
 const redurcer = (state = initialState, action) => {
@@ -47,6 +47,12 @@ const redurcer = (state = initialState, action) => {
            ...state,
            loadState: 'nothing'
        }
+    } else if (action.type === 'find-todos') {
+          return {
+              ...state,
+              loadState: 'nothing',
+              todosArray: action.todo
+          }
     } else if (action.type === 'log-out') {
         return {
             ...state,

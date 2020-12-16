@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
+import todoActiontypes from '../../Reducers/01-todo-actions';
 
 
 const AddTodo = (props) => {
@@ -36,12 +37,15 @@ const closeTodo = () => {
 }
 
 const submitTodo = () => {
+  // const deepClone = props.todoArray.map(todo => ({...todo}))
+  // deepClone.push(props.textArea)
   const data = {
     userName: JSON.parse(localStorage.getItem('todo')).userName,
-    text: props.textArea,
+    // todoArray: deepClone,
     ref: props.myRef
   }
   props.setHoldOnSubmit()
+  props.updateTodoArray('arr')
   props.submitTodo(data)
 }
 
@@ -68,6 +72,7 @@ const mapDispatchToProps = dispatch => {
       closeTodo: (val) => dispatch(addTodoActiontypes.closeTodo(val)),
       submitTodo: (data) => dispatch(addTodoActiontypes.submitTodo(data)),
       setHoldOnSubmit: () =>  dispatch(addTodoActiontypes.setHold()),
+      updateTodoArray: () => dispatch(todoActiontypes.updateTodoArray())
      }
     }
 const mapStateToProps = state => {

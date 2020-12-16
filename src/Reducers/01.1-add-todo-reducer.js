@@ -4,7 +4,7 @@ const initialState = {
     holdAfterSubmit: '',
     addTodoRender: false,
     addTodo: false,
-    renderLoadTodo: false
+    renderLoadTodo: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -29,7 +29,8 @@ const reducer = (state = initialState, action) => {
             submitOn: false,
             addTodo: false,
             addTodoRender: !state.addTodoRender,
-            renderLoadTodo: !state.renderLoadTodo
+            renderLoadTodo: !state.renderLoadTodo,
+            todoArray: action.todoArray
         }
     } else if (action.type === 'set-hold') {
         return {
