@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
-import actionTypes from '../../Reducers/01-todo-actions'
+import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 
 const LoadTodos = (props) => {
   console.log('Inside todo box')
@@ -39,16 +39,16 @@ const LoadTodos = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      fetchTodos: () => dispatch(actionTypes.fetchTodos()),
-      checkDate: (user) => dispatch(actionTypes.checkDate(user))
+      fetchTodos: () => dispatch(loadTodoActionTypes.fetchTodos()),
+      checkDate: (user) => dispatch(loadTodoActionTypes.checkDate(user))
    } 
   }
 const mapStateToProps = state => {
   return {
-    loadState: state.todoReducer.loadState,
+    loadState: state.loadTodoReducer.loadState,
     date: state.todoReducer.date,
-    dateRef: state.todoReducer.ref,
-    loadTodoFromAddTodo: state.addTodoReducer.renderLoadTodo
+    dateRef: state.loadTodoReducer.ref,
+    loadTodoFromAddTodo: state.loadTodoReducer.renderLoadTodo
   }
 }
 

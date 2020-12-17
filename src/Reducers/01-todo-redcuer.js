@@ -13,50 +13,13 @@ const date = () => {
 
 
 const initialState = {
-    loadState: 'spinner',
-    ref: false,
     date: date(),
-    todosArray: []
 }
 
 const redurcer = (state = initialState, action) => {
-    if (action.type === 'nothing') {
+    if (action.type === 'log-out') {
         return {
             ...state,
-            loadState: 'nothing'
-        }
-    } else if (action.type === 'success') {
-        return {
-            ...state,
-            loadState: 'loading'
-        }
-    }  else if (action.type === 'set-ref') {
-        return {
-            ...state,
-            ref: action.ref,
-            actualTodos: action.todo,
-            loadState: 'nothing'
-        }
-    } else if (action.type === 'set-only-ref') {
-        return {
-            ...state,
-            ref: action.ref
-        }      
-    } else if (action.type === 'no-results') {
-       return {
-           ...state,
-           loadState: 'nothing'
-       }
-    } else if (action.type === 'find-todos') {
-          return {
-              ...state,
-              loadState: 'nothing',
-              todosArray: action.todo
-          }
-    } else if (action.type === 'log-out') {
-        return {
-            ...state,
-            loadState: 'spinner'
         }
     }
     return state
