@@ -80,6 +80,11 @@ const client = new faunadb.Client({
             type: 'update-todo-array',
             todoArray
         }
+    },
+    logOut: () => {
+        return {
+            type: 'log-out',
+        }
     }
   }
 

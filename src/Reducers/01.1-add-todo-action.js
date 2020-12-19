@@ -35,7 +35,7 @@ const actionTypes = {
     },
     submitDone: (todoArray) => {
         return {
-            type: 'submit-todo',
+            type: 'submit-done',
             todoArray
         }
     },

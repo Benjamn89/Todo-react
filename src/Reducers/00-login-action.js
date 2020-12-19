@@ -117,7 +117,7 @@ const actionTypes = {
     },
     logOut: () => {
       return {
-        type: 'logOut'
+        type: 'log-out'
       }
     }
 }

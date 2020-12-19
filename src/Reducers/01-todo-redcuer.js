@@ -17,11 +17,6 @@ const initialState = {
 }
 
 const redurcer = (state = initialState, action) => {
-    if (action.type === 'log-out') {
-        return {
-            ...state,
-        }
-    }
     return state
 }
 

@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
             passInput: ''
         }
     }
-        else if (action.type === 'logOut') {
+        else if (action.type === 'log-out') {
            return {
                ...state,
                userAuth: !state.userAuth

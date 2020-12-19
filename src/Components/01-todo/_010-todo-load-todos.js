@@ -17,6 +17,13 @@ const LoadTodos = (props) => {
     }
     props.checkDate(data)
   })
+   
+  useEffect(() => {
+    if (props.addedTodo < 1) {
+      return
+    }
+   console.log('Running when todo has added')
+  }, [props.addedTodo])
 
    const spinner = <div className='todo-spinner'>
    <div className='todo-spinner-dot'></div>
@@ -45,17 +52,17 @@ const mapDispatchToProps = dispatch => {
   }
 const mapStateToProps = state => {
   return {
-    loadState: state.loadTodoReducer.loadState,
     date: state.todoReducer.date,
+    loadState: state.loadTodoReducer.loadState,
     dateRef: state.loadTodoReducer.ref,
-    loadTodoFromAddTodo: state.loadTodoReducer.renderLoadTodo
+    loadTodoFromAddTodo: state.loadTodoReducer.renderLoadTodo,
+    addedTodo: state.loadTodoReducer.addedTodo
   }
 }
 
 
 const myMemo = (prevProps, nextProps) => {
-  if (prevProps.loadState === nextProps.loadState &&
-      prevProps.loadTodoFromAddTodo === nextProps.loadTodoFromAddTodo) {
+  if (prevProps.loadState === nextProps.loadState) {
     return true
   }
   return false

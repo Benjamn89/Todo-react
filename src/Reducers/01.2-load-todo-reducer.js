@@ -1,26 +1,12 @@
 const initialState = {
     loadState: 'spinner',
     ref: false,
-    todoArray: []
+    todoArray: [],
+    addedTodo: 0
 }
 
 const reducer = (state = initialState, action) => {
-    if (action.type === 'nothing') {
-        return {
-            ...state,
-            loadState: 'nothing'
-        }
-    } else if (action.type === 'success') {
-        return {
-            ...state,
-            loadState: 'loading'
-        }
-    } else if (action.type === 'no-results') {
-        return {
-            ...state,
-            loadState: 'nothing'
-        }
-     } else if (action.type === 'no-results') {
+    if (action.type === 'no-results') {
         return {
             ...state,
             loadState: 'nothing'
@@ -48,8 +34,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         ref: action.ref
     }      
+} else if (action.type === 'submit-done') {
+   return {
+       ...state,
+       loadState: 'spinner',
+       addedTodo: state.addedTodo + 1
+   }
+} else if (action.type === 'log-out') {
+    return {
+        ...state,
+        ref: false,
+        loadState: 'spinner',
+        addedTodo: 0
+    }
 }
-
     return state
 }
 

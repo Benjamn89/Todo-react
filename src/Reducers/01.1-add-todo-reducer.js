@@ -4,7 +4,6 @@ const initialState = {
     holdAfterSubmit: '',
     addTodoRender: false,
     addTodo: false,
-    renderLoadTodo: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +20,7 @@ const reducer = (state = initialState, action) => {
             addTodo: action.val,
             addTodoRender: !state.addTodoRender
         }
-    } else if (action.type === 'submit-todo') {
+    } else if (action.type === 'submit-done') {
         return {
             ...state,
             textArea: '',
@@ -29,7 +28,6 @@ const reducer = (state = initialState, action) => {
             submitOn: false,
             addTodo: false,
             addTodoRender: !state.addTodoRender,
-            renderLoadTodo: !state.renderLoadTodo,
             todoArray: action.todoArray
         }
     } else if (action.type === 'set-hold') {

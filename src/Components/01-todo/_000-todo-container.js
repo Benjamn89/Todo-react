@@ -3,8 +3,7 @@ import React, {  } from 'react'
 import LoadTodos from './_010-todo-load-todos';
 import AddTodo from './_020-todo-add-todo';
 // Import actionTypes
-import actionTypes from '../../Reducers/00-login-action'
-import actionTypesTodos from '../../Reducers/01-todo-actions';
+import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
 import addTodoActiontypes2 from '../../Reducers/01.1-add-todo-action';
 // Import Redux
 import { connect } from "react-redux";
@@ -14,7 +13,6 @@ const TodoPage = (props) => {
     console.log('Todo-Container')
     const logOutBtn = () => {
         localStorage.clear()
-        props.logOutFromLogin()
         props.logOutFromTodo()
     }
     const toggleTodo = () => {
@@ -71,8 +69,7 @@ const TodoPage = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logOutFromLogin: () => dispatch(actionTypes.logOut()),
-        logOutFromTodo: () => dispatch(actionTypesTodos.logOut()),
+        logOutFromTodo: () => dispatch(actionTypesLoadTodo.logOut()),
         toggleTodo: () => dispatch(addTodoActiontypes2.toggleTodo())
      } 
     }
