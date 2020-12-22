@@ -31,11 +31,13 @@ const LoadTodos = (props) => {
    </div>
 
   const noTodos = <div className='todo-no-todos'>No todos lo Load.</div>
-  const loadSuccess = <div>We actualy loading todo's</div> 
+  const loadSuccess = <div className='load-success-wrapper'>{props.todoArray.map(todo => {
+    return <div className='load-success-div' key={todo}><p className='load-success-p'>{todo}</p></div>
+  })}</div>
 
  if (props.loadState === 'nothing') {
   return noTodos
- } else if (props.loadState === 'loading') {
+ } else if (props.loadState === 'founded') {
    return loadSuccess
  }
 
@@ -56,7 +58,8 @@ const mapStateToProps = state => {
     loadState: state.loadTodoReducer.loadState,
     dateRef: state.loadTodoReducer.ref,
     loadTodoFromAddTodo: state.loadTodoReducer.renderLoadTodo,
-    addedTodo: state.loadTodoReducer.addedTodo
+    addedTodo: state.loadTodoReducer.addedTodo,
+    todoArray: state.loadTodoReducer.todoArray
   }
 }
 

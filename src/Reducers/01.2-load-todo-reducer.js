@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
      } else if (action.type === 'find-todos') {
         return {
             ...state,
-            loadState: 'nothing',
+            loadState: 'founded',
             todoArray: action.todo
         }
   }  else if (action.type === 'update-todo-array'){

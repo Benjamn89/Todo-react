@@ -36,6 +36,14 @@ const closeTodo = () => {
   props.closeTodo(false)
 }
 
+const keyPress = (e) => {
+  if (e.key === 'Enter') {
+    submitTodo()
+  } else if (e.key === 'Escape') {
+    closeTodo()
+  }
+}
+
 const submitTodo = () => {
   const deepClone = JSON.parse(JSON.stringify(props.todoArray))
   deepClone.push(props.textArea)
@@ -51,7 +59,7 @@ const submitTodo = () => {
 
   return <div className={props.addTodoState ? `todo-add-todo todo-add-todo-on ${props.holdAfterSubmit}` : 'todo-add-todo'}>
   <div className='todo-add-wrapper'>
-  <input onChange={typingTodo} value={props.textArea}
+  <input onChange={typingTodo} onKeyDown={keyPress} value={props.textArea}
   placeholder='Type Here...' maxLength='40' type='text' className='add-todo-input'/>
   <div className='add-todo-click add-todo-cancel' onClick={closeTodo}>
     <div></div>

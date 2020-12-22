@@ -1,37 +1,38 @@
-@import './_001-todo-box-wrapper.scss';
-@import './_002-todo-date.scss';
-@import './_003-todo-functions';
-@import './0201-todo-add-todos';
-@import './_010-todo-spinner';
-@import './011-todo-no-todos';
+@import "./_001-todo-box-wrapper.scss";
+@import "./_002-todo-date.scss";
+@import "./_003-todo-functions";
+@import "./0201-todo-add-todos";
+@import "./_010-todo-spinner";
+@import "./011-todo-no-todos";
+@import "./012-load-success";
 .todo-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .todo-logo {
-    height: 100px;
-    width: 100%;
-    background: black;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    & > h1 {
-        color: #fff;
-        font-weight: 400;
-    }
+  height: 100px;
+  width: 100%;
+  background: black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > h1 {
+    color: #fff;
+    font-weight: 400;
+  }
 }
 .todo-logo-line {
-    position: absolute;
-    bottom: 15px;
-    height: 6px;
-    width: 100%;
-    background: #00D2D3;
+  position: absolute;
+  bottom: 15px;
+  height: 6px;
+  width: 100%;
+  background: #00d2d3;
 }
 .todo-logo-svg {
-    position: absolute;
-    right: 0;
-    top: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }

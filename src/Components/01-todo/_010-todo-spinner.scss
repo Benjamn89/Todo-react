@@ -1,36 +1,36 @@
 .todo-spinner {
-    height: 100px;
-    width: 100px;
-    background: black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    border: solid 2px #fff;
-    align-self: center;
+  height: 100px;
+  width: 100px;
+  background: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  border: solid 2px #fff;
+  align-self: center;
 }
 .todo-spinner-dot {
-    height: 4px;
-    width: 4px;
-    border-radius: 50%;
-    background: #fff;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: #fff;
 }
 .todo-spinner-line {
-    position: absolute;
-    height: 49%;
-    width: 2px;
-    background: #00D2D3;
-    border-radius: 20px;
-    top: 1px;
-    animation: todoLine 2s linear infinite;
-    will-change: transform;
-    transform-origin: bottom;
+  position: absolute;
+  height: 49%;
+  width: 2px;
+  background: #00d2d3;
+  border-radius: 20px;
+  top: 1px;
+  animation: todoLine 2s linear infinite;
+  will-change: transform;
+  transform-origin: bottom;
 }
 
 @keyframes todoLine {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
