@@ -18,12 +18,12 @@ const LoadTodos = (props) => {
     props.checkDate(data)
   })
    
-  useEffect(() => {
-    if (props.addedTodo < 1) {
-      return
-    }
-   console.log('Running when todo has added')
-  }, [props.addedTodo])
+  // useEffect(() => {
+  //   if (props.addedTodo < 1) {
+  //     return
+  //   }
+  //  console.log('Running when todo has added')
+  // }, [props.addedTodo])
 
    const spinner = <div className='todo-spinner'>
    <div className='todo-spinner-dot'></div>
@@ -57,15 +57,15 @@ const mapStateToProps = state => {
     date: state.todoReducer.date,
     loadState: state.loadTodoReducer.loadState,
     dateRef: state.loadTodoReducer.ref,
-    loadTodoFromAddTodo: state.loadTodoReducer.renderLoadTodo,
     addedTodo: state.loadTodoReducer.addedTodo,
-    todoArray: state.loadTodoReducer.todoArray
+    todoArray: state.loadTodoReducer.todoArray,
+    allowRender: state.loadTodoReducer.allowRender
   }
 }
 
 
 const myMemo = (prevProps, nextProps) => {
-  if (prevProps.loadState === nextProps.loadState) {
+  if (prevProps.allowRender === nextProps.allowRender) {
     return true
   }
   return false

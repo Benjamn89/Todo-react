@@ -18,7 +18,7 @@ const client = new faunadb.Client({
                 )
             ).then((ret) => {
                 console.log('Date was founded, Save the ref and retriving the data')
-                dispatch(actionTypes.setOnlyRef(ret.ref.value.id))
+                dispatch(actionTypes.setRef(ret.ref.value.id))
                 client.query(
                   q.Get(q.Ref(q.Collection(user.user), ret.ref.value.id))
                 )
@@ -28,42 +28,38 @@ const client = new faunadb.Client({
                       dispatch(actionTypes.noResults())
                   } else {
                       // Results has been founded
-                      console.log(ret.data.todo)
                       dispatch(actionTypes.foundTodos(ret.data.todo))}
                 })
                 
             }).catch(() => {
                 console.log('New date has been created')
+                dispatch(actionTypes.newDateCreated())
                 client.query(
                   q.Create(
                     q.Collection(user.user),
                     { data: { date: user.date, todo: [] } },
                   )
                 ).then((ret) => {
-                    const data = {
-                        ref: ret.ref.value.id,
-                        todo: ret.data.todo
-                    }
-                    dispatch(actionTypes.setRef(data))
+                    const ref = ret.ref.value.id
+                    dispatch(actionTypes.setRef(ref))
                 }).catch((err) => {
                     console.log(err)
                 })
             })
         }
       },
-      setRef: (data) => {
+      newDateCreated: () => {
+          return {
+              type: 'new-date-created'
+          }
+      }
+      ,
+      setRef: (ref) => {
         return {
             type: 'set-ref',
-            ref: data.ref,
-            todo: data.todo 
+            ref
         }
     },
-    setOnlyRef: (ref) => {
-        return {
-            type:'set-only-ref',
-            ref
-        }  
-      },
       noResults: () => {
         return {
             type: 'no-results'
@@ -71,7 +67,7 @@ const client = new faunadb.Client({
     },
     foundTodos: (todo) => {
         return {
-            type: 'find-todos',
+            type: 'found-todos',
             todo
         }
     },
