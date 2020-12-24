@@ -37,7 +37,7 @@ const closeTodo = () => {
 }
 
 const keyPress = (e) => {
-  if (e.key === 'Enter') {
+  if (e.key === 'Enter' && e.target.value.length > 2) {
     submitTodo()
   } else if (e.key === 'Escape') {
     closeTodo()
@@ -60,7 +60,7 @@ const submitTodo = () => {
   return <div className={props.addTodoState ? `todo-add-todo todo-add-todo-on ${props.holdAfterSubmit}` : 'todo-add-todo'}>
   <div className='todo-add-wrapper'>
   <input onChange={typingTodo} onKeyDown={keyPress} value={props.textArea}
-  placeholder='Type Here...' maxLength='40' type='text' className='add-todo-input'/>
+  placeholder='Type Here...' maxLength='30' type='text' className='add-todo-input'/>
   <div className='add-todo-click add-todo-cancel' onClick={closeTodo}>
     <div></div>
     <div></div>

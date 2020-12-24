@@ -1,46 +1,46 @@
 .todo-box-wrapper {
-    height: 85vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .todo-box {
-    height: 600px;
-    width: 470px;
-    background: black;
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  height: 600px;
+  width: 470px;
+  background: black;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .todo-box-inside {
-    height: 75%;
-    width: 90%;
-    border: solid 1.5px #fff;
-    margin-top: 7%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 75%;
+  width: 90%;
+  border: solid 1.5px #fff;
+  margin-top: 7%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .todo-btn-page-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 100%;
-    bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
 }
 .todo-change-page {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    & > svg {
-        height: 25px;
-    }
-    &:nth-child(1) {
-        margin-right: 30px;
-    }
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  & > svg {
+    height: 25px;
+  }
+  &:nth-child(1) {
+    margin-right: 30px;
+  }
 }

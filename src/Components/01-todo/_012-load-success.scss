@@ -16,9 +16,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: showTodo 0.5s ease forwards;
+  position: relative;
+  cursor: pointer;
+  &:hover > p {
+    color: #00d2d3;
+  }
 }
 .load-success-p {
+  transition: color 0.3s;
   color: #ff5e57;
   font-weight: 600;
   font-size: 15px;
+}
+.load-todo-svg {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  left: 5px;
+  bottom: 3px;
+}
+
+@keyframes showTodo {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
