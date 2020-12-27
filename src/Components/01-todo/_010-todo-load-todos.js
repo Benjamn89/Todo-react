@@ -5,6 +5,7 @@ import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 
 const LoadTodos = (props) => {
   console.log('Inside todo box')
+  // Need to think on alternative
   const userName = useRef(JSON.parse(localStorage.getItem('todo')).userName)
   useEffect(() => {
    if (props.dateRef !== false) {
@@ -18,15 +19,23 @@ const LoadTodos = (props) => {
     props.checkDate(data)
   })
    
+   const toggleDone = (e) => {
+     const deepClone = JSON.parse(JSON.stringify(props.todoArray))
+     const indexArray = parseInt(e.target.getAttribute('keydom'))
+     deepClone[indexArray].done = !deepClone[indexArray].done
+     props.updateTodoArray(deepClone)
+   }
+
    const spinner = <div className='todo-spinner'>
    <div className='todo-spinner-dot'></div>
    <div className='todo-spinner-line'></div>
    </div>
 
   const noTodos = <div className='todo-no-todos'>No todos lo Load.</div>
-  const loadSuccess = <div className='load-success-wrapper'>{props.todoArray.map(todo => {
-    return <div className='load-success-div' key={todo}><p className='load-success-p'>{todo}</p>
-    <svg className='load-todo-svg' width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+  const loadSuccess = <div className='load-success-wrapper'>{props.todoArray.map((todo, ind) => {
+    return <div className={todo.done === false ? 'load-success-div' : 'load-success-div load-success-div-done'} key={ind + todo.text} keydom={ind} onClick={toggleDone}>
+      <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}>{todo.text}</p>
+    <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'} width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="20" cy="27" r="19.5" fill="white" stroke="#00D2D3"/>
        <path d="M10 25L20.5 35.5L40 1" stroke="#00D2D3" strokeWidth="3"/>
        </svg></div>
@@ -46,7 +55,8 @@ const LoadTodos = (props) => {
 const mapDispatchToProps = dispatch => {
   return {
       fetchTodos: () => dispatch(loadTodoActionTypes.fetchTodos()),
-      checkDate: (user) => dispatch(loadTodoActionTypes.checkDate(user))
+      checkDate: (user) => dispatch(loadTodoActionTypes.checkDate(user)),
+      updateTodoArray: (todoArray) => dispatch(loadTodoActionTypes.updateTodoArray(todoArray))
    } 
   }
 const mapStateToProps = state => {

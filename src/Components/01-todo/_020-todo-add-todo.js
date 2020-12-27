@@ -46,7 +46,11 @@ const keyPress = (e) => {
 
 const submitTodo = () => {
   const deepClone = JSON.parse(JSON.stringify(props.todoArray))
-  deepClone.push(props.textArea)
+  const todoObj = {
+    text: props.textArea,
+    done: false
+  }
+  deepClone.push(todoObj)
   const data = {
     userName: JSON.parse(localStorage.getItem('todo')).userName,
     todoArray: deepClone,

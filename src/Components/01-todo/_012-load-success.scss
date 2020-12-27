@@ -23,18 +23,34 @@
     color: #00d2d3;
   }
 }
+.load-success-div-done {
+  &:hover > p {
+    color: #ff5e57;
+  }
+}
 .load-success-p {
   transition: color 0.3s;
   color: #ff5e57;
   font-weight: 600;
   font-size: 15px;
+  pointer-events: none;
+}
+.load-success-p-done {
+  color: #00d2d3;
 }
 .load-todo-svg {
   position: absolute;
   height: 40px;
   width: 40px;
-  left: 5px;
   bottom: 3px;
+  transition: 0.3s;
+  opacity: 0;
+  left: 0;
+  pointer-events: none;
+}
+.load-todo-svg-on {
+  opacity: 1;
+  left: 5px;
 }
 
 @keyframes showTodo {
