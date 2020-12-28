@@ -6,7 +6,6 @@ import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 
 const LoadTodos = (props) => {
   console.log('Inside todo box')
-  // Need to think on alternative
   const userName = useRef(JSON.parse(localStorage.getItem('todo')).userName)
   useEffect(() => {
    if (props.dateRef !== false) {
@@ -28,7 +27,8 @@ const LoadTodos = (props) => {
      const data = {
        userName: JSON.parse(localStorage.getItem('todo')).userName,
        todoArray: deepClone,
-       ref: props.dateRef
+       ref: props.dateRef,
+       noRender: true
      }
 
      props.updateTodoArray(deepClone)

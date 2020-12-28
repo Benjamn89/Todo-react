@@ -29,6 +29,7 @@ const actionTypes = {
                 )
               )
               .then(() => {
+                  if (data.noRender === true) {return}
                   dispatch(actionTypes.submitDone(data.todoArray))
               }).catch(err => console.log(err))
         }

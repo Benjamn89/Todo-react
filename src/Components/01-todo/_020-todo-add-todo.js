@@ -54,7 +54,7 @@ const submitTodo = () => {
   const data = {
     userName: JSON.parse(localStorage.getItem('todo')).userName,
     todoArray: deepClone,
-    ref: props.myRef
+    ref: props.myRef,
   }
   props.setHoldOnSubmit()
   props.updateTodoArray(data.todoArray)
