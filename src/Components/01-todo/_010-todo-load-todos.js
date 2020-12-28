@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
+import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 
 const LoadTodos = (props) => {
   console.log('Inside todo box')
@@ -23,7 +24,15 @@ const LoadTodos = (props) => {
      const deepClone = JSON.parse(JSON.stringify(props.todoArray))
      const indexArray = parseInt(e.target.getAttribute('keydom'))
      deepClone[indexArray].done = !deepClone[indexArray].done
+
+     const data = {
+       userName: JSON.parse(localStorage.getItem('todo')).userName,
+       todoArray: deepClone,
+       ref: props.dateRef
+     }
+
      props.updateTodoArray(deepClone)
+     props.updateArrayDb(data)
    }
 
    const spinner = <div className='todo-spinner'>
@@ -56,7 +65,8 @@ const mapDispatchToProps = dispatch => {
   return {
       fetchTodos: () => dispatch(loadTodoActionTypes.fetchTodos()),
       checkDate: (user) => dispatch(loadTodoActionTypes.checkDate(user)),
-      updateTodoArray: (todoArray) => dispatch(loadTodoActionTypes.updateTodoArray(todoArray))
+      updateTodoArray: (todoArray) => dispatch(loadTodoActionTypes.updateTodoArray(todoArray)),
+      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDb(data))
    } 
   }
 const mapStateToProps = state => {

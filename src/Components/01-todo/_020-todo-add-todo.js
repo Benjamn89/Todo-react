@@ -58,7 +58,7 @@ const submitTodo = () => {
   }
   props.setHoldOnSubmit()
   props.updateTodoArray(data.todoArray)
-  props.submitTodo(data)
+  props.updateArrayDb(data)
 }
 
   return <div className={props.addTodoState ? `todo-add-todo todo-add-todo-on ${props.holdAfterSubmit}` : 'todo-add-todo'}>
@@ -82,9 +82,9 @@ const mapDispatchToProps = dispatch => {
     return {
       updateTextArea: (data) => dispatch(addTodoActiontypes.updateTextArea(data)),
       closeTodo: (val) => dispatch(addTodoActiontypes.closeTodo(val)),
-      submitTodo: (data) => dispatch(addTodoActiontypes.submitTodo(data)),
       setHoldOnSubmit: () =>  dispatch(addTodoActiontypes.setHold()),
-      updateTodoArray: (todoArray) => dispatch(loadTodoActionTypes.updateTodoArray(todoArray))
+      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDb(data)),
+      updateTodoArray: (todoArray) => dispatch(loadTodoActionTypes.updateTodoArray(todoArray)),
      }
     }
 const mapStateToProps = state => {

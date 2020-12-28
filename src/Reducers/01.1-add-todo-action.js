@@ -20,7 +20,7 @@ const actionTypes = {
             val
         }
     },
-    submitTodo: (data) => {
+    updateArrayDb: (data) => {
         return dispatch => {
             client.query(
                 q.Update(
