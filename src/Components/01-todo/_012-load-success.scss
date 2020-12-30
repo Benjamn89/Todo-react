@@ -22,10 +22,48 @@
   &:hover > p {
     color: #00d2d3;
   }
+  &:hover > .load-todo-delete {
+    right: 10px;
+    opacity: 1;
+  }
 }
 .load-success-div-done {
   &:hover > p {
     color: #ff5e57;
+  }
+}
+.load-todo-delete {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  right: -10px;
+  opacity: 0;
+  transition: right 0.2s, opacity 0.5s;
+  &:hover {
+    background: rgba(150, 143, 143, 0.151);
+  }
+}
+.load-todo-delete-inside {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  :nth-child(1),
+  :nth-child(2) {
+    width: 1px;
+    height: 60%;
+    background: rgba(0, 0, 0, 0.507);
+    position: absolute;
+  }
+  :nth-child(1) {
+    transform: rotate(45deg);
+  }
+  :nth-child(2) {
+    transform: rotate(-45deg);
   }
 }
 .load-success-p {

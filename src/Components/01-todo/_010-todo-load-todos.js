@@ -47,7 +47,10 @@ const LoadTodos = (props) => {
     <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'} width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="20" cy="27" r="19.5" fill="white" stroke="#00D2D3"/>
        <path d="M10 25L20.5 35.5L40 1" stroke="#00D2D3" strokeWidth="3"/>
-       </svg></div>
+       </svg>
+       <div className='load-todo-delete'>
+         <div className='load-todo-delete-inside'><div></div><div></div></div>
+       </div> </div>
   })}</div>
 
  if (props.loadState === 'nothing') {
