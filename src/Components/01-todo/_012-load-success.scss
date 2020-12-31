@@ -19,17 +19,9 @@
   animation: showTodo 0.5s ease forwards;
   position: relative;
   cursor: pointer;
-  &:hover > p {
-    color: #00d2d3;
-  }
   &:hover > .load-todo-delete {
     right: 10px;
     opacity: 1;
-  }
-}
-.load-success-div-done {
-  &:hover > p {
-    color: #ff5e57;
   }
 }
 .load-todo-delete {
@@ -40,6 +32,9 @@
   right: -10px;
   opacity: 0;
   transition: right 0.2s, opacity 0.5s;
+  div {
+    pointer-events: none;
+  }
   &:hover {
     background: rgba(150, 143, 143, 0.151);
   }
@@ -71,10 +66,20 @@
   color: #ff5e57;
   font-weight: 600;
   font-size: 15px;
-  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    color: #00d2d3;
+  }
 }
 .load-success-p-done {
   color: #00d2d3;
+  &:hover > p {
+    color: #ff5e57;
+  }
 }
 .load-todo-svg {
   position: absolute;

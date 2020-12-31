@@ -35,6 +35,10 @@ const LoadTodos = (props) => {
      props.updateArrayDb(data)
    }
 
+   const deleteTodo = (e) => {
+    console.log(e.target)
+   }
+
    const spinner = <div className='todo-spinner'>
    <div className='todo-spinner-dot'></div>
    <div className='todo-spinner-line'></div>
@@ -42,13 +46,14 @@ const LoadTodos = (props) => {
 
   const noTodos = <div className='todo-no-todos'>No todos lo Load.</div>
   const loadSuccess = <div className='load-success-wrapper'>{props.todoArray.map((todo, ind) => {
-    return <div className={todo.done === false ? 'load-success-div' : 'load-success-div load-success-div-done'} key={ind + todo.text} keydom={ind} onClick={toggleDone}>
-      <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}>{todo.text}</p>
+    return <div className='load-success-div' key={ind + todo.text}>
+      <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}
+       keydom={ind} onClick={toggleDone}>{todo.text}</p>
     <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'} width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="20" cy="27" r="19.5" fill="white" stroke="#00D2D3"/>
        <path d="M10 25L20.5 35.5L40 1" stroke="#00D2D3" strokeWidth="3"/>
        </svg>
-       <div className='load-todo-delete'>
+       <div className='load-todo-delete' onClick={deleteTodo}>
          <div className='load-todo-delete-inside'><div></div><div></div></div>
        </div> </div>
   })}</div>
