@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
     return {
         ...state,
         todoArray: action.todoArray,
-        loadState: 'founded',
+        loadState: action.loadState,
         allowRender: !state.allowRender
     }
 }  else if (action.type === 'set-ref') {

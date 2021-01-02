@@ -19,6 +19,7 @@
   animation: showTodo 0.5s ease forwards;
   position: relative;
   cursor: pointer;
+  transition: 0.5s;
   &:hover > .load-todo-delete {
     right: 10px;
     opacity: 1;
@@ -37,6 +38,11 @@
   }
   &:hover {
     background: rgba(150, 143, 143, 0.151);
+  }
+  &:hover ~ .load-todo-delete-hover {
+    transition: 0.2s;
+    transition-delay: 0.7s;
+    opacity: 1;
   }
 }
 .load-todo-delete-inside {
@@ -60,6 +66,23 @@
   :nth-child(2) {
     transform: rotate(-45deg);
   }
+}
+.load-todo-delete-hover {
+  position: absolute;
+  height: 20px;
+  width: 50px;
+  background: #fff;
+  border: solid 0.5px;
+  border-radius: 4px;
+  right: 0;
+  top: 37px;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.1s;
+  opacity: 0;
 }
 .load-success-p {
   transition: color 0.3s;
