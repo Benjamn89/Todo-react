@@ -46,16 +46,27 @@ const keyPress = (e) => {
 
 const submitTodo = () => {
   const deepClone = JSON.parse(JSON.stringify(props.todoArray))
+  let pages = 1
+  let currentPage = 1
   const todoObj = {
     text: props.textArea,
     done: false
   }
   deepClone.push(todoObj)
+  let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
+  if (deepClone.length > 6) {
+    pages = 2
+    currentPage = 2
+    deepCloneCopy.splice(0, 6)
+  }
   const data = {
     userName: JSON.parse(localStorage.getItem('todo')).userName,
     todoArray: deepClone,
+    displayArray: deepCloneCopy,
     ref: props.myRef,
-    loadState: 'founded'
+    loadState: 'founded',
+    pages,
+    currentPage
   }
   props.setHoldOnSubmit()
   props.updateTodoArray(data)

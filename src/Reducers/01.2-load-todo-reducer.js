@@ -2,8 +2,11 @@ const initialState = {
     loadState: 'spinner',
     ref: false,
     todoArray: [],
+    displayArray: [],
     addedTodo: 0,
-    allowRender: false
+    allowRender: false,
+    pages: 1,
+    currentPage: 1
 }
 
 const reducer = (state = initialState, action) => {
@@ -25,13 +28,17 @@ const reducer = (state = initialState, action) => {
             ...state,
             loadState: 'founded',
             todoArray: action.todo,
+            displayArray: action.todo,
             allowRender: !state.allowRender
         }
   }  else if (action.type === 'update-todo-array'){
     return {
         ...state,
         todoArray: action.todoArray,
+        displayArray: action.displayArray,
         loadState: action.loadState,
+        pages: action.pages,
+        currentPage: action.currentPage,
         allowRender: !state.allowRender
     }
 }  else if (action.type === 'set-ref') {

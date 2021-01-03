@@ -33,10 +33,10 @@ const TodoPage = (props) => {
               <LoadTodos />
                 <div className='todo-btn-page-wrapper'>
                 <button className='todo-change-page'><svg width="31" height="33" viewBox="0 0 31 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 16.5L30.75 0.478531V32.5215L0 16.5Z" fill="white" fillOpacity="0.2"/>
+                <path d="M0 16.5L30.75 0.478531V32.5215L0 16.5Z" fill="white" fillOpacity={props.pages > 1 ? '1' : '0.2'}/>
                 </svg></button>
                 <button className='todo-change-page'><svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M31.14 16.5L0.390015 32.5215L0.390015 0.478531L31.14 16.5Z" fill="white" fillOpacity="0.2"/>
+                <path d="M31.14 16.5L0.390015 32.5215L0.390015 0.478531L31.14 16.5Z" fill="white" fillOpacity='0.2'/>
                   </svg></button>
                 </div>
             </div>
@@ -77,7 +77,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
       userAuth: state.loginReducer.userAuth,
-      date: state.todoReducer.date
+      date: state.todoReducer.date,
+      pages: state.loadTodoReducer.pages,
+      currentPage: state.loadTodoReducer.currentPage
     }
   }
 

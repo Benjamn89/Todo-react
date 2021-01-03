@@ -23,6 +23,7 @@
   &:hover > .load-todo-delete {
     right: 10px;
     opacity: 1;
+    pointer-events: unset;
   }
 }
 .load-todo-delete {
@@ -33,6 +34,7 @@
   right: -10px;
   opacity: 0;
   transition: right 0.2s, opacity 0.5s;
+  pointer-events: none;
   div {
     pointer-events: none;
   }

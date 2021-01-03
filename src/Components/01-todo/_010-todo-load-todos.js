@@ -28,6 +28,7 @@ const LoadTodos = (props) => {
      const data = {
        userName: JSON.parse(localStorage.getItem('todo')).userName,
        todoArray: deepClone,
+       displayArray: deepClone,
        ref: props.dateRef,
        noRender: true,
        loadState
@@ -42,15 +43,24 @@ const LoadTodos = (props) => {
     const indexArray = parseInt(e.target.getAttribute('keydom'))
     deepClone.splice(indexArray, 1)  
     let loadState = 'founded'
+    let pages = 1
+    let currentPage = 1
+    if (deepClone.length > 6) {
+      pages = 2
+      currentPage = 2
+    }
     if (deepClone.length < 1) {
       loadState = 'nothing'
     }
     const data = {
       userName: JSON.parse(localStorage.getItem('todo')).userName,
       todoArray: deepClone,
+      displayArray: deepClone,
       ref: props.dateRef,
       noRender: true,
-      loadState
+      loadState,
+      pages,
+      currentPage
      }
      
      props.updateTodoArray(data)
@@ -63,7 +73,7 @@ const LoadTodos = (props) => {
    </div>
 
   const noTodos = <div className='todo-no-todos'>No todos lo Load.</div>
-  const loadSuccess = <div className='load-success-wrapper'>{props.todoArray.map((todo, ind) => {
+  const loadSuccess = <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
     return <div className='load-success-div' key={ind + todo.text}>
       <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}
        keydom={ind} onClick={toggleDone}>{todo.text}</p>
@@ -104,6 +114,7 @@ const mapStateToProps = state => {
     dateRef: state.loadTodoReducer.ref,
     addedTodo: state.loadTodoReducer.addedTodo,
     todoArray: state.loadTodoReducer.todoArray,
+    displayArray: state.loadTodoReducer.displayArray,
     allowRender: state.loadTodoReducer.allowRender
   }
 }

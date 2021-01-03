@@ -75,7 +75,10 @@ const client = new faunadb.Client({
         return {
             type: 'update-todo-array',
             todoArray: data.todoArray,
-            loadState: data.loadState
+            displayArray: data.displayArray,
+            loadState: data.loadState,
+            pages: data.pages,
+            currentPage: data.currentPage
         }
     },
     logOut: () => {
