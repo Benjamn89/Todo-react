@@ -23,15 +23,25 @@ const LoadTodos = (props) => {
      const deepClone = JSON.parse(JSON.stringify(props.todoArray))
      const indexArray = parseInt(e.target.getAttribute('keydom'))
      deepClone[indexArray].done = !deepClone[indexArray].done
+     let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
      let loadState = 'founded'
+     let pages = 1
+     let currentPage = 1
+     if (deepClone.length > 6) {
+      pages = 2
+      currentPage = 2
+      deepCloneCopy.splice(0, 6)
+    }
      
      const data = {
        userName: JSON.parse(localStorage.getItem('todo')).userName,
        todoArray: deepClone,
-       displayArray: deepClone,
+       displayArray: deepCloneCopy,
        ref: props.dateRef,
        noRender: true,
-       loadState
+       loadState,
+       pages,
+       currentPage
      }
 
      props.updateTodoArray(data)
@@ -41,13 +51,15 @@ const LoadTodos = (props) => {
    const deleteTodo = (e) => {
     const deepClone = JSON.parse(JSON.stringify(props.todoArray))
     const indexArray = parseInt(e.target.getAttribute('keydom'))
-    deepClone.splice(indexArray, 1)  
+    deepClone.splice(indexArray, 1)
+    let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
     let loadState = 'founded'
     let pages = 1
     let currentPage = 1
     if (deepClone.length > 6) {
       pages = 2
       currentPage = 2
+      deepCloneCopy.splice(0, 6)
     }
     if (deepClone.length < 1) {
       loadState = 'nothing'
@@ -55,7 +67,7 @@ const LoadTodos = (props) => {
     const data = {
       userName: JSON.parse(localStorage.getItem('todo')).userName,
       todoArray: deepClone,
-      displayArray: deepClone,
+      displayArray: deepCloneCopy,
       ref: props.dateRef,
       noRender: true,
       loadState,
@@ -76,7 +88,7 @@ const LoadTodos = (props) => {
   const loadSuccess = <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
     return <div className='load-success-div' key={ind + todo.text}>
       <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}
-       keydom={ind} onClick={toggleDone}>{todo.text}</p>
+       keydom={props.pages > 1 ? props.displayArray.length + 5 : ind} onClick={toggleDone}>{todo.text}</p>
     <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'} width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="20" cy="27" r="19.5" fill="white" stroke="#00D2D3"/>
        <path d="M10 25L20.5 35.5L40 1" stroke="#00D2D3" strokeWidth="3"/>
@@ -115,7 +127,8 @@ const mapStateToProps = state => {
     addedTodo: state.loadTodoReducer.addedTodo,
     todoArray: state.loadTodoReducer.todoArray,
     displayArray: state.loadTodoReducer.displayArray,
-    allowRender: state.loadTodoReducer.allowRender
+    allowRender: state.loadTodoReducer.allowRender,
+    pages: state.loadTodoReducer.pages,
   }
 }
 
