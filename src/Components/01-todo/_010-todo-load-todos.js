@@ -88,12 +88,12 @@ const LoadTodos = (props) => {
   const loadSuccess = <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
     return <div className='load-success-div' key={ind + todo.text}>
       <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}
-       keydom={props.pages > 1 ? props.displayArray.length + 5 : ind} onClick={toggleDone}>{todo.text}</p>
+       keydom={props.pages > 1 ? 6 + ind : ind} onClick={toggleDone}>{todo.text}</p>
     <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'} width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="20" cy="27" r="19.5" fill="white" stroke="#00D2D3"/>
        <path d="M10 25L20.5 35.5L40 1" stroke="#00D2D3" strokeWidth="3"/>
        </svg>
-       <div className='load-todo-delete' keydom={ind} onClick={deleteTodo}>
+       <div className='load-todo-delete' keydom={props.pages > 1 ? 6 + ind : ind} onClick={deleteTodo}>
          <div className='load-todo-delete-inside'><div></div><div></div></div>
        </div>
          <div className='load-todo-delete-hover'>Delete</div>
