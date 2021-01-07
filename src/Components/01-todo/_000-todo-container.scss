@@ -1,10 +1,11 @@
 @import "./_001-todo-box-wrapper.scss";
 @import "./_002-todo-date.scss";
 @import "./_003-todo-functions";
-@import "./0201-todo-add-todos";
+@import "./021-todo-add-todos";
 @import "./_010-todo-spinner";
 @import "./011-todo-no-todos";
 @import "./012-load-success";
+@import "./031-change-date";
 .todo-container {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
-@import '../Components/00-login/_00-login.scss';
-@import '../Components/01-todo/_000-todo-container';
+@import "../Components/00-login/_00-login.scss";
+@import "../Components/01-todo/_000-todo-container";
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +8,13 @@
 
 body {
   margin: 0;
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
