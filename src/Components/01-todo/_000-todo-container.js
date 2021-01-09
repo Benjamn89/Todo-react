@@ -2,7 +2,7 @@ import React, {  } from 'react'
 // Import react components
 import LoadTodos from './_010-todo-load-todos';
 import AddTodo from './_020-todo-add-todo';
-import ChangeDate from './_030-change-date';
+// import ChangeDate from './_030-change-date';
 // Import actionTypes
 import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
 import addTodoActiontypes2 from '../../Reducers/01.1-add-todo-action';
@@ -52,8 +52,8 @@ const TodoPage = (props) => {
             </div>
             </div>
             <div className='todo-functions'>
-             {/* <AddTodo /> */}
-             <ChangeDate />
+             <AddTodo />
+             {/* <ChangeDate /> */}
               <div onClick={toggleTodo} className='todo-functions-inside'>Add Todo
               <svg className='add-todo-arrow' width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                <circle cx="17.5" cy="17.5" r="16.25" stroke="white" strokeWidth="2.5"/>
