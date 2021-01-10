@@ -19,8 +19,11 @@ const TodoPage = (props) => {
     const toggleTodo = () => {
       props.toggleTodo()
     }
+    const detectTyping = () => {
+      console.log('Detect Typing is running')
+    }
     return (
-        <div className='todo-container'>
+        <div className='todo-container' tabIndex='1' onKeyDown={detectTyping}>
         <div className='todo-logo'>
             <h1>Hello Binyamin</h1>
             <div className='todo-logo-line'></div>
