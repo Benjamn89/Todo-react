@@ -12,6 +12,8 @@ import { connect } from "react-redux";
 
 const TodoPage = (props) => {
     console.log('Todo-Container')
+    // Detecting pressed keys together for opening the "addtodo" from keyboard
+    let detectKeys = {}
     const logOutBtn = () => {
         localStorage.clear()
         props.logOutFromTodo()
@@ -19,11 +21,17 @@ const TodoPage = (props) => {
     const toggleTodo = () => {
       props.toggleTodo()
     }
-    const detectTyping = () => {
-      console.log('Detect Typing is running')
+    const keyDown = (e) => {
+      detectKeys[e.key] = e.type === 'keydown'
+      if (detectKeys['a'] && detectKeys['d']) {
+         props.toggleTodo()
+      }
+    }
+    const keyUp = (e) => {
+     detectKeys[e.key] = e.type === 'keydown'
     }
     return (
-        <div className='todo-container' tabIndex='1' onKeyDown={detectTyping}>
+        <div className='todo-container' tabIndex='0' onKeyDown={keyDown} onKeyUp={keyUp}>
         <div className='todo-logo'>
             <h1>Hello Binyamin</h1>
             <div className='todo-logo-line'></div>

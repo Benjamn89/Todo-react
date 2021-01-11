@@ -10,9 +10,9 @@ const AddTodo = (props) => {
     let counter =  useRef(true)
     let submitOn = useRef(false)
     let inputElement = useRef(null)
-
-useEffect(() => {
-  const arrow =  document.querySelector('.add-todo-arrow')
+    
+    useEffect(() => {
+    const arrow =  document.querySelector('.add-todo-arrow')
   if (counter.current === true) {
     arrow.classList.remove('add-todo-arrow-down')
      counter.current = false
@@ -75,7 +75,8 @@ const submitTodo = () => {
   props.updateArrayDb(data)
 }
 
-  return <div className={props.addTodoState ? `todo-add-todo todo-add-todo-on ${props.holdAfterSubmit}` : 'todo-add-todo'}>
+  return <div className={props.addTodoState ? `todo-add-todo todo-add-todo-on ${props.holdAfterSubmit}` : 'todo-add-todo'}
+  tabIndex='0'>
   <div className='todo-add-wrapper'>
   <input onChange={typingTodo} onKeyDown={keyPress} value={props.textArea} ref={inputElement}
   placeholder='Type Here...' maxLength='30' type='text' className='add-todo-input' autoFocus/>
