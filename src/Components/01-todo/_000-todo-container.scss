@@ -1,17 +1,18 @@
 @import "./_001-todo-box-wrapper.scss";
 @import "./_002-todo-date.scss";
 @import "./_003-todo-functions";
-@import "./021-todo-add-todos";
-@import "./_010-todo-spinner";
-@import "./011-todo-no-todos";
-@import "./012-load-success";
-@import "./031-change-date";
+@import "./_101-todo-add-todos";
+@import "./_201-todo-spinner";
+@import "./_202-todo-no-todos";
+@import "./_203-load-success";
+@import "./_301-change-date";
+@import "./098-todo-helper";
 .todo-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  outline: none;
+  position: relative;
 }
 .todo-logo {
   height: 100px;

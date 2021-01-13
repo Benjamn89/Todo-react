@@ -1,8 +1,9 @@
-import React, {  } from 'react'
+import React from 'react'
 // Import react components
-import LoadTodos from './_010-todo-load-todos';
-import AddTodo from './_020-todo-add-todo';
-// import ChangeDate from './_030-change-date';
+import LoadTodos from './_200-todo-load-todos';
+import AddTodo from './_100-todo-add-todo';
+import Helper from './_098-todo-helper';
+// import ChangeDate from './_300-change-date';
 // Import actionTypes
 import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
 import addTodoActiontypes2 from '../../Reducers/01.1-add-todo-action';
@@ -12,8 +13,6 @@ import { connect } from "react-redux";
 
 const TodoPage = (props) => {
     console.log('Todo-Container')
-    // Detecting pressed keys together for opening the "addtodo" from keyboard
-    let detectKeys = {}
     const logOutBtn = () => {
         localStorage.clear()
         props.logOutFromTodo()
@@ -21,17 +20,9 @@ const TodoPage = (props) => {
     const toggleTodo = () => {
       props.toggleTodo()
     }
-    const keyDown = (e) => {
-      detectKeys[e.key] = e.type === 'keydown'
-      if (detectKeys['a'] && detectKeys['d']) {
-         props.toggleTodo()
-      }
-    }
-    const keyUp = (e) => {
-     detectKeys[e.key] = e.type === 'keydown'
-    }
     return (
-        <div className='todo-container' tabIndex='0' onKeyDown={keyDown} onKeyUp={keyUp}>
+        <div className='todo-container'>
+          <Helper />
         <div className='todo-logo'>
             <h1>Hello Binyamin</h1>
             <div className='todo-logo-line'></div>
@@ -92,7 +83,7 @@ const mapStateToProps = state => {
       userAuth: state.loginReducer.userAuth,
       date: state.todoReducer.date,
       pages: state.loadTodoReducer.pages,
-      currentPage: state.loadTodoReducer.currentPage
+      currentPage: state.loadTodoReducer.currentPage,
     }
   }
 
