@@ -7,19 +7,16 @@ import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action'
 
 const AddTodo = (props) => {
     console.log('Child Add Todo')
-    let counter =  useRef(true)
     let submitOn = useRef(false)
-    let inputElement = useRef(null)
-    
+    let inputElement = useRef(null)   
     useEffect(() => {
     const arrow =  document.querySelector('.add-todo-arrow')
-  if (counter.current === true) {
-    arrow.classList.remove('add-todo-arrow-down')
-     counter.current = false
-    } else {
-      arrow.classList.add('add-todo-arrow-down')
-      counter.current = true
-      inputElement.current.focus()
+  if (props.addTodoState) {
+    arrow.classList.add('add-todo-arrow-down')
+    inputElement.current.focus()
+  } else {
+      arrow.classList.remove('add-todo-arrow-down')
+      inputElement.current.blur()
   }
 }, [props.addTodoState])
 
