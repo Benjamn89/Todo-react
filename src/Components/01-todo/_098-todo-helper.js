@@ -1,30 +1,30 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import { connect } from "react-redux";
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 
 const Helper = (props) => {
-  let thisElement = useRef(null)
-    useEffect(() => {
-      thisElement.current.focus()
+  let detectKeys = {}
+  // TEST
+const keyDown = useCallback((e) => {
+  detectKeys[e.key] = e.type === 'keydown'
+  if (detectKeys['a'] && detectKeys['d']) {
+    detectKeys['a'] = false
+    detectKeys['d'] = false
+    e.preventDefault()
+    props.toggleTodo()
+  }
+  // eslint-disable-next-line
+}, [])
+// TEST
+  useEffect(() => {
+      if (props.addTodoState) {
+        document.body.removeEventListener('keydown', keyDown)
+      } else {
+        document.body.addEventListener('keydown', keyDown)
+      }
     })
-    // Detecting pressed keys together for opening the "addtodo" from keyboard
-    let detectKeys = {}
-    const keyDown = (e) => {
-        detectKeys[e.key] = e.type === 'keydown'
-        if (detectKeys['a'] && detectKeys['d']) {
-           props.toggleTodo()
-        }
-      }
-      const keyUp = (e) => {
-       detectKeys[e.key] = e.type === 'keydown'
-      }
-
     console.log('Helper Component')
-    return <div className='todo-helper'
-     tabIndex='0'
-      onKeyDown={props.addTodoState ? null : keyDown}
-       onKeyUp={props.addTodoState ? null : keyUp}
-       ref={thisElement}></div>
+    return <div className='todo-helper'></div>
 }
 
 const mapStateToProps = state => {
