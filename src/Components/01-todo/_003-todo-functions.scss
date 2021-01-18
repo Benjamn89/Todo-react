@@ -26,18 +26,3 @@
     color: #00d2d3;
   }
 }
-.todo-logout-btn {
-  color: rgba(255, 95, 87, 0.678);
-  &:hover {
-    color: #ff5e57;
-  }
-}
-.add-todo-arrow {
-  position: absolute;
-  right: 10%;
-  will-change: transform;
-  transition: 0.3s ease;
-}
-.add-todo-arrow-down {
-  transform: rotate(180deg);
-}

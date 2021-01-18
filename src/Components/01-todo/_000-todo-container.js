@@ -3,6 +3,7 @@ import React from 'react'
 import LoadTodos from './_200-todo-load-todos';
 import AddTodo from './_100-todo-add-todo';
 import Helper from './_098-todo-helper';
+import ToggleBtn from './_010-toggle-btn';
 // import ChangeDate from './_300-change-date';
 // Import actionTypes
 import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
@@ -16,9 +17,6 @@ const TodoPage = (props) => {
     const logOutBtn = () => {
         localStorage.clear()
         props.logOutFromTodo()
-    }
-    const toggleTodo = () => {
-      props.toggleTodo()
     }
     return (
         <div className='todo-container'>
@@ -55,13 +53,8 @@ const TodoPage = (props) => {
             </div>
             <div className='todo-functions'>
              <AddTodo />
+              <ToggleBtn />
              {/* <ChangeDate /> */}
-              <div onClick={toggleTodo} className='todo-functions-inside'>Add Todo
-              <svg className='add-todo-arrow' width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <circle cx="17.5" cy="17.5" r="16.25" stroke="white" strokeWidth="2.5"/>
-               <path d="M12.471 20.25L17.5 13.2816L22.529 20.25H12.471Z" stroke="white" strokeWidth="1.5"/>
-               </svg>
-              </div>
               <div className='todo-functions-inside'>Change Day</div>
               <div className='todo-functions-inside'>Search Todo</div>
               <div className='todo-functions-inside todo-logout-btn' onClick={logOutBtn}>LogOut</div>
