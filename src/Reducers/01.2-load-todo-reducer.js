@@ -23,15 +23,7 @@ const reducer = (state = initialState, action) => {
                  loadState: 'nothing',
                  ref: true
              }
-     } else if (action.type === 'found-todos') {
-        return {
-            ...state,
-            loadState: 'founded',
-            todoArray: action.todo,
-            displayArray: action.todo,
-            allowRender: !state.allowRender
-        }
-  }  else if (action.type === 'update-todo-array'){
+     } else if (action.type === 'update-todo-array'){
     return {
         ...state,
         todoArray: action.todoArray,

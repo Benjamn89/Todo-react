@@ -27,8 +27,23 @@ const client = new faunadb.Client({
                       console.log('No results has founded')
                       dispatch(actionTypes.noResults())
                   } else {
-                      // Results has been founded
-                      dispatch(actionTypes.foundTodos(ret.data.todo))}
+                    let pages = 1
+                    let currentPage = 1
+                    let deepCopyArray = JSON.parse(JSON.stringify(ret.data.todo))
+                      if (ret.data.todo.length / 5 > 1) {
+                           deepCopyArray.splice(0, 6)
+                          pages = 2
+                          currentPage = 2
+                      }
+                      const data = {
+                          type: 'update-todo-array',
+                          todoArray: ret.data.todo,
+                          displayArray: deepCopyArray,
+                          loadState: 'founded',
+                          pages,
+                          currentPage
+                      }
+                      dispatch(actionTypes.updateTodoArray(data))}
                 })
                 
             }).catch(() => {
@@ -63,12 +78,6 @@ const client = new faunadb.Client({
       noResults: () => {
         return {
             type: 'no-results'
-        }
-    },
-    foundTodos: (todo) => {
-        return {
-            type: 'found-todos',
-            todo
         }
     },
     updateTodoArray: (data) => {
