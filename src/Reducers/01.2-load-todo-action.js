@@ -30,7 +30,7 @@ const client = new faunadb.Client({
                     let pages = 1
                     let currentPage = 1
                     let deepCopyArray = JSON.parse(JSON.stringify(ret.data.todo))
-                      if (ret.data.todo.length / 5 > 1) {
+                      if (ret.data.todo.length / 6 > 1) {
                            deepCopyArray.splice(0, 6)
                           pages = 2
                           currentPage = 2

@@ -7,7 +7,6 @@ import ToggleBtn from './_010-toggle-btn';
 // import ChangeDate from './_300-change-date';
 // Import actionTypes
 import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
-import addTodoActiontypes2 from '../../Reducers/01.1-add-todo-action';
 // Import Redux
 import { connect } from "react-redux";
 
@@ -67,7 +66,6 @@ const TodoPage = (props) => {
 const mapDispatchToProps = dispatch => {
     return {
         logOutFromTodo: () => dispatch(actionTypesLoadTodo.logOut()),
-        toggleTodo: () => dispatch(addTodoActiontypes2.toggleTodo())
      } 
     }
 
@@ -80,4 +78,11 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoPage)
+  const myMemo = (prevProps, nextProps) => {
+    // if (prevProps.allowRender === nextProps.allowRender) {
+    //   return true
+    // }
+    return false
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(TodoPage, myMemo))

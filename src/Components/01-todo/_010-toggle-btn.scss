@@ -13,16 +13,16 @@
 .add-todo-arrow-down {
   transform: rotate(180deg);
 }
-.toggle-btn:hover > .toggle-btn-hover {
-  animation: testItBaby 0.3s ease forwards 1s;
-}
-@keyframes testItBaby {
+@keyframes onToggleClose {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
   }
+}
+.toggle-btn:hover > .toggle-btn-hover {
+  animation: onToggleClose 0.3s ease forwards 1s;
 }
 .toggle-btn-hover {
   position: absolute;
@@ -43,7 +43,4 @@
   text-align: center;
   color: black;
   opacity: 0;
-}
-.toggle-btn-off {
-  display: none;
 }

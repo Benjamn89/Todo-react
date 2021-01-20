@@ -5,6 +5,7 @@ const initialState = {
     displayArray: [],
     addedTodo: 0,
     allowRender: false,
+    allowContainer: false,
     pages: 1,
     currentPage: 1
 }
