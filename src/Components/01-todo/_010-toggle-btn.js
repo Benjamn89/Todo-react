@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from "react-redux";
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 
-const ToggleBtn = (props) => {
+const OnHoverBtn = (props) => {
     console.log('ToggleBtn')
     const toggleTodo = () => {
         props.toggleTodo()
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => {
    } 
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ToggleBtn)
+export default connect(mapStateToProps, mapDispatchToProps)(OnHoverBtn)

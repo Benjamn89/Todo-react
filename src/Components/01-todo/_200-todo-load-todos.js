@@ -35,14 +35,7 @@ const LoadTodos = (props) => {
      
      const data = {
        userName: JSON.parse(localStorage.getItem('todo')).userName,
-       todoArray: deepClone,
-       displayArray: deepCloneCopy,
-       ref: props.dateRef,
-       noRender: true,
-       loadState,
-       pages,
-       currentPage
-     }
+       todoArray: deepClone,displayArray: deepCloneCopy,ref: props.dateRef,noRender: true,loadState,pages,currentPage}
 
      props.updateTodoArray(data)
      props.updateArrayDb(data)
@@ -66,33 +59,37 @@ const LoadTodos = (props) => {
     }
     const data = {
       userName: JSON.parse(localStorage.getItem('todo')).userName,
-      todoArray: deepClone,
-      displayArray: deepCloneCopy,
-      ref: props.dateRef,
-      noRender: true,
-      loadState,
-      pages,
-      currentPage
-     }
+      todoArray: deepClone,displayArray: deepCloneCopy,ref: props.dateRef,noRender: true,loadState,pages,currentPage}
      
      props.updateTodoArray(data)
      props.updateArrayDb(data)
    }
 
-   const spinner = <div className='todo-spinner'>
-   <div className='todo-spinner-dot'></div>
-   <div className='todo-spinner-line'></div>
+   const backPage = () => {
+     if (props.currentPage > 1) {
+       let currentPage = props.currentPage - 1
+       const startIndex = (currentPage - 1) * 6
+       const endIndex = (currentPage * 5) + ((currentPage - 1) * 1) + 1
+       const deepClone = JSON.parse(JSON.stringify(props.todoArray))
+       const displayArray = deepClone.slice(startIndex, endIndex)
+       console.log(displayArray)
+     }
+   }
+   
+   let currentState = null
+   const spinner = <div className='todo-spinner'><div className='todo-spinner-dot'></div><div className='todo-spinner-line'></div>
    </div>
-
-  const noTodos = <div className='todo-no-todos'>No todos lo Load.</div>
-  const loadSuccess = <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
+   const noTodos = <div className='todo-no-todos'>No todos lo Load.</div>
+   const loadSuccess =  <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
     return <div className='load-success-div' key={ind + todo.text}>
       <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}
        keydom={props.pages > 1 ? 6 + ind : ind} onClick={toggleDone}>{todo.text}</p>
-    <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'} width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="27" r="19.5" fill="white" stroke="#00D2D3"/>
-       <path d="M10 25L20.5 35.5L40 1" stroke="#00D2D3" strokeWidth="3"/>
-       </svg>
+    <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'}
+     width="42" height="47"
+     viewBox="0 0 42 47"
+     fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="27" r="19.5" fill="white" stroke="#00D2D3"/>
+    <path d="M10 25L20.5 35.5L40 1" stroke="#00D2D3" strokeWidth="3"/>
+    </svg>
        <div className='load-todo-delete' keydom={props.pages > 1 ? 6 + ind : ind} onClick={deleteTodo}>
          <div className='load-todo-delete-inside'><div></div><div></div></div>
        </div>
@@ -101,16 +98,25 @@ const LoadTodos = (props) => {
   })}</div>
 
  if (props.loadState === 'nothing') {
-  return noTodos
+   currentState = noTodos
  } else if (props.loadState === 'founded') {
-   return loadSuccess
- }
+    currentState = loadSuccess
+ } else {currentState = spinner}
 
 
-  return spinner
+  return <div className='todo-box-inside'>
+          {currentState}
+           <div className='todo-btn-page-wrapper'>
+       <button className='todo-change-page' onClick={backPage}>
+         <svg width="31" height="33" viewBox="0 0 31 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+       <path d="M0 16.5L30.75 0.478531V32.5215L0 16.5Z" fill="white" fillOpacity={props.pages > 1 ? '1' : '0.2'}/></svg>
+       </button>
+       <button className='todo-change-page'><svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+       <path d="M31.14 16.5L0.390015 32.5215L0.390015 0.478531L31.14 16.5Z" fill="white" fillOpacity='0.2'/>
+         </svg></button>
+       </div>
+  </div>
 }
-
-
 const mapDispatchToProps = dispatch => {
   return {
       fetchTodos: () => dispatch(loadTodoActionTypes.fetchTodos()),
@@ -129,15 +135,13 @@ const mapStateToProps = state => {
     displayArray: state.loadTodoReducer.displayArray,
     allowRender: state.loadTodoReducer.allowRender,
     pages: state.loadTodoReducer.pages,
+    currentPage: state.loadTodoReducer.currentPage
   }
 }
-
-
 const myMemo = (prevProps, nextProps) => {
   if (prevProps.allowRender === nextProps.allowRender) {
     return true
   }
   return false
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(LoadTodos, myMemo))
