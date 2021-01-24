@@ -5,7 +5,6 @@ const initialState = {
     displayArray: [],
     addedTodo: 0,
     allowRender: false,
-    allowContainer: false,
     pages: 1,
     currentPage: 1
 }
@@ -34,17 +33,24 @@ const reducer = (state = initialState, action) => {
         currentPage: action.currentPage,
         allowRender: !state.allowRender
     }
-}  else if (action.type === 'set-ref') {
+   } else if (action.type === 'change-page') {
+        return {
+            ...state,
+            displayArray: action.data.displayArray,
+            currentPage: action.data.currentPage,
+            allowRender: !state.allowRender
+        }
+   } else if (action.type === 'set-ref') {
     return {
         ...state,
         ref: action.ref,
     }
-}  else if (action.type === 'submit-done') {
+    }  else if (action.type === 'submit-done') {
    return {
        ...state,
        addedTodo: state.addedTodo + 1
    }
-} else if (action.type === 'log-out') {
+   } else if (action.type === 'log-out') {
     return {
         ...state,
         ref: false,

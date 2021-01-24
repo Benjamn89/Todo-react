@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from 'react'
 import { connect } from "react-redux";
 import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
+// Import functions
+ import {caulcPages} from './10-functions';
 
 const LoadTodos = (props) => {
   console.log('Inside todo box')
@@ -23,19 +25,11 @@ const LoadTodos = (props) => {
      const deepClone = JSON.parse(JSON.stringify(props.todoArray))
      const indexArray = parseInt(e.target.getAttribute('keydom'))
      deepClone[indexArray].done = !deepClone[indexArray].done
-     let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
-     let loadState = 'founded'
-     let pages = 1
-     let currentPage = 1
-     if (deepClone.length > 6) {
-      pages = 2
-      currentPage = 2
-      deepCloneCopy.splice(0, 6)
-    }
+     const displayArray = caulcPages(props.currentPage, deepClone)
      
      const data = {
        userName: JSON.parse(localStorage.getItem('todo')).userName,
-       todoArray: deepClone,displayArray: deepCloneCopy,ref: props.dateRef,noRender: true,loadState,pages,currentPage}
+       todoArray: deepClone,displayArray ,ref: props.dateRef,noRender: true,loadState: 'founded',pages: props.pages,currentPage: props.currentPage}
 
      props.updateTodoArray(data)
      props.updateArrayDb(data)
@@ -65,15 +59,16 @@ const LoadTodos = (props) => {
      props.updateArrayDb(data)
    }
 
-   const backPage = () => {
-     if (props.currentPage > 1) {
-       let currentPage = props.currentPage - 1
-       const startIndex = (currentPage - 1) * 6
-       const endIndex = (currentPage * 5) + ((currentPage - 1) * 1) + 1
+   const changePage = (caulc) => {
+       console.log('Operate')
        const deepClone = JSON.parse(JSON.stringify(props.todoArray))
-       const displayArray = deepClone.slice(startIndex, endIndex)
-       console.log(displayArray)
-     }
+       let currentPage = props.currentPage + caulc
+      const displayArray = caulcPages(currentPage, deepClone)
+       const data = {
+         displayArray,
+         currentPage,
+       }
+       props.changePage(data)
    }
    
    let currentState = null
@@ -83,7 +78,7 @@ const LoadTodos = (props) => {
    const loadSuccess =  <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
     return <div className='load-success-div' key={ind + todo.text}>
       <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}
-       keydom={props.pages > 1 ? 6 + ind : ind} onClick={toggleDone}>{todo.text}</p>
+       keydom={props.currentPage > 1 ? 6 + ind : ind} onClick={toggleDone}>{todo.text}</p>
     <svg className={todo.done === false ? 'load-todo-svg' : 'load-todo-svg load-todo-svg-on'}
      width="42" height="47"
      viewBox="0 0 42 47"
@@ -107,12 +102,13 @@ const LoadTodos = (props) => {
   return <div className='todo-box-inside'>
           {currentState}
            <div className='todo-btn-page-wrapper'>
-       <button className='todo-change-page' onClick={backPage}>
+       <button className='todo-change-page' onClick={props.pages > 1 && props.currentPage > 1 ? () => changePage(-1) : null}>
          <svg width="31" height="33" viewBox="0 0 31 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-       <path d="M0 16.5L30.75 0.478531V32.5215L0 16.5Z" fill="white" fillOpacity={props.pages > 1 ? '1' : '0.2'}/></svg>
+       <path d="M0 16.5L30.75 0.478531V32.5215L0 16.5Z" fill="white" fillOpacity={props.pages > 1 && props.currentPage > 1 ? '1' : '0.2'}/></svg>
        </button>
-       <button className='todo-change-page'><svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-       <path d="M31.14 16.5L0.390015 32.5215L0.390015 0.478531L31.14 16.5Z" fill="white" fillOpacity='0.2'/>
+       <button className='todo-change-page' onClick={props.pages > 1 && props.currentPage < props.pages ? () => changePage(+1) : null}>
+         <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path d="M31.14 16.5L0.390015 32.5215L0.390015 0.478531L31.14 16.5Z" fill="white" fillOpacity={props.currentPage < props.pages ? '1' : '0.2'}/>
          </svg></button>
        </div>
   </div>
@@ -122,7 +118,8 @@ const mapDispatchToProps = dispatch => {
       fetchTodos: () => dispatch(loadTodoActionTypes.fetchTodos()),
       checkDate: (user) => dispatch(loadTodoActionTypes.checkDate(user)),
       updateTodoArray: (data) => dispatch(loadTodoActionTypes.updateTodoArray(data)),
-      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDb(data))
+      changePage: (data) => dispatch(loadTodoActionTypes.changePage(data)),
+      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDb(data)),
    } 
   }
 const mapStateToProps = state => {

@@ -90,6 +90,13 @@ const client = new faunadb.Client({
             currentPage: data.currentPage
         }
     },
+    changePage: (data) => {
+        return {
+            type: 'change-page',
+            data
+        }
+    }
+    ,
     logOut: () => {
         return {
             type: 'log-out',
