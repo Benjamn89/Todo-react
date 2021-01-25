@@ -60,7 +60,6 @@ const LoadTodos = (props) => {
    }
 
    const changePage = (caulc) => {
-       console.log('Operate')
        const deepClone = JSON.parse(JSON.stringify(props.todoArray))
        let currentPage = props.currentPage + caulc
       const displayArray = caulcPages(currentPage, deepClone)
