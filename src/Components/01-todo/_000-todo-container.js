@@ -3,10 +3,11 @@ import React from 'react'
 import LoadTodos from './_200-todo-load-todos';
 import AddTodo from './_100-todo-add-todo';
 import Helper from './_098-todo-helper';
-import OnHoverBtn from './_010-on-hover-btn';
+import AddTodoBtn from './_010-add-todo-btn';
 import ChangeDate from './_300-change-date';
 // Import actionTypes
 import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
+import changeDateAction from '../../Reducers/01.3-load-todo-action';
 // Import Redux
 import { connect } from "react-redux";
 
@@ -41,10 +42,10 @@ const TodoPage = (props) => {
             </div>
             </div>
             <div className='todo-functions'>
-             {/* <AddTodo /> */}
-              <OnHoverBtn />
+              <AddTodoBtn />
+              <AddTodo />
               <ChangeDate />
-              <div className='todo-functions-inside'>Change Day</div>
+              <div className='todo-functions-inside' onClick={props.toggleChangeDay}>Change Day</div>
               <div className='todo-functions-inside'>Search Todo</div>
               <div className='todo-functions-inside todo-logout-btn' onClick={logOutBtn}>LogOut</div>
             </div>
@@ -56,6 +57,7 @@ const TodoPage = (props) => {
 const mapDispatchToProps = dispatch => {
     return {
         logOutFromTodo: () => dispatch(actionTypesLoadTodo.logOut()),
+        toggleChangeDay: () => dispatch(changeDateAction.toggleChangeDay())
      } 
     }
 

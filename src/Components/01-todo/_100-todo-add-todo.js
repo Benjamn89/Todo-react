@@ -10,14 +10,11 @@ const AddTodo = (props) => {
     let submitOn = useRef(false)
     let inputElement = useRef(null)   
     useEffect(() => {
-    const arrow =  document.querySelector('.add-todo-arrow')
   if (props.addTodoState && props.holdAfterSubmit.length > 2) {
     inputElement.current.blur()
   } else if (props.addTodoState) {
-    arrow.classList.add('add-todo-arrow-down')
     inputElement.current.focus()
   } else {
-      arrow.classList.remove('add-todo-arrow-down')
       inputElement.current.blur()
   }
 }, [props.addTodoState, props.holdAfterSubmit])

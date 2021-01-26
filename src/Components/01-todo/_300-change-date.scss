@@ -10,6 +10,14 @@
   color: #fff;
   padding-bottom: 15px;
   padding-left: 20px;
+  opacity: 0.5;
+  transform: scaleY(0);
+  transition: 0.3s ease;
+  transform-origin: 0 100%;
+}
+.change-date-box-on {
+  opacity: 1;
+  transform: scaleY(1);
 }
 .change-date-wrapper {
   height: 100%;

@@ -1,9 +1,10 @@
-import React, {useEffect, useRef} from 'react'
+import React from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 
 const ChangeDate = props => {
-    return <div className='change-date-box'>
+    console.log('Change Date Component')
+    return <div className={props.changeDayState ? 'change-date-box change-date-box-on' : 'change-date-box'}>
     
     <div className='change-date-click change-date-cancel'>
     <div></div>
@@ -34,4 +35,10 @@ const ChangeDate = props => {
     </div>
 }
 
-export default ChangeDate
+const mapStateToProps = state => {
+return {
+  changeDayState: state.changeDateReducer.changeDayState 
+ }
+}
+
+export default connect(mapStateToProps, null)(ChangeDate)
