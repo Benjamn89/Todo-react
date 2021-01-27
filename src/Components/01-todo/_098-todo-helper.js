@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect} from 'react'
 import { connect } from "react-redux";
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
+import changeDateAction from '../../Reducers/01.3-load-todo-action';
 
 const Helper = (props) => {
   let detectKeys = {}
@@ -13,6 +14,12 @@ const keyDown = useCallback((e) => {
     e.preventDefault()
     props.toggleTodo()
   }
+  if (detectKeys['a'] && detectKeys['c']) {
+    detectKeys['a'] = false
+    detectKeys['c'] = false
+    e.preventDefault()
+    props.toggleChangeDay()
+  }
   // eslint-disable-next-line
 }, [])
 // TEST
@@ -22,7 +29,14 @@ const keyDown = useCallback((e) => {
       } else {
         document.body.addEventListener('keydown', keyDown)
       }
-    })
+    }, [props.addTodoState, keyDown])
+    useEffect(() => {
+      if (props.changeDayState) {
+        document.body.removeEventListener('keydown', keyDown)
+      } else {
+        document.body.addEventListener('keydown', keyDown)
+      }
+    }, [props.changeDayState, keyDown])
     console.log('Helper Component')
     return <div className='todo-helper'></div>
 }
@@ -30,12 +44,14 @@ const keyDown = useCallback((e) => {
 const mapStateToProps = state => {
   return {
     addTodoState: state.addTodoReducer.addTodo,
+    changeDayState: state.changeDateReducer.changeDayState 
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-      toggleTodo: () => dispatch(addTodoActiontypes.toggleTodo())
+      toggleTodo: () => dispatch(addTodoActiontypes.toggleTodo()),
+      toggleChangeDay: () => dispatch(changeDateAction.toggleChangeDay())
    } 
   }
 

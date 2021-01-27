@@ -13,13 +13,13 @@ const AddTodoBtn = (props) => {
       }
     })
 
-      let hover = <div className='toggle-btn-hover'>Click to open or alternatively press 'A' + 'D'</div>
+      let hover = <div className='add-todo-btn-hover'>Click to open or alternatively press 'A' + 'D'</div>
       if (props.addTodoState) {
-        hover = <div className='toggle-btn-hover'>To close press Esc</div>
+        hover = <div className='add-todo-btn-hover'>To close press Esc</div>
       }
-    return  <div onClick={props.toggleTodo} className='todo-functions-inside toggle-btn'>Add Todo
+    return  <div onClick={props.toggleTodo} className='todo-functions-inside add-todo-btn'>Add Todo
     <svg className='add-todo-arrow' width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" ref={svgElement}>
-     <circle cx="17.5" cy="17.5" r="16.25" stroke="white" strokeWidth="2.5"/>
+     <circle cx="17.5" cy="17.5" r="16.25" stroke={props.addTodoState ? '#00d2d3' : 'white'} strokeWidth="2.5"/>
      <path d="M12.471 20.25L17.5 13.2816L22.529 20.25H12.471Z" stroke="white" strokeWidth="1.5"/>
      </svg>
      {hover}

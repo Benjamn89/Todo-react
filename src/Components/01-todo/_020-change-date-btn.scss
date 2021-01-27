@@ -1,0 +1,9 @@
+.change-date-arrow {
+  position: absolute;
+  right: 10%;
+  will-change: transform;
+  transition: 0.3s ease;
+}
+.change-date-arrow-down {
+  transform: rotate(180deg);
+}

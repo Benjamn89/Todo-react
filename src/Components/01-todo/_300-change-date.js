@@ -4,6 +4,12 @@ import { connect } from "react-redux";
 
 const ChangeDate = props => {
     console.log('Change Date Component')
+    
+    const changeDateInput = () => {
+      console.log('Testing')
+    }
+
+
     return <div className={props.changeDayState ? 'change-date-box change-date-box-on' : 'change-date-box'}>
     
     <div className='change-date-click change-date-cancel'>
@@ -16,12 +22,11 @@ const ChangeDate = props => {
      <path d="M1 10.5L5 14.5L12.5 1.5" stroke="#00D2D3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
      </svg>
      </div>
-      
 
          <div className='change-date-wrapper'>
            <div className='change-date-inside'>
              <p className='change-date-p'>D</p>
-             <input type='number' value='00' className='change-date-input'/>
+             <input type='number' value='00' className='change-date-input' onChange={changeDateInput}/>
            </div>
            <div className='change-date-inside'>
              <p className='change-date-p'>M</p>
@@ -37,7 +42,10 @@ const ChangeDate = props => {
 
 const mapStateToProps = state => {
 return {
-  changeDayState: state.changeDateReducer.changeDayState 
+  changeDayState: state.changeDateReducer.changeDayState,
+  day: state.changeDateReducer.dayInput,
+  month: state.changeDateReducer.monthInput,
+  year: state.changeDateReducer.yearInput
  }
 }
 

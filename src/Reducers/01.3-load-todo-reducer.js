@@ -1,5 +1,8 @@
 const initialState = {
-  changeDayState: false
+  changeDayState: false,
+  dayInput: 0,
+  monthInput: 0,
+  yearInput: 0
 }
 
 const reducer = (state = initialState, action) => {
