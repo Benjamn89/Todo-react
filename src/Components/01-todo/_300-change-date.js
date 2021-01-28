@@ -1,14 +1,48 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
+import changeDateAction from '../../Reducers/01.3-load-todo-action';
 
 const ChangeDate = props => {
     console.log('Change Date Component')
-    
-    const changeDateInput = () => {
-      console.log('Testing')
+    let inputElement = useRef(null)
+    useEffect(() => {
+      if (props.changeDayState) {
+        inputElement.current.focus()
+        inputElement.current.select()
+      }
+    }, [props.changeDayState])
+
+
+    const changeDayInput = (e) => {
+      const value = e.target.value
+      const parseStr = parseInt(value)
+      if (value.length < 2 && parseStr < 4) {
+        props.changeDayUpdate(value)
+      } else if (value.length > 1 && parseStr < 32) {
+        props.changeDayUpdate(value)
+      } else if (value.length < 1) {
+        props.changeDayUpdate('')
+      }
     }
 
+    const changeMonthInput = (e) => {
+      const value = e.target.value
+      const parseStr = parseInt(value)
+      if (value.length < 2 && parseStr < 2) {
+        props.changeMonthUpdate(value)
+      } else if (value.length > 1 && parseStr < 13 && parseStr > 0) {
+        props.changeMonthUpdate(value)
+      } else if (value.length < 1) {
+        props.changeMonthUpdate('')
+      }
+    }
+    
+    const keyPress = (e) => {
+      if (e.key === 'Escape') {
+        props.toggleChangeDay(false)
+      }
+    }
 
     return <div className={props.changeDayState ? 'change-date-box change-date-box-on' : 'change-date-box'}>
     
@@ -26,15 +60,18 @@ const ChangeDate = props => {
          <div className='change-date-wrapper'>
            <div className='change-date-inside'>
              <p className='change-date-p'>D</p>
-             <input type='number' value='00' className='change-date-input' onChange={changeDateInput}/>
+             <input type='text' value={props.day} className='change-date-input' maxLength='2'
+             onKeyDown={keyPress} onChange={changeDayInput} ref={inputElement}/>
            </div>
            <div className='change-date-inside'>
              <p className='change-date-p'>M</p>
-            <input type='number' value='00' className='change-date-input'/>
+            <input type='text' value={props.month} className='change-date-input' maxLength='2'
+            onKeyDown={keyPress} onChange={changeMonthInput}/>
            </div>
            <div className='change-date-inside'>
               <p className='change-date-p'>Y</p>
-            <input type='number' value='00' className='change-date-input'/>
+            <input type='text' value={props.year} className='change-date-input'
+            onKeyDown={keyPress}/>
            </div>
          </div>
     </div>
@@ -49,4 +86,12 @@ return {
  }
 }
 
-export default connect(mapStateToProps, null)(ChangeDate)
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleChangeDay: () => dispatch(changeDateAction.toggleChangeDay()),
+    changeDayUpdate: (data) => dispatch(changeDateAction.changeDayUpdate(data)),
+    changeMonthUpdate: (data) => dispatch(changeDateAction.changeMonthUpdate(data)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeDate)

@@ -11,6 +11,18 @@
         return {
           type: 'toggle-change-day'
         }
+    },
+    changeDayUpdate: (data) => {
+      return {
+        type: 'change-day-update',
+        data
+      }
+    },
+    changeMonthUpdate: (data) => {
+      return {
+        type: 'change-month-update',
+        data
+      }
     }
   }
 
