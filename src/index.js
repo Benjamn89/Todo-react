@@ -10,7 +10,7 @@ import loginReducer from './Reducers/00-login-reducer'
 import todoReducer from './Reducers/01-todo-redcuer'
 import addTodoReducer from './Reducers/01.1-add-todo-reducer'
 import loadTodoReducer from './Reducers/01.2-load-todo-reducer';
-import changeDateReducer from './Reducers/01.3-load-todo-reducer';
+import changeDateReducer from './Reducers/01.3-change-date-reducer';
 
 // combined reducers
 const rootReducer = combineReducers({

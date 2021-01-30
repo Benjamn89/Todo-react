@@ -2,7 +2,8 @@ const initialState = {
   changeDayState: false,
   dayInput: '00',
   monthInput: '00',
-  yearInput: '00'
+  yearInput: '21',
+  allowSubmit: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,7 +12,7 @@ const reducer = (state = initialState, action) => {
             changeDayState: !state.changeDayState,
             dayInput: '00',
             monthInput: '00',
-            yearInput: '00'
+            yearInput: '21'
         }
     } else if (action.type === 'change-day-update') {
         return {
@@ -28,7 +29,7 @@ const reducer = (state = initialState, action) => {
             ...state,
             yearInput: action.data
         }
-    }
+    } 
     return state
 }
 

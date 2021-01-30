@@ -23,6 +23,12 @@
         type: 'change-month-update',
         data
       }
+    },
+    changeYearUpdate: (data) => {
+      return {
+        type: 'change-year-update',
+        data
+      }
     }
   }
 
