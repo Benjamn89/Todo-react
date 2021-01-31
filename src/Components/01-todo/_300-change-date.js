@@ -15,32 +15,38 @@ const ChangeDate = props => {
     const changeDayInput = (e) => {
       const value = e.target.value
       const parseStr = parseInt(value)
+      let data = {value,count: 0}
       if (value.length < 2 && parseStr < 4) {
-        props.changeDayUpdate(value)
+        props.changeDayUpdate(data)
       } else if (value.length > 1 && parseStr < 32) {
-        props.changeDayUpdate(value)
+        data.count = 1
+        props.changeDayUpdate(data)
       } else if (value.length < 1) {
-        props.changeDayUpdate('')
+        props.changeDayUpdate(data)
       }
     }
     const changeMonthInput = (e) => {
       const value = e.target.value
       const parseStr = parseInt(value)
+      let data = {value,count: 0}
       if (value.length < 2 && parseStr < 2) {
-        props.changeMonthUpdate(value)
+        props.changeMonthUpdate(data)
       } else if (value.length > 1 && parseStr < 13 && parseStr > 0) {
-        props.changeMonthUpdate(value)
+        data.count = 1
+        props.changeMonthUpdate(data)
       } else if (value.length < 1) {
-        props.changeMonthUpdate('')
+        props.changeMonthUpdate(data)
       }
     }
     const changeYearInput = (e) => {
       const value = e.target.value
       const parseStr = parseInt(value)
+      let data = {value,count: 0}
       if (value.length < 2 && parseStr === 2) {
-        props.changeYearUpdate(value)
-      } else if (value.length > 1) {
-        props.changeYearUpdate(value)
+        props.changeYearUpdate(data)
+      } else if (value.length > 1 && value.length < 3) {
+        data.count = 1
+        props.changeYearUpdate(data)
       }
     }
     
@@ -51,11 +57,18 @@ const ChangeDate = props => {
     }
     const focusOut = (e) => {
       if (e.target.value.length < 2) {
-        let newValue = e.target.value
+        let value = e.target.value
         const keydom = e.target.getAttribute('keyDom')
-        newValue = `0${newValue}`
-        keydom === 'day' ? props.changeDayUpdate(newValue) : props.changeMonthUpdate(newValue)
+        value = `0${value}`
+        const data = {value,count: 1}
+        keydom === 'day' ? props.changeDayUpdate(data) : props.changeMonthUpdate(data)
       }
+    }
+    const test = () => {
+      if (props.dayCount + props.monthCount + props.yearCount > 2) {
+        return true
+      }
+      return false
     }
     return <div className={props.changeDayState ? 'change-date-box change-date-box-on' : 'change-date-box'}>
 
@@ -64,7 +77,7 @@ const ChangeDate = props => {
     <div></div>
      </div>
 
-     <div className={props.allowSubmit ? 'change-date-click change-date-confirm change-date-confirm-on' : 'change-date-click change-date-confirm'}>
+     <div className={test() ? 'change-date-click change-date-confirm change-date-confirm-on' : 'change-date-click change-date-confirm'}>
      <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
      <path d="M1 10.5L5 14.5L12.5 1.5" stroke="#00D2D3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
      </svg>
@@ -95,7 +108,10 @@ return {
   day: state.changeDateReducer.dayInput,
   month: state.changeDateReducer.monthInput,
   year: state.changeDateReducer.yearInput,
-  allowSubmit: state.changeDateReducer.allowSubmit
+  allowSubmit: state.changeDateReducer.allowSubmit,
+  dayCount: state.changeDateReducer.dayCount,
+  monthCount: state.changeDateReducer.monthCount,
+  yearCount: state.changeDateReducer.yearCount,
  }
 }
 const mapDispatchToProps = dispatch => {
