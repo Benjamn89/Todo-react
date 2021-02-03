@@ -45,7 +45,14 @@ const actionTypes = {
             type: 'set-hold'
         }
     },
-    toggleTodo: () => {
+    toggleTodo: (condition) => {
+        if (condition) {
+            return dispatch => {
+                setTimeout(() => {
+                 dispatch(actionTypes.toggleTodo(false))
+                }, 200)
+            }
+        }
         return {
             type: 'toggle-todo'
         }

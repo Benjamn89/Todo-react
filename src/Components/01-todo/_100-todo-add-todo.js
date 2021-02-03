@@ -108,10 +108,7 @@ const mapStateToProps = state => {
 }
 
 const myMemo = (prevProps, nextProps) => {
-  if (prevProps.addTodoRender === nextProps.addTodoRender) {
-    return true
-  }
-  return false
+  return prevProps.addTodoRender === nextProps.addTodoRender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(AddTodo, myMemo))

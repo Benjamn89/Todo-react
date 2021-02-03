@@ -135,9 +135,6 @@ const mapStateToProps = state => {
   }
 }
 const myMemo = (prevProps, nextProps) => {
-  if (prevProps.allowRender === nextProps.allowRender) {
-    return true
-  }
-  return false
+  return prevProps.allowRender === nextProps.allowRender
 }
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(LoadTodos, myMemo))

@@ -7,10 +7,18 @@
 //   })
 
   const actionTypes = {
-    toggleChangeDay: () => {
-        return {
-          type: 'toggle-change-day'
-        }
+    toggleChangeDay: (condition) => {
+        if (condition) {
+          return dispatch => {
+            setTimeout(() => {
+              dispatch(actionTypes.toggleChangeDay(false))
+            },200)
+          }
+        } 
+         return {
+            type: 'toggle-change-day'
+          }
+        
     },
     changeDayUpdate: (data) => {
       return {
