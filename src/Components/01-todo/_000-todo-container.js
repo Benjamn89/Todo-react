@@ -11,7 +11,6 @@ import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
 // Import Redux
 import { connect } from "react-redux";
 
-
 const TodoPage = (props) => {
     console.log('Todo-Container')
     const logOutBtn = () => {
@@ -53,20 +52,17 @@ const TodoPage = (props) => {
         </div>
     )
 }
-
 const mapDispatchToProps = dispatch => {
     return {
         logOutFromTodo: () => dispatch(actionTypesLoadTodo.logOut()),
      } 
     }
-
 const mapStateToProps = state => {
     return {
       userAuth: state.loginReducer.userAuth,
       date: state.todoReducer.date,
     }
   }
-
   export default connect(mapStateToProps, mapDispatchToProps)(TodoPage)
   // const myMemo = (prevProps, nextProps) => {
   //   // if (prevProps.allowRender === nextProps.allowRender) {

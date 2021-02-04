@@ -95,8 +95,7 @@ const client = new faunadb.Client({
             type: 'change-page',
             data
         }
-    }
-    ,
+    },
     logOut: () => {
         return {
             type: 'log-out',
