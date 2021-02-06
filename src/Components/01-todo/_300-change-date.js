@@ -3,6 +3,7 @@ import React, {useRef, useEffect} from 'react'
 import { connect } from "react-redux";
 import changeDateAction from '../../Reducers/01.3-change-date-action';
 import containerAction from '../../Reducers/01-todo-actions';
+import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 
 const ChangeDate = props => {
     console.log('Change Date Component')
@@ -55,6 +56,9 @@ const ChangeDate = props => {
       if (e.key === 'Escape') {
         props.toggleChangeDay(false)
       }
+      if (e.key === 'Enter' && props.dayCount + props.monthCount + props.yearCount > 2) {
+        submitBtn()
+      }
     }
     const focusOut = (e) => {
       if (e.target.value.length < 2) {
@@ -72,8 +76,15 @@ const ChangeDate = props => {
       return false
     }
     const submitBtn = () => {
+      props.setToSpinner()
       const date = `${props.day}.${props.month}.20${props.year}`
+      const data = {
+        user: JSON.parse(localStorage.getItem('todo')).userName,
+        date
+      }
+      props.checkDate(data)
       props.changeDateContainer(date)
+      props.toggleChangeDay()
     }
     return <div className={props.changeDayState ? 'change-date-box change-date-box-on' : 'change-date-box'}>
 
@@ -126,7 +137,9 @@ const mapDispatchToProps = dispatch => {
     changeDayUpdate: (data) => dispatch(changeDateAction.changeDayUpdate(data)),
     changeMonthUpdate: (data) => dispatch(changeDateAction.changeMonthUpdate(data)),
     changeYearUpdate: (data) => dispatch(changeDateAction.changeYearUpdate(data)),
-    changeDateContainer: date => dispatch(containerAction.changeDateContainer(date))
+    changeDateContainer: date => dispatch(containerAction.changeDateContainer(date)),
+    checkDate: (data) => dispatch(loadTodoActionTypes.checkDate(data)),
+    setToSpinner: () => dispatch(loadTodoActionTypes.setToSpinner())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChangeDate)

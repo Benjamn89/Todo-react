@@ -44,6 +44,10 @@ const reducer = (state = initialState, action) => {
     return {
         ...state,
         ref: action.ref,
+        todoArray: [],
+        displayArray: [],
+        pages: 1,
+        currentPage: 1
     }
     }  else if (action.type === 'submit-done') {
    return {
@@ -56,6 +60,12 @@ const reducer = (state = initialState, action) => {
         ref: false,
         loadState: 'spinner',
         addedTodo: 0
+    }
+} else if (action.type === 'set-to-spinner') {
+    return {
+        ...state,
+        loadState: 'spinner',
+        allowRender: !state.allowRender
     }
 }
     return state

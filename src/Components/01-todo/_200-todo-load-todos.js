@@ -7,7 +7,7 @@ import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
  import {caulcPages} from './10-functions';
 
 const LoadTodos = (props) => {
-  console.log('Inside todo box')
+  console.log('Load Todos Component')
   const userName = useRef(JSON.parse(localStorage.getItem('todo')).userName)
   useEffect(() => {
    if (props.dateRef !== false) {
@@ -126,7 +126,6 @@ const mapStateToProps = state => {
     date: state.todoReducer.date,
     loadState: state.loadTodoReducer.loadState,
     dateRef: state.loadTodoReducer.ref,
-    addedTodo: state.loadTodoReducer.addedTodo,
     todoArray: state.loadTodoReducer.todoArray,
     displayArray: state.loadTodoReducer.displayArray,
     allowRender: state.loadTodoReducer.allowRender,

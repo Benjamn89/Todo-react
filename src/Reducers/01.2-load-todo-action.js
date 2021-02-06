@@ -63,6 +63,11 @@ const client = new faunadb.Client({
             })
         }
       },
+      setToSpinner: () => {
+       return {
+           type: 'set-to-spinner'
+       }
+      },
       newDateCreated: () => {
           return {
               type: 'new-date-created'

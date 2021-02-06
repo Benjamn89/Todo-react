@@ -11,10 +11,10 @@ const date = () => {
     return displayDate
   }
 
-
 const initialState = {
     date: date(),
 }
+
 
 const redurcer = (state = initialState, action) => {
     if (action.type === 'change-date-container') {
