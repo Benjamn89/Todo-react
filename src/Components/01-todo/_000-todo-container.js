@@ -2,24 +2,16 @@ import React from 'react'
 // Import react components
 import LoadTodos from './_200-todo-load-todos';
 import AddTodo from './_100-todo-add-todo';
-import Helper from './_098-todo-helper';
+import LogOutBtn from './_098-todo-logout-btn';
 import AddTodoBtn from './_010-add-todo-btn';
 import ChangeDate from './_300-change-date';
 import ChangeDateBtn from './_020-change-date-btn';
-// Import actionTypes
-import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
 // Import Redux
 import { connect } from "react-redux";
-
 const TodoPage = (props) => {
     console.log('Todo-Container')
-    const logOutBtn = () => {
-        localStorage.clear()
-        props.logOutFromTodo()
-    }
     return (
         <div className='todo-container'>
-          <Helper />
         <div className='todo-logo'>
             <h1>Hello Binyamin</h1>
             <div className='todo-logo-line'></div>
@@ -46,28 +38,16 @@ const TodoPage = (props) => {
               <ChangeDate />
               <ChangeDateBtn />
               <div className='todo-functions-inside'>Search Todo</div>
-              <div className='todo-functions-inside todo-logout-btn' onClick={logOutBtn}>LogOut</div>
+              <LogOutBtn />
             </div>
         </div>
         </div>
     )
 }
-const mapDispatchToProps = dispatch => {
-    return {
-        logOutFromTodo: () => dispatch(actionTypesLoadTodo.logOut()),
-     } 
-    }
 const mapStateToProps = state => {
     return {
       userAuth: state.loginReducer.userAuth,
       date: state.todoReducer.date,
     }
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(TodoPage)
-  // const myMemo = (prevProps, nextProps) => {
-  //   // if (prevProps.allowRender === nextProps.allowRender) {
-  //   //   return true
-  //   // }
-  //   return false
-  // }
-// export default connect(mapStateToProps, mapDispatchToProps)(React.memo(TodoPage, myMemo))
+  export default connect(mapStateToProps, null)(TodoPage)

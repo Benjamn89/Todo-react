@@ -2,8 +2,8 @@ import React, {useCallback, useEffect} from 'react'
 import { connect } from "react-redux";
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 import changeDateAction from '../../Reducers/01.3-change-date-action';
-
-const Helper = (props) => {
+import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
+const LogOutBtn = (props) => {
   let detectKeys = {}
   // TEST
 const keyDown = useCallback((e) => {
@@ -24,35 +24,33 @@ const keyDown = useCallback((e) => {
 }, [])
 // TEST
   useEffect(() => {
-      if (props.addTodoState) {
+      if (props.addTodoState || props.changeDayState) {
         document.body.removeEventListener('keydown', keyDown)
-      } else {
-        document.body.addEventListener('keydown', keyDown)
-      }
-    }, [props.addTodoState, keyDown])
-    useEffect(() => {
-      if (props.changeDayState) {
+      } else {document.body.addEventListener('keydown', keyDown)}
+    }, [props, keyDown])
+    const logOutBtn = () => {
+      if (!props.addTodoState && !props.changeDayState) {
         document.body.removeEventListener('keydown', keyDown)
-      } else {
-        document.body.addEventListener('keydown', keyDown)
-      }
-    }, [props.changeDayState, keyDown])
-    console.log('Helper Component')
-    return <div className='todo-helper'></div>
+         }
+      localStorage.clear()
+      props.logOutFromTodo()
+  }
+    console.log('LogOut Btn Component')
+    // return <div className='todo-helper'></div>
+    return <div className='todo-functions-inside todo-logout-btn' onClick={logOutBtn}>LogOut</div>
 }
-
 const mapStateToProps = state => {
   return {
     addTodoState: state.addTodoReducer.addTodo,
-    changeDayState: state.changeDateReducer.changeDayState 
+    changeDayState: state.changeDateReducer.changeDayState,
+    forHelper: state.changeDateReducer.forHelper
   }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
       toggleTodo: () => dispatch(addTodoActiontypes.toggleTodo()),
-      toggleChangeDay: () => dispatch(changeDateAction.toggleChangeDay())
+      toggleChangeDay: () => dispatch(changeDateAction.toggleChangeDay()),
+      logOutFromTodo: () => dispatch(actionTypesLoadTodo.logOut()),
    } 
   }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Helper)
+export default connect(mapStateToProps, mapDispatchToProps)(LogOutBtn)

@@ -6,38 +6,38 @@
 //     secret: keys.fauna
 //   })
 
-  const actionTypes = {
-    toggleChangeDay: (condition) => {
-        if (condition) {
-          return dispatch => {
-            setTimeout(() => {
-              dispatch(actionTypes.toggleChangeDay(false))
-            },200)
-          }
-        } 
-         return {
-            type: 'toggle-change-day'
-          }
-        
-    },
-    changeDayUpdate: (data) => {
-      return {
-        type: 'change-day-update',
-        data
-      }
-    },
-    changeMonthUpdate: (data) => {
-      return {
-        type: 'change-month-update',
-        data
-      }
-    },
-    changeYearUpdate: (data) => {
-      return {
-        type: 'change-year-update',
-        data
-      }
+const actionTypes = {
+  toggleChangeDay: (condition) => {
+      if (condition) {
+        return dispatch => {
+          setTimeout(() => {
+            dispatch(actionTypes.toggleChangeDay(false))
+          },200)
+        }
+      } 
+       return {
+          type: 'toggle-change-day'
+        }
+      
+  },
+  changeDayUpdate: (data) => {
+    return {
+      type: 'change-day-update',
+      data
+    }
+  },
+  changeMonthUpdate: (data) => {
+    return {
+      type: 'change-month-update',
+      data
+    }
+  },
+  changeYearUpdate: (data) => {
+    return {
+      type: 'change-year-update',
+      data
     }
   }
+}
 
-  export default actionTypes
+export default actionTypes

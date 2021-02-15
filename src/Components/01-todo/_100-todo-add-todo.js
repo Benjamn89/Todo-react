@@ -84,7 +84,6 @@ const submitTodo = () => {
   </div>
 </div>
 }
-
 const mapDispatchToProps = dispatch => {
     return {
       updateTextArea: (data) => dispatch(addTodoActiontypes.updateTextArea(data)),
@@ -106,9 +105,7 @@ const mapStateToProps = state => {
     todoArray: state.loadTodoReducer.todoArray
   }
 }
-
 const myMemo = (prevProps, nextProps) => {
   return prevProps.addTodoRender === nextProps.addTodoRender
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(AddTodo, myMemo))

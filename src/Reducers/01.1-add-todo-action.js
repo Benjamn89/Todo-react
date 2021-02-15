@@ -34,6 +34,21 @@ const actionTypes = {
               }).catch(err => console.log(err))
         }
     },
+    updateArrayDbTest: () => {
+     return dispatch => {
+         Promise.all([client.query(
+            q.Update(
+              q.Ref(q.Collection(data.userName), data.ref),
+              { data: {todo : data.todoArray} },
+            )
+          ),client.query(
+            q.Update(
+              q.Ref(q.Collection('tll-todos'), '290619774910595589'),
+              { data: {test : 'test'} },
+            )
+          )])
+     }
+    },
     submitDone: (todoArray) => {
         return {
             type: 'submit-done',

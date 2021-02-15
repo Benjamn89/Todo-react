@@ -125,7 +125,6 @@ return {
   day: state.changeDateReducer.dayInput,
   month: state.changeDateReducer.monthInput,
   year: state.changeDateReducer.yearInput,
-  allowSubmit: state.changeDateReducer.allowSubmit,
   dayCount: state.changeDateReducer.dayCount,
   monthCount: state.changeDateReducer.monthCount,
   yearCount: state.changeDateReducer.yearCount,

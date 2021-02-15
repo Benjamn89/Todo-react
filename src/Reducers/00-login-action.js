@@ -24,7 +24,7 @@ const actionTypes = {
             localStorage.setItem('todo', JSON.stringify(objForLocal))
            dispatch(actionTypes.logSuccess())
           })
-          .catch(err => dispatch(actionTypes.loginFailed()))
+          .catch(() => dispatch(actionTypes.loginFailed()))
         }
     },
     userExists: (userData) => {
