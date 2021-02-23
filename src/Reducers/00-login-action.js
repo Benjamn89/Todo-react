@@ -52,15 +52,11 @@ const actionTypes = {
                         dispatch(actionTypes.regSuccess())
                         client.query(q.CreateCollection({ name: userData.displayName }))
                         .then(() => {
-                         client.query(
-                          q.CreateIndex({
-                            name: userData.email,
-                            source: q.Collection(userData.email),
-                            terms: [{ field: ['data', 'date'] }],
-                          })
-                         ).then(() => {
+                          client.query(q.CreateIndex({name: userData.email, source: q.Collection(userData.email),
+                              terms: [{ field: ['data', 'date'] }],}))
+                          .then(() => {
                            console.log('Index was created')
-                         })
+                         }).catch((err) => console.log(err))
                         })
                       })
                   }
@@ -68,58 +64,34 @@ const actionTypes = {
         }
     },
     changeLoginBox: (stateName) => {
-      return {
-          type: 'changeState',
-          stateName
-      }
+      return {type: 'changeState', stateName}
   },
     regFailed: () => {
-   return {
-       type: 'regFailed'
-   }
+   return {type: 'regFailed'}
     },
     removeErr: () => {
-      return {
-        type: 'removeErr'
-      }
+      return {type: 'removeErr'}
     },
     showSpinner: () => {
-      return {
-       type: 'spinnerOn'
-      }
+      return {type: 'spinnerOn'}
     },
     regSuccess: () => {
-      return {
-        type: 'regSuccess'
-      }
+      return {type: 'regSuccess'}
     },
     typeEmail: (val) => {
-      return {
-        type: 'typeEmail',
-        val
-      }
+      return {type: 'typeEmail', val}
     },
     typePass: (val) => {
-      return {
-        type: 'typePass',
-        val
-      }
+      return {type: 'typePass', val}
     },
     logSuccess: () => {
-      return {
-        type: 'loginSuccess'
-      }
+      return {type: 'loginSuccess'}
     },
     loginFailed: () => {
-      return {
-        type: 'loginFailed'
-      }
+      return {type: 'loginFailed'}
     },
     logOut: () => {
-      return {
-        type: 'log-out'
-      }
+      return {type: 'log-out'}
     }
 }
-
 export default actionTypes

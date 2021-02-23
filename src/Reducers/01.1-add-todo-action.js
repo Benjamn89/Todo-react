@@ -34,19 +34,16 @@ const actionTypes = {
               }).catch(err => console.log(err))
         }
     },
-    updateArrayDbTest: () => {
-     return dispatch => {
-         Promise.all([client.query(
-            q.Update(
-              q.Ref(q.Collection(data.userName), data.ref),
-              { data: {todo : data.todoArray} },
-            )
-          ),client.query(
-            q.Update(
-              q.Ref(q.Collection('tll-todos'), '290619774910595589'),
-              { data: {test : 'test'} },
-            )
-          )])
+    updateArrayDbTest: (data) => {
+     return dispatch => {client.query(
+        q.Update(
+          q.Ref(q.Collection(data.userName), data.ref),
+          { data: {todo : data.todoArray} },
+        )
+      ).then(() => {
+            if (data.noRender === true) {return}
+            dispatch(actionTypes.submitDone(data.todoArray))
+          }).catch(err => console.log(err))
      }
     },
     submitDone: (todoArray) => {

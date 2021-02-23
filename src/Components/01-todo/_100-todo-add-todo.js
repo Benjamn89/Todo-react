@@ -42,10 +42,7 @@ const submitTodo = () => {
   const deepClone = JSON.parse(JSON.stringify(props.todoArray))
   let pages = 1
   let currentPage = 1
-  const todoObj = {
-    text: props.textArea,
-    done: false
-  }
+  const todoObj = {text: props.textArea, done: false }
   deepClone.push(todoObj)
   let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
   if (deepClone.length > 6) {
@@ -54,14 +51,8 @@ const submitTodo = () => {
     deepCloneCopy.splice(0, 6)
   }
   const data = {
-    userName: JSON.parse(localStorage.getItem('todo')).userName,
-    todoArray: deepClone,
-    displayArray: deepCloneCopy,
-    ref: props.myRef,
-    loadState: 'founded',
-    pages,
-    currentPage
-  }
+    userName: JSON.parse(localStorage.getItem('todo')).userName, todoArray: deepClone, displayArray: deepCloneCopy,
+    ref: props.myRef, loadState: 'founded', pages, currentPage }
   props.setHoldOnSubmit()
   props.updateTodoArray(data)
   props.updateArrayDb(data)
@@ -89,7 +80,7 @@ const mapDispatchToProps = dispatch => {
       updateTextArea: (data) => dispatch(addTodoActiontypes.updateTextArea(data)),
       closeTodo: (val) => dispatch(addTodoActiontypes.closeTodo(val)),
       setHoldOnSubmit: () =>  dispatch(addTodoActiontypes.setHold()),
-      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDb(data)),
+      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDbTest(data)),
       updateTodoArray: (todoArray) => dispatch(loadTodoActionTypes.updateTodoArray(todoArray)),
      }
     }
