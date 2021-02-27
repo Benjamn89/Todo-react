@@ -10,8 +10,8 @@ const client = new faunadb.Client({
     checkDate: (user) => {
         return dispatch => {
             Promise.all([
-                client.query(q.Get(q.Match(q.Index(user.user),user.date))),
-                client.query(q.Get(q.Match(q.Index(user.user),'11'))),
+                client.query(q.Get(q.Match(q.Index(user.user), user.date))),
+                client.query(q.Get(q.Match(q.Index(user.user),'1.1'))),
               ])
             .then((ret) => {
                 console.log('Date was founded, Save the ref and retriving the data')
@@ -36,16 +36,15 @@ const client = new faunadb.Client({
                       }
                       dispatch(actionTypes.updateTodoArray(data))}
                 })
-                
             }).catch(() => {
                 console.log('New date has been created')
                 dispatch(actionTypes.newDateCreated())
                 Promise.all([client.query(q.Create(q.Collection(user.user),{ data: { date: user.date, todo: [] } },)),
-                             client.query(q.Create(q.Collection(user.user),{ data: { date: '11', todo: [] } },))])
+                client.query(q.Get(q.Match(q.Index(user.user),'1.1')))])
                 .then((ret) => {
                     const ref = {dateRef: ret[0].ref.value.id, allTodosRef: ret[1].ref.value.id}
                     dispatch(actionTypes.setRef(ref))
-                }).catch((err) => {console.log(err)})
+                }).catch(() => {console.log('not founding the 1.1 with index')})
             })
         }
       },

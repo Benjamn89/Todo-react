@@ -29,38 +29,25 @@ const actionTypes = {
     },
     userExists: (userData) => {
         return dispatch => {
-            client.query(
-                q.Paginate(
-                  q.Match(q.Index('user_exists'), userData.email)
-                )
-              )
+            client.query(q.Paginate(q.Match(q.Index('user_exists'), userData.email)))
               .then((ret) => {
                   if (ret.data.length > 0) {
                       console.log('User exists')
                       dispatch(actionTypes.regFailed())
                   } else {
-                    client.query(
-                        q.Create(
-                          q.Collection('users'),
-                          {
-                            credentials: { password: userData.pass },
-                            data: { username: userData.email, displayName: userData.displayName }
-                          }
-                        )
-                      )
+                    client.query(q.Create(q.Collection('users'),{credentials: { password: userData.pass },data: {username: userData.email, displayName: userData.displayName}}))
                       .then(() => {
                         dispatch(actionTypes.regSuccess())
                         client.query(q.CreateCollection({ name: userData.displayName }))
                         .then(() => {
-                          client.query(q.CreateIndex({name: userData.email, source: q.Collection(userData.email),
-                              terms: [{ field: ['data', 'date'] }],}))
-                          .then(() => {
-                           console.log('Index was created')
-                         }).catch((err) => console.log(err))
+                          Promise.all([
+                            client.query(q.CreateIndex({name: userData.email, source: q.Collection(userData.email),terms: [{ field: ['data', 'date'] }],})),
+                            client.query(q.Create(q.Collection(userData.email),{ data: { date: '1.1', todo: [] } },)) ])
+                          .then(() => { console.log('Index was created') })
+                          .catch((err) => console.log(err))
                         })
                       })
-                  }
-              })
+                  } }).catch((err) => console.log(err))
         }
     },
     changeLoginBox: (stateName) => {
