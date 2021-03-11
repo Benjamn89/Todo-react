@@ -5,7 +5,7 @@ const initialState = {
     showSpinner: false,
     successReg: false,
     emailInput: '',
-    passInput: ''
+    passInput: '',
 }
 
 const reducer = (state = initialState, action) => {

@@ -24,102 +24,64 @@ const actionTypes = {
             localStorage.setItem('todo', JSON.stringify(objForLocal))
            dispatch(actionTypes.logSuccess())
           })
-          .catch(err => dispatch(actionTypes.loginFailed()))
+          .catch(() => dispatch(actionTypes.loginFailed()))
         }
     },
     userExists: (userData) => {
         return dispatch => {
-            client.query(
-                q.Paginate(
-                  q.Match(q.Index('user_exists'), userData.email)
-                )
-              )
+            client.query(q.Paginate(q.Match(q.Index('user_exists'), userData.email)))
               .then((ret) => {
                   if (ret.data.length > 0) {
                       console.log('User exists')
                       dispatch(actionTypes.regFailed())
                   } else {
-                    client.query(
-                        q.Create(
-                          q.Collection('users'),
-                          {
-                            credentials: { password: userData.pass },
-                            data: { username: userData.email, displayName: userData.displayName }
-                          }
-                        )
-                      )
+                    console.log('Promise all now')
+                    Promise.all([
+                      client.query(q.Create(q.Collection('users'),{credentials: { password: userData.pass },data: {username: userData.email, displayName: userData.displayName}})),
+                      client.query(q.CreateCollection({ name: userData.displayName }))
+                    ])
                       .then(() => {
+                        console.log('Sending regSuccess and creating doc')
                         dispatch(actionTypes.regSuccess())
-                        client.query(q.CreateCollection({ name: userData.displayName }))
+                        client.query(q.Create(q.Collection(userData.email),{ data: { date: '1.1', todo: [] } },))
                         .then(() => {
-                         client.query(
-                          q.CreateIndex({
-                            name: userData.email,
-                            source: q.Collection(userData.email),
-                            terms: [{ field: ['data', 'date'] }],
-                          })
-                         ).then(() => {
-                           console.log('Index was created')
-                         })
+                          client.query(q.CreateIndex({name: userData.email, source: q.Collection(userData.email),terms: [{ field: ['data', 'date'] }],}))
+                          .then(() => { console.log('Index was created') })
+                          .catch((err) => console.log(err))
                         })
                       })
-                  }
-              })
+                  } }).catch((err) => console.log(err))
         }
     },
     changeLoginBox: (stateName) => {
-      return {
-          type: 'changeState',
-          stateName
-      }
+      return {type: 'changeState', stateName}
   },
     regFailed: () => {
-   return {
-       type: 'regFailed'
-   }
+   return {type: 'regFailed'}
     },
     removeErr: () => {
-      return {
-        type: 'removeErr'
-      }
+      return {type: 'removeErr'}
     },
     showSpinner: () => {
-      return {
-       type: 'spinnerOn'
-      }
+      return {type: 'spinnerOn'}
     },
     regSuccess: () => {
-      return {
-        type: 'regSuccess'
-      }
+      return {type: 'regSuccess'}
     },
     typeEmail: (val) => {
-      return {
-        type: 'typeEmail',
-        val
-      }
+      return {type: 'typeEmail', val}
     },
     typePass: (val) => {
-      return {
-        type: 'typePass',
-        val
-      }
+      return {type: 'typePass', val}
     },
     logSuccess: () => {
-      return {
-        type: 'loginSuccess'
-      }
+      return {type: 'loginSuccess'}
     },
     loginFailed: () => {
-      return {
-        type: 'loginFailed'
-      }
+      return {type: 'loginFailed'}
     },
     logOut: () => {
-      return {
-        type: 'log-out'
-      }
+      return {type: 'log-out'}
     }
 }
-
 export default actionTypes

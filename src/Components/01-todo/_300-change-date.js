@@ -2,6 +2,8 @@ import React, {useRef, useEffect} from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 import changeDateAction from '../../Reducers/01.3-change-date-action';
+import containerAction from '../../Reducers/01-todo-actions';
+import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 
 const ChangeDate = props => {
     console.log('Change Date Component')
@@ -54,6 +56,9 @@ const ChangeDate = props => {
       if (e.key === 'Escape') {
         props.toggleChangeDay(false)
       }
+      if (e.key === 'Enter' && props.dayCount + props.monthCount + props.yearCount > 2) {
+        submitBtn()
+      }
     }
     const focusOut = (e) => {
       if (e.target.value.length < 2) {
@@ -64,11 +69,22 @@ const ChangeDate = props => {
         keydom === 'day' ? props.changeDayUpdate(data) : props.changeMonthUpdate(data)
       }
     }
-    const test = () => {
+    const viButton = () => {
       if (props.dayCount + props.monthCount + props.yearCount > 2) {
         return true
       }
       return false
+    }
+    const submitBtn = () => {
+      props.setToSpinner()
+      const date = `${props.day}.${props.month}.20${props.year}`
+      const data = {
+        user: JSON.parse(localStorage.getItem('todo')).userName,
+        date
+      }
+      props.checkDate(data)
+      props.changeDateContainer(date)
+      props.toggleChangeDay()
     }
     return <div className={props.changeDayState ? 'change-date-box change-date-box-on' : 'change-date-box'}>
 
@@ -77,7 +93,8 @@ const ChangeDate = props => {
     <div></div>
      </div>
 
-     <div className={test() ? 'change-date-click change-date-confirm change-date-confirm-on' : 'change-date-click change-date-confirm'}>
+     <div onClick={submitBtn} 
+     className={viButton() ? 'change-date-click change-date-confirm change-date-confirm-on' : 'change-date-click change-date-confirm'}>
      <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
      <path d="M1 10.5L5 14.5L12.5 1.5" stroke="#00D2D3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
      </svg>
@@ -108,7 +125,6 @@ return {
   day: state.changeDateReducer.dayInput,
   month: state.changeDateReducer.monthInput,
   year: state.changeDateReducer.yearInput,
-  allowSubmit: state.changeDateReducer.allowSubmit,
   dayCount: state.changeDateReducer.dayCount,
   monthCount: state.changeDateReducer.monthCount,
   yearCount: state.changeDateReducer.yearCount,
@@ -120,6 +136,9 @@ const mapDispatchToProps = dispatch => {
     changeDayUpdate: (data) => dispatch(changeDateAction.changeDayUpdate(data)),
     changeMonthUpdate: (data) => dispatch(changeDateAction.changeMonthUpdate(data)),
     changeYearUpdate: (data) => dispatch(changeDateAction.changeYearUpdate(data)),
+    changeDateContainer: date => dispatch(containerAction.changeDateContainer(date)),
+    checkDate: (data) => dispatch(loadTodoActionTypes.checkDate(data)),
+    setToSpinner: () => dispatch(loadTodoActionTypes.setToSpinner())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChangeDate)

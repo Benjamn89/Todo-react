@@ -6,7 +6,6 @@ import UserIcon from '../../Media/login/user.png'
 import PassIcon from '../../Media/login/pass.png'
 // Public variables
 let inputs;
-
 const Login = (props) => {
   console.log('Login-child')
   useEffect(() => {
@@ -16,12 +15,10 @@ const Login = (props) => {
    inputs[0].classList.remove('login-input-active')
    inputs[1].classList.remove('login-input-active')
   }, [props.loginReducer.successReg])
-
   const [errMsg, changeErrMsg] = useState('')
   const [showErr, changeShowErr] = useState(false)
   const [inputErr, changeInpErr] = useState(false)
   const [inputErr2, changeInpErr2] = useState(false)
-
   // Functions out of state
   const checkInputSpelling = (email, pass) => {
     if (email.length <= 4) {
@@ -38,7 +35,6 @@ const Login = (props) => {
     }
     return false
   }
-
   const logIn = (e) => {
     e.preventDefault()
     const obj = {
@@ -50,7 +46,7 @@ const Login = (props) => {
      }
      props.showSpinner()
     props.tryLogTheUser(obj)
-}
+    }
 const register = (e) => {
     e.preventDefault()
     const obj = {
@@ -63,7 +59,7 @@ const register = (e) => {
     }
     props.showSpinner()
     props.userExists(obj)
-}
+     }
     const userTyping = (e) => {
      if (showErr) {
       changeShowErr(false)
@@ -73,7 +69,6 @@ const register = (e) => {
         e.target.type === 'email'? props.typeEmail(e.target.value) : props.typePass(e.target.value)
       }
     }
-
     const focusIn = (e) => {
      if (e.target.name === 'email') {
       inputs[0].classList.add('login-input-active')
@@ -81,13 +76,11 @@ const register = (e) => {
        inputs[1].classList.add('login-input-active')
      }
     }
-
     const focusOut = (e) => {
       if (e.target.name === 'email') {
         if (props.loginReducer.emailInput.length < 1){inputs[0].classList.remove('login-input-active')}
       } else {if (props.loginReducer.passInput.length < 1){inputs[1].classList.remove('login-input-active')}}
     }
-
   return (
       <div className='login-box'>
         <h1>{props.loginReducer.loginBox}</h1>
@@ -116,14 +109,12 @@ const register = (e) => {
       </div>
   )
 }
-
 const mapStateToProps = state => {
   return {
       loginReducer: state.loginReducer,
       loginState: state.loginReducer.loginBox
   }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
       tryLogTheUser: (obj) => dispatch(actionTypes.tryLogTheUser(obj)),
@@ -134,7 +125,4 @@ const mapDispatchToProps = dispatch => {
       typePass: (val) => dispatch(actionTypes.typePass(val))
    } 
   }
-
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
