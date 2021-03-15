@@ -20,7 +20,6 @@ const LoadTodos = (props) => {
     }
     props.checkDate(data)
   })
-   
    const toggleDone = (e) => {
      const deepClone = JSON.parse(JSON.stringify(props.todoArray))
      const indexArray = parseInt(e.target.getAttribute('keydom'))
@@ -34,7 +33,6 @@ const LoadTodos = (props) => {
      props.updateTodoArray(data)
      props.updateArrayDb(data)
    }
-
    const deleteTodo = (e) => {
     const deepClone = JSON.parse(JSON.stringify(props.todoArray))
     const indexArray = parseInt(e.target.getAttribute('keydom'))
@@ -58,7 +56,6 @@ const LoadTodos = (props) => {
      props.updateTodoArray(data)
      props.updateArrayDb(data)
    }
-
    const changePage = (caulc) => {
        const deepClone = JSON.parse(JSON.stringify(props.todoArray))
        let currentPage = props.currentPage + caulc
@@ -69,7 +66,6 @@ const LoadTodos = (props) => {
        }
        props.changePage(data)
    }
-   
    let currentState = null
    const spinner = <div className='todo-spinner'><div className='todo-spinner-dot'></div><div className='todo-spinner-line'></div>
    </div>

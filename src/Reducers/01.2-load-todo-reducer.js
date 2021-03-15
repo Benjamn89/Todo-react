@@ -4,6 +4,7 @@ const initialState = {
     allTodosRef: false,
     todoArray: [],
     displayArray: [],
+    globalTodos: [],
     addedTodo: 0,
     allowRender: false,
     pages: 1,
@@ -11,13 +12,13 @@ const initialState = {
 }
 const reducer = (state = initialState, action) => {
           if (action.type === 'no-results') {
-    return { ...state, loadState: 'nothing', allowRender: !state.allowRender,}
+    return { ...state, loadState: 'nothing', allowRender: !state.allowRender, globalTodos: action.globalTodos}
    } else if (action.type === 'new-date-created'){
     return { ...state, allowRender: !state.allowRender, loadState: 'nothing', ref: true }
    } else if (action.type === 'update-todo-array'){
-    return { ...state, todoArray: action.todoArray, displayArray: action.displayArray,
-        loadState: action.loadState, pages: action.pages, currentPage: action.currentPage,
-        allowRender: !state.allowRender }
+    return { ...state, todoArray: action.data.todoArray, displayArray: action.data.displayArray,
+        loadState: action.data.loadState, pages: action.data.pages, currentPage: action.data.currentPage,
+        globalTodos: action.data.globalTodos, allowRender: !state.allowRender }
    } else if (action.type === 'change-page') {
     return { ...state, displayArray: action.data.displayArray, currentPage: action.data.currentPage,
                  allowRender: !state.allowRender }
