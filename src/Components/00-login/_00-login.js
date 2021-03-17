@@ -44,7 +44,7 @@ const Login = (props) => {
     if (checkInputSpelling(obj.email, obj.pass) === 'err1' || checkInputSpelling(obj.email, obj.pass) === 'err2') {
       return
      }
-     props.showSpinner()
+    props.showSpinner()
     props.tryLogTheUser(obj)
     }
 const register = (e) => {
@@ -82,7 +82,7 @@ const register = (e) => {
       } else {if (props.loginReducer.passInput.length < 1){inputs[1].classList.remove('login-input-active')}}
     }
   return (
-      <div className='login-box'>
+      <div className={!props.loginReducer.showSpinner ? 'login-box' : 'login-box login-box-spinner'}>
         <h1>{props.loginReducer.loginBox}</h1>
         <form autoComplete='on' className='login-form'>
           <img src={UserIcon} alt='binyamintal' />
