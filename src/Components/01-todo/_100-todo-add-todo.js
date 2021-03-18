@@ -3,8 +3,6 @@ import React, {useEffect, useRef} from 'react'
 import { connect } from "react-redux";
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action'
-
-
 const AddTodo = (props) => {
     console.log('Child Add Todo')
     let submitOn = useRef(false)
@@ -18,7 +16,6 @@ const AddTodo = (props) => {
       inputElement.current.blur()
   }
 }, [props.addTodoState, props.holdAfterSubmit])
-
 const typingTodo = (e) => {
   let data = {
     textValue: e.target.value,
@@ -29,7 +26,6 @@ const typingTodo = (e) => {
   }
   props.updateTextArea(data)
 }
-
 const keyPress = (e) => {
   if (e.key === 'Enter' && e.target.value.length > 2) {
     submitTodo()
@@ -37,7 +33,6 @@ const keyPress = (e) => {
     props.closeTodo(false)
   }
 }
-
 const submitTodo = () => {
   const deepClone = JSON.parse(JSON.stringify(props.todoArray))
   let pages = 1
@@ -57,7 +52,6 @@ const submitTodo = () => {
   props.updateTodoArray(data)
   props.updateArrayDb(data)
 }
-
   return <div className={props.addTodoState ? `todo-add-todo todo-add-todo-on ${props.holdAfterSubmit}` : 'todo-add-todo'}
   tabIndex='0'>
   <div className='todo-add-wrapper'>

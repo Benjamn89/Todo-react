@@ -35,10 +35,10 @@ const client = new faunadb.Client({
                     console.log('New date has been created')
                     dispatch(actionTypes.newDateCreated())
                     Promise.all([client.query(q.Create(q.Collection(user.user),{ data: { date: user.date, todo: [] } },)),
-                    client.query(q.Get(q.Match(q.Index(user.user),'1.1')))])
+                                 client.query(q.Get(q.Match(q.Index(user.user),'1.1')))])
                     .then((ret) => {
-                        const ref = {dateRef: ret[0].ref.value.id, allTodosRef: ret[1].ref.value.id}
-                        dispatch(actionTypes.setRef(ref))
+                        const dataRef = {dateRef: ret[0].ref.value.id, allTodosRef: ret[1].ref.value.id, globalTodos: ret[1].data.todo}
+                        dispatch(actionTypes.setRef(dataRef))
                     }).catch(() => {console.log('not founding the 1.1 with index')})
                 })
             }
