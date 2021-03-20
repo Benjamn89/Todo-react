@@ -16,7 +16,7 @@ const reducer = (state = initialState, action) => {
    } else if (action.type === 'new-date-created'){
     return { ...state, allowRender: !state.allowRender, loadState: 'nothing', ref: true }
    } else if (action.type === 'update-todo-array'){
-    return { ...state, todoArray: action.data.todoArray, displayArray: action.data.displayArray,
+    return { ...state, todoArray: action.data.todoArray, displayArray: action.data.displayArray, globalTodos: action.data.deepCloneGlobal || state.globalTodos,
         loadState: action.data.loadState, pages: action.data.pages, currentPage: action.data.currentPage, allowRender: !state.allowRender}
    } else if (action.type === 'change-page') {
     return { ...state, displayArray: action.data.displayArray, currentPage: action.data.currentPage,

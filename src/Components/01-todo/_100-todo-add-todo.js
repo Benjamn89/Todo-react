@@ -35,10 +35,12 @@ const keyPress = (e) => {
 }
 const submitTodo = () => {
   const deepClone = JSON.parse(JSON.stringify(props.todoArray))
+  const deepCloneGlobal = JSON.parse(JSON.stringify(props.globalTodos))
   let pages = 1
   let currentPage = 1
-  const todoObj = {text: props.textArea, done: false }
+  const todoObj = {text: props.textArea, done: false, id: Math.floor(1000 + Math.random() * 9000)}
   deepClone.push(todoObj)
+  deepCloneGlobal.push(todoObj)
   let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
   if (deepClone.length > 6) {
     pages = 2
@@ -47,7 +49,7 @@ const submitTodo = () => {
   }
   const data = {
     userName: JSON.parse(localStorage.getItem('todo')).userName, todoArray: deepClone, displayArray: deepCloneCopy,
-    ref: props.myRef, loadState: 'founded', pages, currentPage }
+    ref: props.myRef, loadState: 'founded', pages, currentPage, deepCloneGlobal, globalRef: props.globalRef }
   props.setHoldOnSubmit()
   props.updateTodoArray(data)
   props.updateArrayDb(data)
@@ -87,7 +89,9 @@ const mapStateToProps = state => {
     addTodoState: state.addTodoReducer.addTodo,
     date: state.todoReducer.date,
     myRef: state.loadTodoReducer.ref,
-    todoArray: state.loadTodoReducer.todoArray
+    todoArray: state.loadTodoReducer.todoArray,
+    globalTodos: state.loadTodoReducer.globalTodos,
+    globalRef: state.loadTodoReducer.allTodosRef
   }
 }
 const myMemo = (prevProps, nextProps) => {

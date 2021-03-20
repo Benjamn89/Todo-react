@@ -22,12 +22,10 @@ const actionTypes = {
     },
     updateArrayDb: (data) => {
         return dispatch => {
-            client.query(
-                q.Update(
-                  q.Ref(q.Collection(data.userName), data.ref),
-                  { data: {todo : data.todoArray} },
-                )
-              )
+            Promise.all([
+                q.Update(q.Ref(q.Collection(data.userName), data.ref),{ data: {todo : data.todoArray} },),
+                q.Update(q.Ref(q.Collection(data.userName), data.globalRef),{ data: {todo : data.deepCloneGlobal} },),
+            ])
               .then(() => {
                   if (data.noRender === true) {return}
                   dispatch(actionTypes.submitDone(data.todoArray))
