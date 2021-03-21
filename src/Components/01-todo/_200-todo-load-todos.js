@@ -35,7 +35,10 @@ const LoadTodos = (props) => {
    }
    const deleteTodo = (e) => {
     const deepClone = JSON.parse(JSON.stringify(props.todoArray))
+    const deepCloneGlobal = JSON.parse(JSON.stringify(props.globalTodos))
     const indexArray = parseInt(e.target.getAttribute('keydom'))
+    const globalIndex = deepCloneGlobal.findIndex(num => num.id === deepClone[indexArray].id)
+    deepCloneGlobal.splice(globalIndex, 1)
     deepClone.splice(indexArray, 1)
     let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
     let loadState = 'founded'
@@ -50,9 +53,8 @@ const LoadTodos = (props) => {
       loadState = 'nothing'
     }
     const data = {
-      userName: JSON.parse(localStorage.getItem('todo')).userName,
-      todoArray: deepClone,displayArray: deepCloneCopy,ref: props.dateRef,noRender: true,loadState,pages,currentPage}
-     
+      userName: JSON.parse(localStorage.getItem('todo')).userName,todoArray: deepClone,displayArray: deepCloneCopy, 
+      ref: props.dateRef,noRender: true, loadState, pages, currentPage, deepCloneGlobal, globalRef: props.globalRef}
      props.updateTodoArray(data)
      props.updateArrayDb(data)
    }
@@ -126,7 +128,9 @@ const mapStateToProps = state => {
     displayArray: state.loadTodoReducer.displayArray,
     allowRender: state.loadTodoReducer.allowRender,
     pages: state.loadTodoReducer.pages,
-    currentPage: state.loadTodoReducer.currentPage
+    currentPage: state.loadTodoReducer.currentPage,
+    globalTodos: state.loadTodoReducer.globalTodos,
+    globalRef: state.loadTodoReducer.allTodosRef
   }
 }
 const myMemo = (prevProps, nextProps) => {

@@ -38,7 +38,7 @@ const submitTodo = () => {
   const deepCloneGlobal = JSON.parse(JSON.stringify(props.globalTodos))
   let pages = 1
   let currentPage = 1
-  const todoObj = {text: props.textArea, done: false, id: Math.floor(1000 + Math.random() * 9000)}
+  const todoObj = {text: props.textArea, done: false, id: Math.floor(1000 + Math.random() * 9000), date: props.date}
   deepClone.push(todoObj)
   deepCloneGlobal.push(todoObj)
   let deepCloneCopy = JSON.parse(JSON.stringify(deepClone))
@@ -76,7 +76,7 @@ const mapDispatchToProps = dispatch => {
       updateTextArea: (data) => dispatch(addTodoActiontypes.updateTextArea(data)),
       closeTodo: (val) => dispatch(addTodoActiontypes.closeTodo(val)),
       setHoldOnSubmit: () =>  dispatch(addTodoActiontypes.setHold()),
-      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDbTest(data)),
+      updateArrayDb: (data) => dispatch(addTodoActiontypes.updateArrayDb(data)),
       updateTodoArray: (todoArray) => dispatch(loadTodoActionTypes.updateTodoArray(todoArray)),
      }
     }

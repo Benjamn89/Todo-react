@@ -23,26 +23,14 @@ const actionTypes = {
     updateArrayDb: (data) => {
         return dispatch => {
             Promise.all([
-                q.Update(q.Ref(q.Collection(data.userName), data.ref),{ data: {todo : data.todoArray} },),
-                q.Update(q.Ref(q.Collection(data.userName), data.globalRef),{ data: {todo : data.deepCloneGlobal} },),
+                client.query(q.Update(q.Ref(q.Collection(data.userName), data.ref),{ data: {todo : data.todoArray} },)),
+                client.query(q.Update(q.Ref(q.Collection(data.userName), data.globalRef),{ data: {todo : data.deepCloneGlobal} },)),
             ])
               .then(() => {
                   if (data.noRender === true) {return}
                   dispatch(actionTypes.submitDone(data.todoArray))
               }).catch(err => console.log(err))
         }
-    },
-    updateArrayDbTest: (data) => {
-     return dispatch => {client.query(
-        q.Update(
-          q.Ref(q.Collection(data.userName), data.ref),
-          { data: {todo : data.todoArray} },
-        )
-      ).then(() => {
-            if (data.noRender === true) {return}
-            dispatch(actionTypes.submitDone(data.todoArray))
-          }).catch(err => console.log(err))
-     }
     },
     submitDone: (todoArray) => {
         return {
