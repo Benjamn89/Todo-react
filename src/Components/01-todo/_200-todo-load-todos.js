@@ -25,11 +25,14 @@ const LoadTodos = (props) => {
      const indexArray = parseInt(e.target.getAttribute('keydom'))
      deepClone[indexArray].done = !deepClone[indexArray].done
      const displayArray = caulcPages(props.currentPage, deepClone)
+     const deepCloneGlobal = JSON.parse(JSON.stringify(props.globalTodos))
+     const globalIndex = deepCloneGlobal.findIndex(num => num.id === deepClone[indexArray].id)
+     deepCloneGlobal[globalIndex].done = !deepCloneGlobal[globalIndex].done
      
      const data = {
-       userName: JSON.parse(localStorage.getItem('todo')).userName,
-       todoArray: deepClone,displayArray ,ref: props.dateRef,noRender: true,loadState: 'founded',pages: props.pages,currentPage: props.currentPage}
-
+       userName: JSON.parse(localStorage.getItem('todo')).userName,todoArray: deepClone, displayArray, ref: props.dateRef, 
+       noRender: true,loadState: 'founded',pages: props.pages,currentPage: props.currentPage, deepCloneGlobal, globalRef: props.globalRef}
+       
      props.updateTodoArray(data)
      props.updateArrayDb(data)
    }
