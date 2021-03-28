@@ -11,17 +11,16 @@ import todoReducer from './Reducers/01-todo-redcuer'
 import addTodoReducer from './Reducers/01.1-add-todo-reducer'
 import loadTodoReducer from './Reducers/01.2-load-todo-reducer';
 import changeDateReducer from './Reducers/01.3-change-date-reducer';
-
+import searchTodoReducer from './Reducers/01.4-search-todo-reducer';
 // combined reducers
 const rootReducer = combineReducers({
   loginReducer,
   todoReducer,
   addTodoReducer,
   loadTodoReducer,
-  changeDateReducer
+  changeDateReducer,
+  searchTodoReducer,
   });
-
-
 // create logger for thunk
 const logger = (store) => {
     return (next) => {
