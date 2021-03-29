@@ -6,6 +6,7 @@ import LogOutBtn from './_098-todo-logout-btn';
 import AddTodoBtn from './_010-add-todo-btn';
 import ChangeDate from './_300-change-date';
 import ChangeDateBtn from './_020-change-date-btn';
+import SearchTodo from './_400-search-todo';
 import SearchTodoBtn from './_030-search-todo-btn';
 // Import Redux
 import { connect } from "react-redux";
@@ -39,6 +40,7 @@ const TodoPage = (props) => {
               <ChangeDate />
               <ChangeDateBtn />
               <SearchTodoBtn />
+              <SearchTodo />
               <LogOutBtn />
             </div>
         </div>
