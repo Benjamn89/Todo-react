@@ -2,6 +2,7 @@ import React, {useCallback, useEffect} from 'react'
 import { connect } from "react-redux";
 import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
 import changeDateAction from '../../Reducers/01.3-change-date-action';
+import searchTodoAction from '../../Reducers/01.4-search-todo-action';
 import actionTypesLoadTodo from '../../Reducers/01.2-load-todo-action';
 const LogOutBtn = (props) => {
   let detectKeys = {}
@@ -20,11 +21,17 @@ const keyDown = useCallback((e) => {
     e.preventDefault()
     props.toggleChangeDay()
   }
+  if (detectKeys['a'] && detectKeys['s']) {
+    detectKeys['a'] = false
+    detectKeys['s'] = false
+    e.preventDefault()
+    props.toggleSearch()
+  }
   // eslint-disable-next-line
 }, [])
 // TEST
   useEffect(() => {
-      if (props.addTodoState || props.changeDayState) {
+      if (props.addTodoState || props.changeDayState || props.searchTodoState) {
         document.body.removeEventListener('keydown', keyDown)
       } else {document.body.addEventListener('keydown', keyDown)}
     }, [props, keyDown])
@@ -43,13 +50,14 @@ const mapStateToProps = state => {
   return {
     addTodoState: state.addTodoReducer.addTodo,
     changeDayState: state.changeDateReducer.changeDayState,
-    forHelper: state.changeDateReducer.forHelper
+    searchTodoState: state.searchTodoReducer.searchTodoState
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
       toggleTodo: () => dispatch(addTodoActiontypes.toggleTodo()),
       toggleChangeDay: () => dispatch(changeDateAction.toggleChangeDay()),
+      toggleSearch: () => dispatch(searchTodoAction.toggleSearch()),
       logOutFromTodo: () => dispatch(actionTypesLoadTodo.logOut()),
    } 
   }

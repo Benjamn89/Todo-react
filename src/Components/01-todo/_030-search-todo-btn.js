@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 import searchTodoAction from '../../Reducers/01.4-search-todo-action';
 
 const SearchTodoBtn = props => {
+    let inputEl = useRef(null)
+    useEffect(() => {
+        props.searchTodoState ? inputEl.current.focus() : inputEl.current.blur()
+    })
+    const keyDown = (e) => {
+        if (e.key === 'Escape') {
+            props.toggleSearch()
+        }
+    }
     console.log('Search TodoBtn Component')
     return <div className='todo-functions-inside'  onClick={() => props.searchTodoState ? '' : props.toggleSearch()}>
         <h6 className={props.searchTodoState ? 'search-h6 search-h6-off' : 'search-h6'}>Search Todo</h6>
-        <input type='text' className={props.searchTodoState ? 'search-input search-input-on' : 'search-input'}></input>
+        <input type='text' className={props.searchTodoState ? 'search-input search-input-on' : 'search-input'}
+         ref={inputEl} onKeyDown={keyDown}></input>
       <svg className={props.searchTodoState ? 'search-todo-arrow search-todo-arrow-down' : 'search-todo-arrow'}
        onClick={() => props.searchTodoState ? props.toggleSearch() : ''}
         width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
