@@ -3,6 +3,12 @@ const actionTypes = {
        return {
            type: 'toggle-search'
        }
+   },
+   updateSearchInput: (val) => {
+    return {
+        type: 'update-search-input',
+        val
+    }
    }
   }
   

@@ -8,36 +8,45 @@ const LogOutBtn = (props) => {
   let detectKeys = {}
   // TEST
 const keyDown = useCallback((e) => {
-  detectKeys[e.key] = e.type === 'keydown'
-  if (detectKeys['a'] && detectKeys['d']) {
-    detectKeys['a'] = false
-    detectKeys['d'] = false
-    e.preventDefault()
-    props.toggleTodo()
-  }
-  if (detectKeys['a'] && detectKeys['c']) {
-    detectKeys['a'] = false
-    detectKeys['c'] = false
-    e.preventDefault()
-    props.toggleChangeDay()
-  }
-  if (detectKeys['a'] && detectKeys['s']) {
-    detectKeys['a'] = false
-    detectKeys['s'] = false
-    e.preventDefault()
-    props.toggleSearch()
-  }
+  if (e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === 'c') {
+    detectKeys[e.key] = e.type === 'keydown'
+    if (detectKeys['a'] && detectKeys['d']) {
+      // eslint-disable-next-line
+      detectKeys = {}
+      e.preventDefault()
+      props.toggleTodo()
+    }
+    if (detectKeys['a'] && detectKeys['c']) {
+      detectKeys = {}
+      e.preventDefault()
+      props.toggleChangeDay()
+    }
+    if (detectKeys['a'] && detectKeys['s']) {
+      detectKeys = {}
+      e.preventDefault()
+      props.toggleSearch()
+    }
+  } 
   // eslint-disable-next-line
+}, [])
+const keyUp = useCallback((e) => {
+     if (e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === 'c') {
+        detectKeys[e.key] = false
+     }
+    // eslint-disable-next-line
 }, [])
 // TEST
   useEffect(() => {
       if (props.addTodoState || props.changeDayState || props.searchTodoState) {
         document.body.removeEventListener('keydown', keyDown)
-      } else {document.body.addEventListener('keydown', keyDown)}
-    }, [props, keyDown])
+        document.body.removeEventListener('keyup', keyUp)
+      } else {document.body.addEventListener('keydown', keyDown)
+              document.body.addEventListener('keyup', keyUp)}
+    }, [props, keyDown, keyUp])
     const logOutBtn = () => {
       if (!props.addTodoState && !props.changeDayState) {
         document.body.removeEventListener('keydown', keyDown)
+        document.body.removeEventListener('keyup', keyUp)
          }
       localStorage.clear()
       props.logOutFromTodo()

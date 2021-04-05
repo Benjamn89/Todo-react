@@ -16,7 +16,7 @@ class AddTodoBtn extends Component {
         console.log('ToggleBtn')
         let hover = <div className='add-todo-btn-hover'>Click to open or alternatively press 'A' + 'D'</div>
         if (this.props.addTodoState) {
-          hover = <div className='add-todo-btn-hover'>To close press Esc</div>
+          hover = <div className='add-todo-btn-hover'>Esc to close or click the box</div>
         }
         return  <div className='todo-functions-inside add-todo-btn' onClick={this.toggleTodo}>Add Todo
         <svg className={this.props.addTodoState ? 'add-todo-arrow add-todo-arrow-down' : 'add-todo-arrow'} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/    2000/svg">

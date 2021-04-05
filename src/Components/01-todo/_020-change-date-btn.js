@@ -16,7 +16,7 @@ import addTodoActiontypes from '../../Reducers/01.1-add-todo-action';
      console.log('Change Date Btn')
       let hover = <div className='add-todo-btn-hover'>Click to open or alternatively press 'A' + 'C'</div>
       if (this.props.changeDayState) {
-        hover = <div className='add-todo-btn-hover'>To close press Esc</div>
+        hover = <div className='add-todo-btn-hover'>Esc to close or click the box</div>
       }
       return <div className='todo-functions-inside add-todo-btn'onClick={this.toggleChangeDay}>Change Day
     <svg className={this.props.changeDayState ? 'change-date-arrow change-date-arrow-down' : 'change-date-arrow'} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
