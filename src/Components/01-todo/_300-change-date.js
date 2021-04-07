@@ -15,6 +15,7 @@ const ChangeDate = props => {
       }
     }, [props.changeDayState])
     const changeDayInput = (e) => {
+      console.log('change is operation')
       const value = e.target.value
       const parseStr = parseInt(value)
       let data = {value,count: 0}
@@ -65,7 +66,8 @@ const ChangeDate = props => {
         let value = e.target.value
         const keydom = e.target.getAttribute('keyDom')
         value = `0${value}`
-        const data = {value,count: 1}
+        const data = {value,count: 0}
+        data.value > 0 ? data.count = 1 : data.count = 0
         keydom === 'day' ? props.changeDayUpdate(data) : props.changeMonthUpdate(data)
       }
     }
