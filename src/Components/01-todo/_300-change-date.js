@@ -7,11 +7,13 @@ import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 
 const ChangeDate = props => {
     console.log('Change Date Component')
-    let inputElement = useRef(null)
+    let dayInput = useRef(null)
+    let monthInput = useRef(null)
+    let yearInput = useRef(null)
     useEffect(() => {
       if (props.changeDayState) {
-        inputElement.current.focus()
-        inputElement.current.select()
+        dayInput.current.focus()
+        dayInput.current.select()
       }
     }, [props.changeDayState])
     const changeDayInput = (e) => {
@@ -23,6 +25,8 @@ const ChangeDate = props => {
         props.changeDayUpdate(data)
       } else if (value.length > 1 && parseStr < 32) {
         data.count = 1
+        monthInput.current.focus()
+        monthInput.current.select()
         props.changeDayUpdate(data)
       } else if (value.length < 1) {
         props.changeDayUpdate(data)
@@ -36,6 +40,8 @@ const ChangeDate = props => {
         props.changeMonthUpdate(data)
       } else if (value.length > 1 && parseStr < 13 && parseStr > 0) {
         data.count = 1
+        yearInput.current.focus()
+        yearInput.current.select()
         props.changeMonthUpdate(data)
       } else if (value.length < 1) {
         props.changeMonthUpdate(data)
@@ -106,17 +112,17 @@ const ChangeDate = props => {
            <div className='change-date-inside'>
              <p className='change-date-p'>D</p>
              <input type='text' value={props.day} className='change-date-input' maxLength='2'
-             onKeyDown={keyPress} onChange={changeDayInput} ref={inputElement} keydom='day' onBlur={focusOut}/>
+             onKeyDown={keyPress} onChange={changeDayInput} ref={dayInput} keydom='day' onBlur={focusOut}/>
            </div>
            <div className='change-date-inside'>
              <p className='change-date-p'>M</p>
             <input type='text' value={props.month} className='change-date-input' maxLength='2'
-            onKeyDown={keyPress} onChange={changeMonthInput} onBlur={focusOut}/>
+            onKeyDown={keyPress} onChange={changeMonthInput} onBlur={focusOut} ref={monthInput}/>
            </div>
            <div className='change-date-inside'>
               <p className='change-date-p'>Y</p>
             <input type='text' value={props.year} className='change-date-input'
-            onKeyDown={keyPress} onChange={changeYearInput}/>
+            onKeyDown={keyPress} onChange={changeYearInput} ref={yearInput}/>
            </div>
          </div>
     </div>
