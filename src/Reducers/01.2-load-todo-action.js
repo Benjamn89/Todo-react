@@ -43,8 +43,8 @@ const client = new faunadb.Client({
                 })
             }
           },
-      setToSpinner: () => {
-       return {type: 'set-to-spinner'}
+      setLoadState: (state) => {
+       return {type: 'set-to-spinner', state}
       },
       newDateCreated: () => {
           return {type: 'new-date-created'}

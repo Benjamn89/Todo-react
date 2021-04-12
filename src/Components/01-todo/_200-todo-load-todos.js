@@ -91,13 +91,12 @@ const LoadTodos = (props) => {
          <div className='load-todo-delete-hover'>Delete</div>
         </div>
   })}</div>
+  const searchMode = <div className=''>Search Mode</div>
 
- if (props.loadState === 'nothing') {
-   currentState = noTodos
- } else if (props.loadState === 'founded') {
-    currentState = loadSuccess
- } else {currentState = spinner}
-
+        if (props.loadState === 'nothing') {currentState = noTodos}
+   else if (props.loadState === 'founded') {currentState = loadSuccess}
+   else if (props.loadState === 'spinner') {currentState = spinner}
+   else if (props.loadState === 'search')  {currentState = searchMode}
 
   return <div className='todo-box-inside'>
           {currentState}

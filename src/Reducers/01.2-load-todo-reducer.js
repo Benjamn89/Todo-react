@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
    } else if (action.type === 'log-out') {
     return {...state, ref: false, allTodosRef: false, loadState: 'spinner', addedTodo: 0 }
    } else if (action.type === 'set-to-spinner') {
-    return { ...state, loadState: 'spinner', allowRender: !state.allowRender }
+    return { ...state, loadState: action.state, allowRender: !state.allowRender }
     }
     return state
 }

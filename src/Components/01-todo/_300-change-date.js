@@ -84,7 +84,7 @@ const ChangeDate = props => {
       return false
     }
     const submitBtn = () => {
-      props.setToSpinner()
+      props.setLoadState('spinner')
       const date = `${props.day}.${props.month}.20${props.year}`
       const data = {
         user: JSON.parse(localStorage.getItem('todo')).userName,
@@ -146,7 +146,7 @@ const mapDispatchToProps = dispatch => {
     changeYearUpdate: (data) => dispatch(changeDateAction.changeYearUpdate(data)),
     changeDateContainer: date => dispatch(containerAction.changeDateContainer(date)),
     checkDate: (data) => dispatch(loadTodoActionTypes.checkDate(data)),
-    setToSpinner: () => dispatch(loadTodoActionTypes.setToSpinner())
+    setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChangeDate)

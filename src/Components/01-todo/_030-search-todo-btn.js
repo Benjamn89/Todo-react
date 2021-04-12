@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 import searchTodoAction from '../../Reducers/01.4-search-todo-action';
+// import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 
 class SearchTodoBtn extends Component {
     constructor(props) {
@@ -22,9 +23,14 @@ class SearchTodoBtn extends Component {
     search = (e) => {
         const val = e.target.value
         this.props.updateSearchInput(val)
-        let copyAllTodos = JSON.parse(JSON.stringify(this.props.todos))
         if (e.target.value.length > 2) {
-            console.log(copyAllTodos)
+            let copyAllTodos = JSON.parse(JSON.stringify(this.props.todos))
+              const searchResult = () => {
+                  return copyAllTodos.filter((el) => {
+                      return el.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
+                  })
+              }
+              console.log(searchResult())
         }
       }
       render() {
@@ -54,7 +60,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         toggleSearch: () => dispatch(searchTodoAction.toggleSearch()),
-        updateSearchInput: (val) => dispatch(searchTodoAction.updateSearchInput(val))
+        updateSearchInput: (val) => dispatch(searchTodoAction.updateSearchInput(val)),
+        // setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchTodoBtn)
