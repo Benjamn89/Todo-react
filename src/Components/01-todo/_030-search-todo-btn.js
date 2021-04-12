@@ -22,8 +22,9 @@ class SearchTodoBtn extends Component {
     search = (e) => {
         const val = e.target.value
         this.props.updateSearchInput(val)
+        let copyAllTodos = JSON.parse(JSON.stringify(this.props.todos))
         if (e.target.value.length > 2) {
-            console.log('We have 3')
+            console.log(copyAllTodos)
         }
       }
       render() {
