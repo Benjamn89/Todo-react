@@ -2,6 +2,7 @@ const initialState = {
     allowRender: false,
     searchTodoState: false,
     serachInput: '',
+    viBtn: false,
 }
 const reducer = (state = initialState, action) => {
     if (action.type === 'toggle-search') {
@@ -14,6 +15,12 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             serachInput: action.val,
+            allowRender: !state.allowRender
+        }
+    } else if (action.type === 'change-vi-btn') {
+        return {
+            ...state,
+            viBtn: action.condition,
             allowRender: !state.allowRender
         }
     }

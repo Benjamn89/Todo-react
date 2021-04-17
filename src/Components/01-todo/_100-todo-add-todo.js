@@ -65,8 +65,8 @@ const submitTodo = () => {
   </div>
   <div className={props.submitOn ? 'add-todo-click add-todo-confirm add-todo-confirm-on' : 'add-todo-click add-todo-confirm'} onClick={submitTodo}>
   <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M1 10.5L5 14.5L12.5 1.5" stroke="#00D2D3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
+  <path d="M1 10.5L5 14.5L12.5 1.5" stroke="#00D2D3" strokeWidth="2"
+  strokeLinecap="round" strokeLinejoin="round"/> </svg>
   </div>
   </div>
 </div>

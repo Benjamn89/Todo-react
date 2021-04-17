@@ -36,3 +36,12 @@
   pointer-events: all;
   opacity: 1;
 }
+.search-vi-btn {
+  position: absolute;
+  right: 85px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.search-vi-btn-on {
+  opacity: 1;
+}
