@@ -8,7 +8,6 @@ class SearchTodoBtn extends Component {
     constructor(props) {
         super(props)
         this.inputEl = React.createRef()
-        this.viBtn = React.createRef()
     }
     shouldComponentUpdate(n) {
         return this.props.allowRender === !n.allowRender
@@ -23,17 +22,18 @@ class SearchTodoBtn extends Component {
     }
     search = (e) => {
         const val = e.target.value
-        this.props.updateSearchInput(val)
+        let data = {val}
         if (e.target.value.length > 2) {
-            this.viBtn.current.setAttribute('class', 'search-vi-btn search-vi-btn-on')
+            data.viBtn = true
             let copyAllTodos = JSON.parse(JSON.stringify(this.props.todos))
-              const searchResult = () => {
-                  return copyAllTodos.filter((el) => {
-                      return el.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
-                  })
-              }
-              console.log(searchResult())
+            const searchResult = () => {
+                return copyAllTodos.filter((el) => {
+                    return el.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
+                })
+            }
+            console.log(searchResult())
         }
+        this.props.updateSearchInput(data)
       }
       render() {
         console.log('Search TodoBtn Component')
@@ -46,7 +46,8 @@ class SearchTodoBtn extends Component {
             width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="17.5" cy="17.5" r="16.25" stroke={this.props.searchTodoState ? '#00d2d3' : 'white'} strokeWidth="2.5"/>
              <path d="M12.471 20.25L17.5 13.2816L22.529 20.25H12.471Z" stroke="white" strokeWidth="1.5"/></svg>
-             <svg className='search-vi-btn' ref={this.viBtn} width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <svg className={this.props.viBtn ? 'search-vi-btn search-vi-btn-on' : 'search-vi-btn'}
+             width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
              <path d="M1 10.5L5 14.5L12.5 1.5" stroke="#00D2D3" strokeWidth="2"
              strokeLinecap="round" strokeLinejoin="round"/></svg>
          {this.props.searchTodoState ? <div className='add-todo-btn-hover'>Esc to close or click the arrow</div> : <div className='add-todo-btn-hover'>Click to open or alternatively press 'A' + 'S'</div>}
@@ -65,7 +66,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         toggleSearch: () => dispatch(searchTodoAction.toggleSearch()),
-        updateSearchInput: (val) => dispatch(searchTodoAction.updateSearchInput(val)),
+        updateSearchInput: (data) => dispatch(searchTodoAction.updateSearchInput(data)),
         changeViBtn: (condition) => dispatch(searchTodoAction.changeViBtn(condition)),
         // setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state))
     }

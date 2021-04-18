@@ -2,11 +2,8 @@ const actionTypes = {
    toggleSearch: () => {
        return {type: 'toggle-search'}
    },
-   updateSearchInput: (val) => {
-    return {type: 'update-search-input',val}
+   updateSearchInput: (data) => {
+    return {type: 'update-search-input',data}
    },
-   changeViBtn: (condition) => {
-       return {type: 'change-vi-btn',condition}
-      }
   }
   export default actionTypes
