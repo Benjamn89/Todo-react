@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // Import redux/ tools
 import { connect } from "react-redux";
 import searchTodoAction from '../../Reducers/01.4-search-todo-action';
-// import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
+import loadTodoActionTypes from '../../Reducers/01.2-load-todo-action';
 
 class SearchTodoBtn extends Component {
     constructor(props) {
@@ -23,7 +23,9 @@ class SearchTodoBtn extends Component {
     search = (e) => {
         const val = e.target.value
         let data = {val}
-        if (e.target.value.length > 2) {
+          if (e.target.value.length > 2) {
+              if (this.props.loadState !== 'search') {
+                  this.props.setLoadState('search')}
             data.viBtn = true
             let copyAllTodos = JSON.parse(JSON.stringify(this.props.todos))
             const searchResult = () => {
@@ -32,7 +34,8 @@ class SearchTodoBtn extends Component {
                 })
             }
             console.log(searchResult())
-        }
+        } else if (e.target.value.length < 3 && this.props.loadState === 'search')
+          {this.props.setLoadState('founded')}
         this.props.updateSearchInput(data)
       }
       render() {
@@ -50,7 +53,8 @@ class SearchTodoBtn extends Component {
              width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
              <path d="M1 10.5L5 14.5L12.5 1.5" stroke="#00D2D3" strokeWidth="2"
              strokeLinecap="round" strokeLinejoin="round"/></svg>
-         {this.props.searchTodoState ? <div className='add-todo-btn-hover'>Esc to close or click the arrow</div> : <div className='add-todo-btn-hover'>Click to open or alternatively press 'A' + 'S'</div>}
+           {this.props.searchTodoState ? <div className='add-todo-btn-hover'>Esc to close or click the arrow</div>
+           : <div className='add-todo-btn-hover'>Click to open or alternatively press 'A' + 'S'</div>}
         </div>
       }
 }
@@ -60,7 +64,8 @@ const mapStateToProps = state => {
         searchInput: state.searchTodoReducer.serachInput,
         allowRender: state.searchTodoReducer.allowRender,
         viBtn: state.searchTodoReducer.viBtn,
-        todos: state.loadTodoReducer.globalTodos
+        todos: state.loadTodoReducer.globalTodos,
+        loadState: state.loadTodoReducer.loadState,
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -68,7 +73,7 @@ const mapDispatchToProps = dispatch => {
         toggleSearch: () => dispatch(searchTodoAction.toggleSearch()),
         updateSearchInput: (data) => dispatch(searchTodoAction.updateSearchInput(data)),
         changeViBtn: (condition) => dispatch(searchTodoAction.changeViBtn(condition)),
-        // setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state))
+        setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchTodoBtn)

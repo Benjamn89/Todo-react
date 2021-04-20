@@ -52,9 +52,6 @@ const LoadTodos = (props) => {
       currentPage = 2
       deepCloneCopy.splice(0, 6)
     }
-    if (deepClone.length < 1) {
-      loadState = 'nothing'
-    }
     const data = {
       userName: JSON.parse(localStorage.getItem('todo')).userName,todoArray: deepClone,displayArray: deepCloneCopy, 
       ref: props.dateRef,noRender: true, loadState, pages, currentPage, deepCloneGlobal, globalRef: props.globalRef}
@@ -74,8 +71,7 @@ const LoadTodos = (props) => {
    let currentState = null
    const spinner = <div className='todo-spinner'><div className='todo-spinner-dot'></div><div className='todo-spinner-line'></div>
    </div>
-   const noTodos = <div className='todo-no-todos'>No todos lo Load.</div>
-   const loadSuccess =  <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
+   const loadSuccess = props.displayArray.length > 0 ? <div className='load-success-wrapper'>{props.displayArray.map((todo, ind) => {
     return <div className='load-success-div' key={ind + todo.text}>
       <p className={todo.done === false ? 'load-success-p' : 'load-success-p load-success-p-done'}
        keydom={props.currentPage > 1 ? 6 + ind : ind} onClick={toggleDone}>{todo.text}</p>
@@ -90,11 +86,10 @@ const LoadTodos = (props) => {
        </div>
          <div className='load-todo-delete-hover'>Delete</div>
         </div>
-  })}</div>
+  })}</div> : <div className='todo-no-todos'>No todos lo Load.</div>
   const searchMode = <div className=''>Search Mode</div>
 
-        if (props.loadState === 'nothing') {currentState = noTodos}
-   else if (props.loadState === 'founded') {currentState = loadSuccess}
+        if (props.loadState === 'founded') {currentState = loadSuccess}
    else if (props.loadState === 'spinner') {currentState = spinner}
    else if (props.loadState === 'search')  {currentState = searchMode}
 

@@ -12,10 +12,10 @@ const initialState = {
 }
 const reducer = (state = initialState, action) => {
           if (action.type === 'no-results') {
-    return { ...state, loadState: 'nothing', allowRender: !state.allowRender, globalTodos: action.globalTodos,
+    return { ...state, loadState: 'founded', allowRender: !state.allowRender, globalTodos: action.globalTodos,
              todoArray: [], displayArray: [], pages: 1, currentPage: 1}
    } else if (action.type === 'new-date-created'){
-    return { ...state, allowRender: !state.allowRender, loadState: 'nothing', ref: true }
+    return { ...state, allowRender: !state.allowRender, loadState: 'founded', ref: true }
    } else if (action.type === 'update-todo-array'){
     return { ...state, todoArray: action.data.todoArray, displayArray: action.data.displayArray,
          globalTodos: action.data.deepCloneGlobal || state.globalTodos, loadState: action.data.loadState,
