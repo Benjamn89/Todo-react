@@ -24,16 +24,16 @@ class SearchTodoBtn extends Component {
         const val = e.target.value
         let data = {val}
           if (e.target.value.length > 2) {
-              if (this.props.loadState !== 'search') {
-                  this.props.setLoadState('search')}
             data.viBtn = true
             let copyAllTodos = JSON.parse(JSON.stringify(this.props.todos))
-            const searchResult = () => {
-                return copyAllTodos.filter((el) => {
-                    return el.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
-                })
-            }
-            console.log(searchResult())
+            copyAllTodos = copyAllTodos.filter((el) => {
+                return el.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
+            })
+            if (copyAllTodos !== this.props.searchResults) {
+                console.log(copyAllTodos !== this.props.searchResults)
+                console.log(copyAllTodos)
+                console.log(this.props.searchResults)
+                this.props.updateSearchRes(copyAllTodos)            }
         } else if (e.target.value.length < 3 && this.props.loadState === 'search')
           {this.props.setLoadState('founded')}
         this.props.updateSearchInput(data)
@@ -64,6 +64,7 @@ const mapStateToProps = state => {
         searchInput: state.searchTodoReducer.serachInput,
         allowRender: state.searchTodoReducer.allowRender,
         viBtn: state.searchTodoReducer.viBtn,
+        searchResults: state.searchTodoReducer.searchResults,
         todos: state.loadTodoReducer.globalTodos,
         loadState: state.loadTodoReducer.loadState,
     }
@@ -73,7 +74,8 @@ const mapDispatchToProps = dispatch => {
         toggleSearch: () => dispatch(searchTodoAction.toggleSearch()),
         updateSearchInput: (data) => dispatch(searchTodoAction.updateSearchInput(data)),
         changeViBtn: (condition) => dispatch(searchTodoAction.changeViBtn(condition)),
-        setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state))
+        setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state)),
+        updateSearchRes: (res) =>  dispatch(searchTodoAction.updateSearchRes(res))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchTodoBtn)

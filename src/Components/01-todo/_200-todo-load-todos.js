@@ -87,7 +87,7 @@ const LoadTodos = (props) => {
          <div className='load-todo-delete-hover'>Delete</div>
         </div>
   })}</div> : <div className='todo-no-todos'>No todos lo Load.</div>
-  const searchMode = <div className=''>Search Mode</div>
+  const searchMode = <div className='search-mode'>Search Mode</div>
 
         if (props.loadState === 'founded') {currentState = loadSuccess}
    else if (props.loadState === 'spinner') {currentState = spinner}
