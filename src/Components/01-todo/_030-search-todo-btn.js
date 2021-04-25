@@ -22,18 +22,17 @@ class SearchTodoBtn extends Component {
     }
     search = (e) => {
         const val = e.target.value
-        let data = {val}
+        let data = {val, searchResults: []}
           if (e.target.value.length > 2) {
             data.viBtn = true
-            let copyAllTodos = JSON.parse(JSON.stringify(this.props.todos))
-            copyAllTodos = copyAllTodos.filter((el) => {
+            data.searchResults = JSON.parse(JSON.stringify(this.props.todos))
+            data.searchResults = data.searchResults.filter((el) => {
                 return el.text.toLowerCase().indexOf(val.toLowerCase()) !== -1
             })
-            if (copyAllTodos !== this.props.searchResults) {
-                console.log(copyAllTodos !== this.props.searchResults)
-                console.log(copyAllTodos)
-                console.log(this.props.searchResults)
-                this.props.updateSearchRes(copyAllTodos)            }
+            if (this.props.loadState !== 'search' ||
+                this.props.searchResults.length !== data.searchResults.length) {
+                this.props.setLoadState('search')
+            }
         } else if (e.target.value.length < 3 && this.props.loadState === 'search')
           {this.props.setLoadState('founded')}
         this.props.updateSearchInput(data)
@@ -75,7 +74,6 @@ const mapDispatchToProps = dispatch => {
         updateSearchInput: (data) => dispatch(searchTodoAction.updateSearchInput(data)),
         changeViBtn: (condition) => dispatch(searchTodoAction.changeViBtn(condition)),
         setLoadState: (state) => dispatch(loadTodoActionTypes.setLoadState(state)),
-        updateSearchRes: (res) =>  dispatch(searchTodoAction.updateSearchRes(res))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchTodoBtn)
