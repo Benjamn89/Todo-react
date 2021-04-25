@@ -1,3 +1,12 @@
 .search-mode {
   color: #fff;
 }
+.search-res-found-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.search-res-found-line {
+  color: #fff;
+}

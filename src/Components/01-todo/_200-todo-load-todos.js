@@ -87,8 +87,12 @@ const LoadTodos = (props) => {
          <div className='load-todo-delete-hover'>Delete</div>
         </div>
   })}</div> : <div className='todo-no-todos'>No todos lo Load.</div>
-  const searchMode = <div className='search-mode'>Search Mode</div>
-
+           const searchMode = props.searchResults.length < 1 ? <div className='search-mode'>Search Mode</div>
+               : <div className='search-res-found-wrap'>
+                  {props.searchResults.map((el, ind) => {
+                    return <div className='search-res-found-line' key={ind}>{el.text}</div>
+                  })}
+               </div> 
         if (props.loadState === 'founded') {currentState = loadSuccess}
    else if (props.loadState === 'spinner') {currentState = spinner}
    else if (props.loadState === 'search')  {currentState = searchMode}
@@ -127,7 +131,8 @@ const mapStateToProps = state => {
     pages: state.loadTodoReducer.pages,
     currentPage: state.loadTodoReducer.currentPage,
     globalTodos: state.loadTodoReducer.globalTodos,
-    globalRef: state.loadTodoReducer.allTodosRef
+    globalRef: state.loadTodoReducer.allTodosRef,
+    searchResults: state.searchTodoReducer.searchResults
   }
 }
 const myMemo = (prevProps, nextProps) => {
