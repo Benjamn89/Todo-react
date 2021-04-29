@@ -87,10 +87,13 @@ const LoadTodos = (props) => {
          <div className='load-todo-delete-hover'>Delete</div>
         </div>
   })}</div> : <div className='todo-no-todos'>No todos lo Load.</div>
-           const searchMode = props.searchResults.length < 1 ? <div className='search-mode'>Search Mode</div>
+   const searchMode = props.searchResults.length < 1 ? <div className='search-mode'>Search Mode</div>
                : <div className='search-res-found-wrap'>
                   {props.searchResults.map((el, ind) => {
-                    return <div className='search-res-found-line' key={ind}>{el.text}</div>
+                    return <div className='search-res-found-line' key={ind}>
+                      <svg width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0.5 40L31 0H47.5L18.5 40H0.5Z" fill="#00D2D3"/>
+                      </svg>{el.text}</div>
                   })}
                </div> 
         if (props.loadState === 'founded') {currentState = loadSuccess}
